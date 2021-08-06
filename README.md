@@ -10,6 +10,6 @@
 virtualenv --python=python3.8 .env     
 source .env/bin/activate
 pip install -r requirements.txt
-export FLASK_APP=flask_app
-flask run
+python -m spacy download en
+python flask_app.py
 ```
