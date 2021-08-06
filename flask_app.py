@@ -1,12 +1,14 @@
 from flask import Flask, request
+from flask_cors import CORS
 from config import DEFAULT_CATEGORY
 from search import get_deck_by_id, look_up, get_sentence_by_id, get_sentence_with_context, get_sentences_with_combinatory_ids
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def hello_world():
-    return 'Hello from Flask again!!'
+    return 'Hello from Flask!'
 
 @app.route('/look_up_dictionary')
 def look_up_dictionary():
@@ -23,8 +25,6 @@ def look_up_dictionary():
             'JLPT': None if not has_jlpt else int(request.args.get('jlpt')),
             'WK': None if not has_wk else int(request.args.get('wk'))
         }
-        # response.set_header('Access-Control-Allow-Origin', '*')
-        # response.add_header('Access-Control-Allow-Methods', 'GET')
         return look_up(
             text = request.args.get('keyword')[:50], 
             sorting = None if not has_sorting else request.args.get('sort'),
@@ -33,4 +33,4 @@ def look_up_dictionary():
             user_levels=user_levels)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
