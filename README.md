@@ -5,6 +5,15 @@
 - Flask 2.0.1
 
 
+## Prerequisities
+
+#### Enchant
+
+```bash
+brew install enchant
+```
+
+
 ## Getting started
 ```bash
 virtualenv --python=python3.8 .env     
