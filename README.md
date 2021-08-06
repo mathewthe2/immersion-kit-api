@@ -1,6 +1,6 @@
-# immersion-kit-api
+# Immersion Kit API
 
-Stack:
+## Stack
 - Python 3.8
 - Flask 2.0.1
 
