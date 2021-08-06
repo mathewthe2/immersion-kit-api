@@ -1,1 +1,7 @@
 Flask==2.0.1
+genanki==0.11.0
+pyenchant==3.2.1
+spacy==3.1.1
+SudachiDict-small==20210802
+SudachiPy==0.5.2
+wanakana-python==1.2.2
