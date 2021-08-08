@@ -1,10 +1,11 @@
 import io
 import os
 import requests
+from pathlib import Path
 from flask import Flask, Response, request 
 from flask_cors import CORS
 from werkzeug.wsgi import FileWrapper
-from pathlib import Path
+from anki import generate_deck
 from config import DEFAULT_CATEGORY, RESOURCES_PATH, MEDIA_FILE_HOST, EXTENSION_MIMETYPE_MAP
 from search import get_deck_by_id, look_up, get_sentence_by_id, get_sentence_with_context, get_sentences_with_combinatory_ids
 
@@ -13,7 +14,7 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-    return 'Hello from Flask!'
+    return 'API Documentation not avaiable currently. If you are interested, please contact us at support@immersionkit.com.'
 
 @app.route('/look_up_dictionary')
 def look_up_dictionary():
@@ -63,13 +64,7 @@ def sentences():
     else: 
         return get_sentences_with_combinatory_ids(request.args.get('ids').split(','))
 
-def download_static_file(request_url, filename, mimetype):
-    response = requests.get(request_url)
-    file_path = Path(RESOURCES_PATH, "static", filename)
-    file = open(file_path, "wb")
-    file.write(response.content)
-    file.close()
-
+def download_file(file_path, filename, mimetype):
     return_data = io.BytesIO()
     with open(file_path, 'rb') as fo:
         return_data.write(fo.read())
@@ -78,6 +73,14 @@ def download_static_file(request_url, filename, mimetype):
     w = FileWrapper(return_data)
     os.remove(file_path)
     return Response(w, mimetype=mimetype, headers = {'Content-disposition': 'attachment; filename={}'.format(filename)})
+
+def download_static_file(request_url, filename, mimetype):
+    response = requests.get(request_url)
+    file_path = Path(RESOURCES_PATH, "static", filename)
+    file = open(file_path, "wb")
+    file.write(response.content)
+    file.close()
+    return download_file(file_path, filename, mimetype)
 
 @app.route('/download_sentence_image')
 def download_sentence_image():
@@ -133,6 +136,25 @@ def download_media():
             filename=filename,
             mimetype=mimetype
         )
+
+@app.route('/download_sentence')
+def download_sentence_apkg():
+    sentence_id = request.args.get('id')
+    if sentence_id is None:
+        return 'No sentence id specified.'
+    else:
+        has_category = request.args.get('category') is not None and request.args.get('category') != ''
+        sentence = get_sentence_by_id(sentence_id, category=DEFAULT_CATEGORY if not has_category else request.args.get('category'))
+        if sentence is None:
+            return 'File not found.'
+        else:
+            deck_name = generate_deck(sentence)
+            file_path = Path(RESOURCES_PATH, 'decks', deck_name)
+            return download_file(
+                file_path=file_path,
+                filename=deck_name,
+                mimetype='application/apkg'
+            ) 
 
 if __name__ == "__main__":
     app.run(debug=False)

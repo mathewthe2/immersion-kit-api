@@ -7,6 +7,7 @@ from pathlib import Path
 from config import RESOURCES_PATH
 
 DECK_ID = 2137715748
+DECK_NAME = 'Immersion Kit'
 
 # model_id = random.randrange(1 << 30, 1 << 31)
 
@@ -32,10 +33,11 @@ anime_model = genanki.Model(
 def generate_deck(sentence):
   # deck_id = random.randrange(1 << 30, 1 << 31)
   deck_id = DECK_ID
+  deck_name = DECK_NAME
 
   my_deck = genanki.Deck(
     deck_id,
-    sentence['deck_name'])
+    deck_name)
 
   # Download Image
   response = requests.get(sentence["image_url"])
