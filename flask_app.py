@@ -1,8 +1,9 @@
 import io
 import os
 import requests
-from flask import Flask, request, send_file
+from flask import Flask, Response, request 
 from flask_cors import CORS
+from werkzeug.wsgi import FileWrapper
 from pathlib import Path
 from config import DEFAULT_CATEGORY, RESOURCES_PATH, MEDIA_FILE_HOST, EXTENSION_MIMETYPE_MAP
 from search import get_deck_by_id, look_up, get_sentence_by_id, get_sentence_with_context, get_sentences_with_combinatory_ids
@@ -74,12 +75,9 @@ def download_static_file(request_url, filename, mimetype):
         return_data.write(fo.read())
     # (after writing, cursor will be at last byte, so move it to start)
     return_data.seek(0)
-
+    w = FileWrapper(return_data)
     os.remove(file_path)
-
-    return send_file(return_data, mimetype=mimetype,
-                    attachment_filename=filename,
-                    as_attachment=True)
+    return Response(w, mimetype=mimetype, headers = {'Content-disposition': 'attachment; filename={}'.format(filename)})
 
 @app.route('/download_sentence_image')
 def download_sentence_image():
