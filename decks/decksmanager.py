@@ -13,7 +13,8 @@ class DecksManager:
         self.cur.execute("create table sentences ({})".format(','.join(SENTENCE_FIELDS)))
         
     def set_category(self, category):
-        self.category = category
+        if category in self.decks:
+            self.category = category
 
     def load_decks(self):
         for deck_category in DECK_CATEGORIES:

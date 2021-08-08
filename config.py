@@ -26,6 +26,12 @@ DECK_CATEGORIES = {
     }
 } 
 
+EXTENSION_MIMETYPE_MAP = {
+    'mp3': 'audio/mpeg',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg'
+}
+
 # Sentence Format
 SENTENCE_FIELDS = [
     "id", 
