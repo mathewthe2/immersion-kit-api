@@ -6,7 +6,7 @@ from sudachipy import tokenizer
 from sudachipy import dictionary
 from config import EXAMPLE_PATH, LITERATURE_EXAMPLE_PATH, GAMEGENGO_PATH
 
-tokenizer_obj = dictionary.Dictionary().create()
+tokenizer_obj = dictionary.Dictionary(dict_type="small").create()
 mode = tokenizer.Tokenizer.SplitMode.A
 
 def get_deck_structure(path, filename):
@@ -166,4 +166,5 @@ def add_column_to_gamegengo(filename, column):
 
 # parse_grammar_deck('Game Gengo Grammar N4')
 # add_column_to_gamegengo('Game Gengo Grammar N4', 'timestamp')
-parse_all_decks()
+# parse_all_decks()
+parse_deck('Angel Beats!')

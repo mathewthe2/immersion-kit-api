@@ -1,0 +1,9 @@
+{
+    "chapter-column": 0,
+    "id-column": 1,
+    "sound-column": 2,
+    "image-column": 3,
+    "text-column": 4,
+    "translation-column": 5,
+    "text-with-furigana-column": 6
+}
