@@ -56,10 +56,20 @@ def deck():
     else: 
         return get_deck_by_id(request.args.get('id'), category=DEFAULT_CATEGORY if not has_category else request.args.get('category'))
 
-@app.route('/sentences')
+@app.route('/sentences', methods=["GET", "POST"])
 def sentences():
-    sentences_ids = request.args.get('ids')
-    if sentences_ids is None:
+    # if request.method == 'POST':
+    #     json = request.json
+    #     if not json:
+    #         return 'No data posted.'
+    #     sentence_ids = json['ids']
+    #     if sentence_ids is None:
+    #         return 'No sentence ids specified.'
+    #     else: 
+    #         return get_sentences_with_combinatory_ids(sentence_ids)
+    # else:
+    sentence_ids = request.args.get('ids')
+    if sentence_ids is None:
         return 'No sentence ids specified.'
     else: 
         return get_sentences_with_combinatory_ids(request.args.get('ids').split(','))

@@ -1,7 +1,7 @@
 from glob import glob
 from pathlib import Path
 import json
-from config import EXAMPLE_PATH
+from config import ANIME_PATH
 
 class Tagger:
     def __init__(self):
@@ -9,7 +9,7 @@ class Tagger:
         self.deck_to_tag_map = {}
 
     def load_tags(self):
-        deck_folders = glob(str(EXAMPLE_PATH) + '/*/')
+        deck_folders = glob(str(ANIME_PATH) + '/*/')
         for deck_folder in deck_folders:
             deck_name = Path(deck_folder).name
             tags = self.load_tags_for_deck(deck_folder)
@@ -20,7 +20,7 @@ class Tagger:
                 self.tag_map[tag].add(deck_name)
 
     def load_tags_for_deck(self, filename):
-        file = Path(EXAMPLE_PATH, filename, 'tags.json')
+        file = Path(ANIME_PATH, filename, 'tags.json')
         with open(file, encoding='utf-8') as f:
             data = json.load(f)
             return data

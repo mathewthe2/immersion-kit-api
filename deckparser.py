@@ -4,7 +4,7 @@ from glob import glob
 from tokenizer.englishtokenizer import analyze_english
 from sudachipy import tokenizer
 from sudachipy import dictionary
-from config import EXAMPLE_PATH, LITERATURE_EXAMPLE_PATH, GAMEGENGO_PATH
+from config import ANIME_PATH, LIVE_ACTION_PATH, LITERATURE_PATH, GAMEGENGO_PATH
 
 tokenizer_obj = dictionary.Dictionary(dict_type="small").create()
 mode = tokenizer.Tokenizer.SplitMode.A
@@ -54,11 +54,11 @@ def parse_grammar_deck(filename):
         json.dump(examples, outfile, indent=4, ensure_ascii=False)
 
 def parse_literature_deck(filename, skip_author=True):
-    meta_data_file = Path(LITERATURE_EXAMPLE_PATH, filename, 'metadata.json')
+    meta_data_file = Path(LITERATURE_PATH, filename, 'metadata.json')
     metadata = {}
     with open(meta_data_file, encoding='utf-8') as f:
         metadata = json.load(f)
-    file = Path(LITERATURE_EXAMPLE_PATH, filename, 'deck.json')
+    file = Path(LITERATURE_PATH, filename, 'deck.json')
     examples = []
     with open(file, encoding='utf-8') as f:
         data = json.load(f)
@@ -86,12 +86,12 @@ def parse_literature_deck(filename, skip_author=True):
             }
             examples.append(example)
 
-    with open(Path(LITERATURE_EXAMPLE_PATH, filename, 'data.json'), 'w+', encoding='utf8') as outfile:
+    with open(Path(LITERATURE_PATH, filename, 'data.json'), 'w+', encoding='utf8') as outfile:
         json.dump(examples, outfile, indent=4, ensure_ascii=False)
 
-def parse_deck(filename):
-    deck_structure = get_deck_structure(EXAMPLE_PATH, filename)
-    file = Path(EXAMPLE_PATH, filename, 'deck.json')
+def parse_deck(filename, path=ANIME_PATH):
+    deck_structure = get_deck_structure(path, filename)
+    file = Path(path, filename, 'deck.json')
     examples = []
     with open(file, encoding='utf-8') as f:
         data = json.load(f)
@@ -122,21 +122,21 @@ def parse_deck(filename):
             }
             examples.append(example)
 
-    with open(Path(EXAMPLE_PATH, filename, 'data.json'), 'w+', encoding='utf8') as outfile:
+    with open(Path(path, filename, 'data.json'), 'w+', encoding='utf8') as outfile:
         json.dump(examples, outfile, indent=4, ensure_ascii=False)
 
 def parse_all_literature_decks():
-    deck_folders = glob(str(LITERATURE_EXAMPLE_PATH) + '/*/')
+    deck_folders = glob(str(LITERATURE_PATH) + '/*/')
     for deck_folder in deck_folders:
         parse_literature_deck(Path(deck_folder).name, skip_author=True)
 
 def parse_all_decks():
-    deck_folders = glob(str(EXAMPLE_PATH) + '/*/')
+    deck_folders = glob(str(ANIME_PATH) + '/*/')
     for deck_folder in deck_folders:
         parse_deck(Path(deck_folder).name)
 
 def print_deck_statistics():
-    deck_folders = glob(str(EXAMPLE_PATH) + '/*/')
+    deck_folders = glob(str(ANIME_PATH) + '/*/')
     total_notes = 0
     for deck_folder in deck_folders:
         file = Path(deck_folder, 'data.json')
@@ -167,4 +167,4 @@ def add_column_to_gamegengo(filename, column):
 # parse_grammar_deck('Game Gengo Grammar N4')
 # add_column_to_gamegengo('Game Gengo Grammar N4', 'timestamp')
 # parse_all_decks()
-parse_deck('Angel Beats!')
+# parse_deck('Good Morning Call Season 1', LIVE_ACTION_PATH)

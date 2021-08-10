@@ -4,9 +4,10 @@ import os
 bundle_path = os.path.dirname(os.path.abspath(__file__))
 RESOURCES_PATH = Path(bundle_path, 'resources')
 DICTIONARY_PATH = Path(bundle_path, 'resources', 'dictionaries')
-EXAMPLE_PATH = Path(bundle_path, 'resources', 'anime')
+ANIME_PATH = Path(bundle_path, 'resources', 'anime')
+LIVE_ACTION_PATH = Path(bundle_path, 'resources', 'live_action')
 GAMEGENGO_PATH = Path(bundle_path, 'resources', 'gamegengo')
-LITERATURE_EXAMPLE_PATH = Path(bundle_path, 'resources', 'literature')
+LITERATURE_PATH = Path(bundle_path, 'resources', 'literature')
 
 # Parsing
 CONTEXT_RANGE = 10
@@ -15,12 +16,17 @@ CONTEXT_RANGE = 10
 DEFAULT_CATEGORY = 'anime'
 DECK_CATEGORIES = {
     'anime': {
-        'path': EXAMPLE_PATH,
+        'path': ANIME_PATH,
+        'has_image': True,
+        'has_sound': True
+    },
+     'live_action': {
+        'path': LIVE_ACTION_PATH,
         'has_image': True,
         'has_sound': True
     },
     'literature': {
-        'path': LITERATURE_EXAMPLE_PATH,
+        'path': LITERATURE_PATH,
         'has_image': False,
         'has_sound': True
     }

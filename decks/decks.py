@@ -1,11 +1,11 @@
 from glob import glob
-from config import EXAMPLE_PATH, CONTEXT_RANGE, SENTENCE_FIELDS, RESOURCES_PATH
+from config import ANIME_PATH, CONTEXT_RANGE, SENTENCE_FIELDS, RESOURCES_PATH
 import json
 import string
 from pathlib import Path
 
 class Decks:
-    def __init__(self, category="anime", path=EXAMPLE_PATH, has_image=True, has_sound=True):
+    def __init__(self, category="anime", path=ANIME_PATH, has_image=True, has_sound=True):
         self.sentence_map = {}
         self.sentence_translation_map = {}
         self.category = category
