@@ -41,6 +41,7 @@ EXTENSION_MIMETYPE_MAP = {
 # Sentence Format
 SENTENCE_FIELDS = [
     "id", 
+    "category",
     "deck_name",
     "deck_name_japanese", # literature
     "author_japanese", # literature

@@ -43,6 +43,7 @@ class DecksManager:
                     sentence[key] = ''
                 else:
                     sentence[key] = json.loads(value) if key in SENTENCE_KEYS_FOR_LISTS else value
+            sentence["category"] = sentence["id"].split('-', 1)[0] # isolate category into different field
             sentence["id"] = sentence["id"].split('-', 1)[1] # remove category from id
             sentences.append(self.parse_sentence(sentence))
         return sentences
@@ -61,11 +62,11 @@ class DecksManager:
     def parse_sentence(self, sentence):
         if sentence:
             if (self.decks[self.category].has_image):
-                image_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, self.category, sentence['deck_name'], sentence['image'])
+                image_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, sentence['category'], sentence['deck_name'], sentence['image'])
                 sentence['image_url'] = image_path.replace(" ", "%20")
             
             if (self.decks[self.category].has_sound):
-                sound_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, self.category, sentence['deck_name'], sentence['sound'])
+                sound_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, sentence['category'], sentence['deck_name'], sentence['sound'])
                 sentence['sound_url'] = sound_path.replace(" ", "%20")
         return sentence
 
