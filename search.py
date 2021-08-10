@@ -27,7 +27,7 @@ def get_sentence_by_id(sentence_id, category=DEFAULT_CATEGORY):
 
 def deconstruct_combinatory_sentence_id(sentence_id):
     if '-' in sentence_id:
-        print(sentence_id)
+        # print(sentence_id)
         return {
             'category': sentence_id.split('-', 1)[0],
             'example_id': sentence_id.split('-', 1)[1]
@@ -36,25 +36,26 @@ def deconstruct_combinatory_sentence_id(sentence_id):
         return None
 
 def get_sentences_with_combinatory_ids(combinatory_sentence_ids):
-    result = []
-    for combinatory_sentence_id in combinatory_sentence_ids:
-        sentence = deconstruct_combinatory_sentence_id(combinatory_sentence_id)
-        if sentence:
-            result.append(get_sentence_by_id(sentence['example_id'], sentence['category'].lower()))
+    search_list = [sentence_id for sentence_id in combinatory_sentence_ids if deconstruct_combinatory_sentence_id(sentence_id)]
+    result = decks.get_sentences(search_list)
+    # for combinatory_sentence_id in combinatory_sentence_ids:
+    #     sentence = deconstruct_combinatory_sentence_id(combinatory_sentence_id)
+    #     if sentence:
+    #         result.append(get_sentence_by_id(sentence['example_id'], sentence['category'].lower()))
     return dict(data=result)
 
 def get_sentence_with_context(sentence_id, category=DEFAULT_CATEGORY):
     sentence = get_sentence_by_id(sentence_id, category)
     if not sentence:
         return None
-    sentence["pretext_sentences"] = decks.get_sentences(sentence["pretext"])
-    sentence["posttext_sentences"] = decks.get_sentences(sentence["posttext"])
+    sentence["pretext_sentences"] = decks.get_category_sentences(sentence["pretext"])
+    sentence["posttext_sentences"] = decks.get_category_sentences(sentence["posttext"])
     return sentence
 
 def get_examples(text_is_japanese, words_map, text, word_bases, tags=[], user_levels={}, is_exact_match=False):
     results = [words_map.get(token, set()) for token in word_bases]
     if results:
-        examples = decks.get_sentences(list(set.intersection(*results)))
+        examples = decks.get_category_sentences(list(set.intersection(*results)))
         examples = filter_examples_by_tags(examples, tags)
         examples = filter_examples_by_level(user_levels, examples)
         if is_exact_match:
