@@ -35,7 +35,7 @@ def look_up_dictionary():
             text = request.args.get('keyword')[:50], 
             sorting = None if not has_sorting else request.args.get('sort'),
             category = DEFAULT_CATEGORY if not has_category else request.args.get('category'),
-            tags = [] if not has_tags else request.args.get('split').split(','),
+            tags = [] if not has_tags else request.args.get('tags').split(','),
             user_levels=user_levels)
 
 @app.route('/sentence_with_context')
