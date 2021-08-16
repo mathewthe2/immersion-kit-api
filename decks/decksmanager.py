@@ -61,12 +61,13 @@ class DecksManager:
 
     def parse_sentence(self, sentence):
         if sentence:
+            category = self.category if 'category' not in sentence else sentence['category']
             if (self.decks[self.category].has_image):
-                image_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, sentence['category'], sentence['deck_name'], sentence['image'])
+                image_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, category, sentence['deck_name'], sentence['image'])
                 sentence['image_url'] = image_path.replace(" ", "%20")
             
             if (self.decks[self.category].has_sound):
-                sound_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, sentence['category'], sentence['deck_name'], sentence['sound'])
+                sound_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, category, sentence['deck_name'], sentence['sound'])
                 sentence['sound_url'] = sound_path.replace(" ", "%20")
         return sentence
 
