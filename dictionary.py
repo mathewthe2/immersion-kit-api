@@ -5,7 +5,7 @@ from config import DICTIONARY_PATH
 
 class Dictionary:
     def __init__(self):
-        self.dictionary_map = {}
+        self.dictionary_map = {}  
 
     def is_entry(self, word):
         return word in self.dictionary_map
@@ -13,6 +13,15 @@ class Dictionary:
     def get_first_entry(self, word):
         return self.dictionary_map[word][0]
 
+    def is_uninflectable_entry(self, word):
+        if not self.is_entry(word):
+            return False
+        else:
+            entry = self.get_first_entry(word)
+            is_verb = 'vt' in entry[2]
+            is_i_adjective = 'adj-i' in entry[2] 
+            return not is_verb and not is_i_adjective 
+            
     def load_dictionary_by_path(self, dictionary_path):
         output_map = {}
         archive = zipfile.ZipFile(dictionary_path, 'r')

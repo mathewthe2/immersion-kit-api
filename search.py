@@ -109,9 +109,8 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}):
                         text = hiragana_text
                         # TODO: suggest english word in return query here
     
-    if not is_exact_match:
-        is_word_in_dictionary = text_is_japanese and dictionary.is_entry(text)
-        is_exact_match = is_word_in_dictionary
+    # if not is_exact_match:
+    #     is_exact_match = text_is_japanese and dictionary.is_uninflectable_entry(text)
     decks.set_category(category)
     words_map = decks.get_sentence_map() if text_is_japanese else decks.get_sentence_translation_map()
     text = text.replace(" ", "") if text_is_japanese else text

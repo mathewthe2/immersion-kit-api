@@ -21,7 +21,8 @@ KANA_MAPPING = {
 
 KANJI_READING_MAPPING = {
     '私': '私[わたし]',
-    '貴女': '貴女[あなた]'
+    '貴女': '貴女[あなた]',
+    '外宇宙': '外宇宙[がいうちゅう]'
 }
 
 JAPANESE_PUNCTUATION = '　〜！？。、（）：「」『』０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ'
@@ -70,3 +71,6 @@ def add_furigana(text):
 
 # s = '広いな……この廃墟。'
 # s = 'この先に多数の機械生命体反応を確認'
+# s = '早く……'
+# print(add_furigana(s))
+print(analyze_japanese('我が儘'))
