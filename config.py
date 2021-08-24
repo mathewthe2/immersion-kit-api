@@ -63,9 +63,11 @@ SENTENCE_FIELDS = [
     "translation_word_base_list",
     "translation",
     "image",
+    "image_url", # games
     "sound",
     "sound_begin", # literature
     "sound_end", # literature
+    "sound_url", # games
     "pretext",
     "posttext"
 ]
