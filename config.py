@@ -5,6 +5,7 @@ bundle_path = os.path.dirname(os.path.abspath(__file__))
 RESOURCES_PATH = Path(bundle_path, 'resources')
 DICTIONARY_PATH = Path(bundle_path, 'resources', 'dictionaries')
 ANIME_PATH = Path(bundle_path, 'resources', 'anime')
+GAMES_PATH = Path(bundle_path, 'resources', 'games')
 LIVE_ACTION_PATH = Path(bundle_path, 'resources', 'live_action')
 GAMEGENGO_PATH = Path(bundle_path, 'resources', 'gamegengo')
 LITERATURE_PATH = Path(bundle_path, 'resources', 'literature')
@@ -18,17 +19,26 @@ DECK_CATEGORIES = {
     'anime': {
         'path': ANIME_PATH,
         'has_image': True,
-        'has_sound': True
+        'has_sound': True,
+        "has_resource_url": False
+    },
+    'games': {
+        'path': GAMES_PATH,
+        'has_image': True,
+        'has_sound': True,
+        "has_resource_url": True
     },
      'live_action': {
         'path': LIVE_ACTION_PATH,
         'has_image': True,
-        'has_sound': True
+        'has_sound': True,
+        "has_resource_url": False
     },
     'literature': {
         'path': LITERATURE_PATH,
         'has_image': False,
-        'has_sound': True
+        'has_sound': True,
+        "has_resource_url": False
     }
 } 
 
@@ -53,9 +63,11 @@ SENTENCE_FIELDS = [
     "translation_word_base_list",
     "translation",
     "image",
+    "image_url", # games
     "sound",
     "sound_begin", # literature
     "sound_end", # literature
+    "sound_url", # games
     "pretext",
     "posttext"
 ]

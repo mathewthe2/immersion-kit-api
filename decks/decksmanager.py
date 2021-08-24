@@ -22,7 +22,8 @@ class DecksManager:
                 category=deck_category, 
                 path=DECK_CATEGORIES[deck_category]["path"],
                 has_image=DECK_CATEGORIES[deck_category]["has_image"],
-                has_sound=DECK_CATEGORIES[deck_category]["has_sound"])
+                has_sound=DECK_CATEGORIES[deck_category]["has_sound"],
+                has_resource_url=DECK_CATEGORIES[deck_category]["has_resource_url"])
             self.decks[deck_category].load_decks(self.cur)
 
     def get_deck_by_name(self, deck_name):
@@ -62,11 +63,11 @@ class DecksManager:
     def parse_sentence(self, sentence):
         if sentence:
             category = self.category if 'category' not in sentence else sentence['category']
-            if (self.decks[self.category].has_image):
+            if (self.decks[self.category].needs_image_url()):
                 image_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, category, sentence['deck_name'], sentence['image'])
                 sentence['image_url'] = image_path.replace(" ", "%20")
             
-            if (self.decks[self.category].has_sound):
+            if (self.decks[self.category].needs_sound_url()):
                 sound_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, category, sentence['deck_name'], sentence['sound'])
                 sentence['sound_url'] = sound_path.replace(" ", "%20")
         return sentence

@@ -1,17 +1,25 @@
 from glob import glob
+from typing import MappingView
 from config import ANIME_PATH, CONTEXT_RANGE, SENTENCE_FIELDS, RESOURCES_PATH
 import json
 import string
 from pathlib import Path
 
 class Decks:
-    def __init__(self, category="anime", path=ANIME_PATH, has_image=True, has_sound=True):
+    def __init__(self, category="anime", path=ANIME_PATH, has_image=True, has_sound=True, has_resource_url=False):
         self.sentence_map = {}
         self.sentence_translation_map = {}
         self.category = category
         self.path = path
         self.has_image = has_image
         self.has_sound = has_sound
+        self.has_resource_url = has_resource_url
+
+    def needs_image_url(self):
+        return self.has_image and not self.has_resource_url
+
+    def needs_sound_url(self):
+        return self.has_sound and not self.has_resource_url
 
     def get_sentence_map(self):
         return self.sentence_map
