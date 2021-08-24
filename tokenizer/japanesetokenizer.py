@@ -19,9 +19,14 @@ KANA_MAPPING = {
     'lo': 'lo'
 }
 
+KANA_TO_KANJI_MAPPING = {
+    'じょせい': '女性'
+}
+
 KANJI_READING_MAPPING = {
     '私': '私[わたし]',
     '貴女': '貴女[あなた]',
+    '何': '何[なに]',
     '外宇宙': '外宇宙[がいうちゅう]'
 }
 
@@ -30,6 +35,8 @@ JAPANESE_PUNCTUATION = '　〜！？。、（）：「」『』０１２３４�
 SPECIAL_CHARACTERS = '〜'
 
 def analyze_japanese(text):
+    if text in KANA_TO_KANJI_MAPPING:
+        text = KANA_TO_KANJI_MAPPING[text]
     tokens = [m for m in tokenizer_obj.tokenize(text, mode)]
     return {
         'tokens': [token.surface() for token in tokens],
@@ -63,6 +70,12 @@ def add_furigana(text):
                     while is_hiragana(token.surface()[hiragana_count+1]):
                         hiragana_count += 1
                     parsed += '{} {}[{}]'.format(token.surface()[:hiragana_count+1], token.surface()[hiragana_count+1:], to_hiragana(token.reading_form()[hiragana_count+1:]))
+                # elif len(token.surface()) > 1:
+                #     if is_hiragana(token.surface()[1]):
+                #         hiragana_count = 1
+                #         while is_hiragana(token.surface()[hiragana_count+1]):
+                #             hiragana_count += 1
+                #         parsed += '{}[{}]{} {}[{}]'.format(token.surface()[:hiragana_count], to_hiragana(token.reading_form()[0]), token.surface()[hiragana_count], token.surface()[hiragana_count+1:], to_hiragana(token.reading_form()[hiragana_count+1:]))
                 else:
                     parsed += '{}[{}]'.format(token.surface(), reading)
         else:
@@ -71,6 +84,6 @@ def add_furigana(text):
 
 # s = '広いな……この廃墟。'
 # s = 'この先に多数の機械生命体反応を確認'
-# s = '早く……'
+# s = '取り逃す'
+# s = 'とりあえず情報収集の為に行ってみましょうか。'
 # print(add_furigana(s))
-print(analyze_japanese('我が儘'))
