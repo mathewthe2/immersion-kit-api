@@ -1,7 +1,7 @@
 from wanakana import to_hiragana, is_japanese
 from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
-from config import DEFAULT_CATEGORY, EXAMPLE_LIMIT, RESULTS_LIMIT, NEW_WORDS_TO_USER_PER_SENTENCE
+from config import DEFAULT_CATEGORY, EXAMPLE_LIMIT, RESULTS_LIMIT, NEW_WORDS_TO_USER_PER_SENTENCE, RESULT_EXCLUDED_FIELDS
 from tagger import Tagger
 from decks.decksmanager import DecksManager
 from dictionary import Dictionary
@@ -16,6 +16,16 @@ dictionary.load_dictionary('JMdict+')
 decks = DecksManager()
 decks.load_decks()
 decks.set_category('anime')
+
+# hiragana_text = to_hiragana('josei', custom_kana_mapping=KANA_MAPPING)
+# print(hiragana_text)
+# print(analyze_japanese(hiragana_text))
+# print(dictionary.is_entry(hiragana_text))
+print(dictionary.get_first_entry('とは'))
+
+# def close():
+#     decks.con.commit()
+#     decks.con.close()
 
 def get_deck_by_id(deck_name, category=DEFAULT_CATEGORY):
     decks.set_category(category)
@@ -48,16 +58,20 @@ def get_sentence_with_context(sentence_id, category=DEFAULT_CATEGORY):
     return sentence
 
 def get_examples(text_is_japanese, words_map, text, word_bases, tags=[], user_levels={}, is_exact_match=False):
+    # Exact match through SQL
+    if is_exact_match:
+        examples = decks.get_category_sentences_exact(text)
+        return [] if not examples else filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS)
+    
+    # Server side full text search
     results = [words_map.get(token, set()) for token in word_bases]
     if results:
         examples = decks.get_category_sentences(list(set.intersection(*results)))
         examples = filter_examples_by_tags(examples, tags)
         examples = filter_examples_by_level(user_levels, examples)
-        if is_exact_match:
-            examples = filter_examples_by_exact_match(examples, text)
         examples = limit_examples(examples)
         examples = parse_examples(examples, text_is_japanese, word_bases)
-        return filter_fields(examples, excluded_fields=["image", "sound", "translation_word_base_list", "word_base_list", "pretext", "posttext"])
+        return filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS)
     else:
         return []
 
@@ -121,6 +135,7 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}):
     dictionary_words = [] if not text_is_japanese else [word for word in word_bases if dictionary.is_entry(word)]
     result = [{
         'dictionary': get_text_definition(text, dictionary_words),
+        'exact_match': text if is_exact_match else "",
         'examples': examples
     }]
     return dict(data=result)

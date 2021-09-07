@@ -1,17 +1,19 @@
 
 from decks.decks import Decks 
-from config import DECK_CATEGORIES, DEFAULT_CATEGORY, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, SENTENCES_LIMIT
+from config import DECK_CATEGORIES, DEFAULT_CATEGORY, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json
 import sqlite3
 
 class DecksManager:
+
+    con = sqlite3.connect(":memory:", check_same_thread=False)
+    cur = con.cursor()
+    cur.execute("create table sentences ({})".format(','.join(SENTENCE_FIELDS)))
+
     def __init__(self, category=DEFAULT_CATEGORY):
         self.decks = {}
         self.category = category
-        self.con = sqlite3.connect(":memory:", check_same_thread=False)
-        self.cur = self.con.cursor()
-        self.cur.execute("create table sentences ({})".format(','.join(SENTENCE_FIELDS)))
-        
+
     def set_category(self, category):
         if category in self.decks:
             self.category = category
@@ -30,11 +32,14 @@ class DecksManager:
         return [self.parse_sentence(sentence) for sentence in self.decks[self.category].get_deck_by_name(deck_name)]
 
     def get_sentences(self, combinatory_sentence_ids):
-        sentences = []
         search_list = combinatory_sentence_ids[:SENTENCES_LIMIT]
         self.cur.execute("select * from sentences where id in ({seq})".format(
             seq=','.join(['?']*len(search_list))), search_list)
         result = self.cur.fetchall()
+        return self.query_result_to_sentences(result)
+
+    def query_result_to_sentences(self, result):
+        sentences = []
         for sentence_tuple in result:
             sentence = {}
             for data_index, value in enumerate(sentence_tuple):
@@ -52,7 +57,16 @@ class DecksManager:
     def get_category_sentences(self, sentence_ids):
         combinatory_sentence_ids = [self.category + '-' + sentence_id for sentence_id in sentence_ids]
         return self.get_sentences(combinatory_sentence_ids)
-        
+
+    def get_category_sentences_exact(self, text):
+        self.cur.execute("select * from sentences where sentence like '%{}%' limit {}".format(text, RESULTS_LIMIT))
+        result = self.cur.fetchall()
+        all_sentences = self.query_result_to_sentences(result)
+        # filter by category server side
+        sentences = [sentence for sentence in all_sentences if sentence['category'] == self.category]
+        return sentences
+
+
     def get_sentence(self, sentence_id):
         sentences = self.get_category_sentences([sentence_id])
         if len(sentences) > 0:
