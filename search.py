@@ -61,6 +61,8 @@ def get_examples_and_category_count(text_is_japanese, words_map, text, word_base
  
     examples = []
     category_count = {}
+    for category in DECK_CATEGORIES:
+        category_count[category] = 0
     # Exact match through SQL
     if is_exact_match:
         examples = decks.get_category_sentences_exact(text)
@@ -78,17 +80,19 @@ def get_examples_and_category_count(text_is_japanese, words_map, text, word_base
         examples = filter_examples_by_level(user_levels, examples)
         examples = limit_examples(examples)
         examples = parse_examples(examples, text_is_japanese, word_bases)
-        return {
-            "examples": filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS),
-            "category_count": category_count
-        }
-    else:
-        return {
-            "examples" : [],
-            "category_count": {}
-        }
+    return {
+        "examples": filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS),
+        "category_count": category_count
+    }
+    # else:
+    #     return {
+    #         "examples" : [],
+    #         "category_count": {}
+    #     }
 
 def filter_fields(examples, excluded_fields):
+    if examples == []:
+        return []
     filtered_examples =[]
     for example in examples:
         filtered_example= {}
@@ -173,6 +177,8 @@ def get_category_of_example_id(example_id):
     return None if not deconstructed else deconstructed['category']
 
 def count_examples_for_category(example_ids):
+    # print('example ids', example_ids)
+    print('example ids', [id for id in example_ids if id.split('-')[0] == 'games'])
     categories = [key for key in DECK_CATEGORIES]
     category_example_count = {}
     for category in categories:
