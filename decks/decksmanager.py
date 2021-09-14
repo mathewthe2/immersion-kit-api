@@ -12,12 +12,17 @@ class DecksManager:
 
     def __init__(self, category=DEFAULT_CATEGORY):
         self.decks = {}
+        self.sentence_map = {}
+        self.translation_map = {}
         self.category = category
+
+    def get_category(self):
+        return self.category
 
     def set_category(self, category):
         if category in self.decks:
             self.category = category
-
+    
     def load_decks(self):
         for deck_category in DECK_CATEGORIES:
             self.decks[deck_category] = Decks(
@@ -26,7 +31,7 @@ class DecksManager:
                 has_image=DECK_CATEGORIES[deck_category]["has_image"],
                 has_sound=DECK_CATEGORIES[deck_category]["has_sound"],
                 has_resource_url=DECK_CATEGORIES[deck_category]["has_resource_url"])
-            self.decks[deck_category].load_decks(self.cur)
+            self.decks[deck_category].load_decks(self.cur, self.sentence_map, self.translation_map)
 
     def get_deck_by_name(self, deck_name):
         return [self.parse_sentence(sentence) for sentence in self.decks[self.category].get_deck_by_name(deck_name)]
@@ -59,13 +64,19 @@ class DecksManager:
         return self.get_sentences(combinatory_sentence_ids)
 
     def get_category_sentences_exact(self, text):
-        self.cur.execute("select * from sentences where sentence like '%{}%' limit {}".format(text, RESULTS_LIMIT))
+        self.cur.execute("select * from sentences where category = '{}' and sentence like '%{}%' limit {}".format(self.category, text, RESULTS_LIMIT))
         result = self.cur.fetchall()
-        all_sentences = self.query_result_to_sentences(result)
-        # filter by category server side
-        sentences = [sentence for sentence in all_sentences if sentence['category'] == self.category]
+        sentences = self.query_result_to_sentences(result)
         return sentences
 
+    def count_categories_for_exact_sentence(self, text):
+        self.cur.execute("select category, count(case when sentence like '%{}%' then 1 else null end) as `number_of_examples` from sentences group by category".format(text))
+        result = self.cur.fetchall()
+        category_count = {}
+        for category, count in result:
+            if category in DECK_CATEGORIES:
+                category_count[category] = count
+        return category_count
 
     def get_sentence(self, sentence_id):
         sentences = self.get_category_sentences([sentence_id])
@@ -87,7 +98,7 @@ class DecksManager:
         return sentence
 
     def get_sentence_map(self):
-        return self.decks[self.category].get_sentence_map()
+        return self.sentence_map
 
     def get_sentence_translation_map(self):
-        return self.decks[self.category].get_sentence_translation_map()
+        return self.translation_map

@@ -7,8 +7,6 @@ from pathlib import Path
 
 class Decks:
     def __init__(self, category="anime", path=ANIME_PATH, has_image=True, has_sound=True, has_resource_url=False):
-        self.sentence_map = {}
-        self.sentence_translation_map = {}
         self.category = category
         self.path = path
         self.has_image = has_image
@@ -21,12 +19,6 @@ class Decks:
     def needs_sound_url(self):
         return self.has_sound and not self.has_resource_url
 
-    def get_sentence_map(self):
-        return self.sentence_map
-
-    def get_sentence_translation_map(self):
-        return self.sentence_translation_map
-
     def get_deck_by_name(self, deck_name):
         sentences = []
         file = Path(self.path, deck_name, 'data.json')
@@ -38,13 +30,14 @@ class Decks:
     #     archive = zipfile.ZipFile(str(Path(RESOURCES_PATH, 'anime.zip')), 'r')
     #     print(archive.namelist())
 
-    def load_decks(self, cur):
+    def load_decks(self, cur, sentence_map, translation_map):
         deck_folders = glob(str(self.path) + '/*/')
         for deck_folder in deck_folders:
-            sentences = self.load_deck_by_path(deck_folder)
+            sentences, sentence_map, translation_map = self.load_deck_by_path(deck_folder, sentence_map, translation_map)
             self.load_sentences_to_db(sentences, cur)
+        return sentence_map, translation_map
     
-    def load_deck_by_path(self, path):
+    def load_deck_by_path(self, path, sentence_map, translation_map):
         sentences = []
         file = Path(path, 'data.json')
         with open(file, encoding='utf-8') as f:
@@ -58,11 +51,11 @@ class Decks:
             sentence["pretext"] = [sentence["id"] for sentence in pretext_sentences]
             sentence["posttext"] = [sentence["id"] for sentence in posttext_sentences]
             if 'word_base_list' in sentence:
-                self.sentence_map = self.map_sentence(sentence['word_base_list'], sentence['id'], self.sentence_map)
+                sentence_map = self.map_sentence(sentence['word_base_list'], sentence['id'], sentence_map)
             if 'translation_word_base_list' in sentence:
-                self.sentence_translation_map = self.map_sentence(sentence['translation_word_base_list'], sentence['id'], self.sentence_translation_map)
+                translation_map = self.map_sentence(sentence['translation_word_base_list'], sentence['id'], translation_map)
 
-        return sentences
+        return sentences, sentence_map, translation_map
 
     def load_sentences_to_db(self, sentences, cur):
         sentence_tuple_list = []
@@ -73,6 +66,7 @@ class Decks:
                 posttext_sentences = sentences[index+1:len(sentences)] if index+CONTEXT_RANGE > len(sentences) else sentences[index+1:index+CONTEXT_RANGE] 
             sentence["pretext"] = [sentence["id"] for sentence in pretext_sentences]
             sentence["posttext"] = [sentence["id"] for sentence in posttext_sentences]
+            sentence['category'] = self.category
 
             filtered_sentence = self.filter_fields(sentence, ['id'])
             sentence_data_key = self.category + '-' + sentence["id"]
@@ -94,6 +88,9 @@ class Decks:
             if key not in excluded_fields:
                 filtered_sentence[key] = sentence[key]
         return filtered_sentence
+
+    def format_sentence_key(self, example_id):
+        return "{}-{}".format(self.category, example_id)
     
     def map_sentence(self, words, example_id, output_map):
         for (index, word) in enumerate(words):
@@ -104,5 +101,5 @@ class Decks:
                 continue
             if word not in output_map:
                 output_map[word] = set()
-            output_map[word].add(example_id)
+            output_map[word].add(self.format_sentence_key(example_id))
         return output_map

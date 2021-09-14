@@ -1,8 +1,11 @@
 Flask==2.0.1
 Flask-Cors==3.0.10
 genanki==0.11.0
+psycopg2==2.9.1
 pyenchant==3.2.1
+python-dotenv==0.19.0
 spacy==3.1.1
+SQLAlchemy==1.4.23
 SudachiDict-small==20210802
 SudachiPy==0.5.2
 wanakana-python==1.2.2
