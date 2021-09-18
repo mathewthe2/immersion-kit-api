@@ -17,12 +17,6 @@ decks = DecksManager()
 decks.load_decks()
 decks.set_category('anime')
 
-# hiragana_text = to_hiragana('josei', custom_kana_mapping=KANA_MAPPING)
-# print(hiragana_text)
-# print(analyze_japanese(hiragana_text))
-# print(dictionary.is_entry(hiragana_text))
-# print(dictionary.get_first_entry('とは'))
-
 # def close():
 #     decks.con.commit()
 #     decks.con.close()
@@ -84,11 +78,6 @@ def get_examples_and_category_count(text_is_japanese, words_map, text, word_base
         "examples": filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS),
         "category_count": category_count
     }
-    # else:
-    #     return {
-    #         "examples" : [],
-    #         "category_count": {}
-    #     }
 
 def filter_fields(examples, excluded_fields):
     if examples == []:
@@ -178,7 +167,7 @@ def get_category_of_example_id(example_id):
 
 def count_examples_for_category(example_ids):
     # print('example ids', example_ids)
-    print('example ids', [id for id in example_ids if id.split('-')[0] == 'games'])
+    # print('example ids', [id for id in example_ids if id.split('-')[0] == 'anime'])
     categories = [key for key in DECK_CATEGORIES]
     category_example_count = {}
     for category in categories:
