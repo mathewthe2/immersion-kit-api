@@ -562,7 +562,8 @@
             "いらっしゃる",
             " ",
             "御",
-            "母さん",
+            "母",
+            "さん",
             " ",
             "天気",
             "予報",
@@ -574,7 +575,8 @@
             "いらっしゃい",
             " ",
             "お",
-            "母さん",
+            "母",
+            "さん",
             " ",
             "天気",
             "予報",
@@ -703,7 +705,8 @@
             " ",
             "又",
             "御",
-            "父さん",
+            "父",
+            "さん",
             "の",
             "ラジオ",
             " ",
@@ -720,7 +723,8 @@
             " ",
             "また",
             "お",
-            "父さん",
+            "父",
+            "さん",
             "の",
             "ラジオ",
             " ",
@@ -892,7 +896,7 @@
             ",",
             "my",
             "mind",
-            "'s",
+            "be",
             "make",
             "up",
             ".",
@@ -919,8 +923,10 @@
             "昨夜",
             "は",
             " ",
-            "ひと月",
-            "のばす",
+            "一",
+            "月",
+            "の",
+            "ばす",
             "って"
         ],
         "word_list": [
@@ -932,8 +938,10 @@
             "ゆうべ",
             "は",
             " ",
-            "ひと月",
-            "のばす",
+            "ひと",
+            "月",
+            "の",
+            "ばす",
             "って"
         ],
         "translation_word_list": [
@@ -1116,7 +1124,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "kiki",
+            "Kiki",
             ",",
             "wait",
             "!"
@@ -1174,7 +1182,7 @@
             "what",
             "be",
             "this",
-            "leave",
+            "leaving",
             "business",
             "?"
         ],
@@ -1398,7 +1406,7 @@
             ",",
             "my",
             ".",
-            "time",
+            "Time",
             "fly",
             "so",
             "quickly",
@@ -1879,7 +1887,8 @@
             "代",
             "で",
             " ",
-            "おしまい",
+            "御",
+            "仕舞い",
             "です",
             "わ"
         ],
@@ -1893,7 +1902,8 @@
             "代",
             "で",
             " ",
-            "おしまい",
+            "お",
+            "しまい",
             "です",
             "わ"
         ],
@@ -1958,7 +1968,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "sign",
+            "Sign",
             "of",
             "the",
             "time",
@@ -2268,7 +2278,8 @@
         "word_base_list": [
             "そして",
             " ",
-            "ひと月",
+            "一",
+            "月",
             "のばす",
             "て",
             "―",
@@ -2289,7 +2300,8 @@
         "word_list": [
             "そして",
             " ",
-            "ひと月",
+            "ひと",
+            "月",
             "のばし",
             "て",
             "―",
@@ -2723,7 +2735,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-Tonight",
+            "-tonight",
             "?",
             "-yeah",
             "!",
@@ -3471,7 +3483,8 @@
         "word_base_list": [
             "そして",
             " ",
-            "いつも",
+            "いつ",
+            "も",
             "笑顔",
             "を",
             "忘れる",
@@ -3482,7 +3495,8 @@
         "word_list": [
             "そして",
             " ",
-            "いつも",
+            "いつ",
+            "も",
             "笑顔",
             "を",
             "忘れ",
@@ -3615,7 +3629,8 @@
         "sentence_with_furigana": "お 父[とう]さん！あのラジオちょうだい！",
         "word_base_list": [
             "御",
-            "父さん",
+            "父",
+            "さん",
             "！",
             " ",
             "彼の",
@@ -3625,7 +3640,8 @@
         ],
         "word_list": [
             "お",
-            "父さん",
+            "父",
+            "さん",
             "！",
             " ",
             "あの",
@@ -3844,7 +3860,8 @@
         "sentence": "母さんの わかいころに よくにてる",
         "sentence_with_furigana": "母[かあ]さんのわかいころによくにてる",
         "word_base_list": [
-            "母さん",
+            "母",
+            "さん",
             "の",
             " ",
             "若い",
@@ -3856,7 +3873,8 @@
             "てる"
         ],
         "word_list": [
-            "母さん",
+            "母",
+            "さん",
             "の",
             " ",
             "わかい",
@@ -3896,18 +3914,20 @@
         "sentence_with_furigana": "お 父[とう]さん",
         "word_base_list": [
             "御",
-            "父さん"
+            "父",
+            "さん"
         ],
         "word_list": [
             "お",
-            "父さん"
+            "父",
+            "さん"
         ],
         "translation_word_list": [
             "Dad",
             "..."
         ],
         "translation_word_base_list": [
-            "dad",
+            "Dad",
             "..."
         ],
         "translation": "Dad...",
@@ -4518,7 +4538,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-wow",
+            "-Wow",
             "!",
             "-I'm",
             "so",
@@ -4737,7 +4757,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-kiki",
+            "-Kiki",
             ",",
             "it",
             "be",
@@ -4876,7 +4896,8 @@
             "で",
             " ",
             "御",
-            "母さん",
+            "母",
+            "さん",
             "の",
             "箒",
             "を",
@@ -4896,7 +4917,8 @@
             "じゃ",
             " ",
             "お",
-            "母さん",
+            "母",
+            "さん",
             "の",
             "ホーキ",
             "を",
@@ -5131,7 +5153,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "kiki",
+            "Kiki",
             ",",
             "trust",
             "I",
@@ -5217,7 +5239,8 @@
             "僕",
             "も",
             "御",
-            "母さん",
+            "母",
+            "さん",
             "の",
             "箒",
             "が",
@@ -5230,7 +5253,8 @@
             "ボク",
             "も",
             "お",
-            "母さん",
+            "母",
+            "さん",
             "の",
             "ホーキ",
             "が",
@@ -5283,7 +5307,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "traitor",
+            "Traitor",
             "."
         ],
         "translation": "Traitor.",
@@ -5444,7 +5468,7 @@
             "get",
             "'em",
             ".",
-            "-bye",
+            "-Bye",
             "."
         ],
         "translation": "-Go get 'em. -Bye.",
@@ -5531,12 +5555,16 @@
         "sentence": "あいかわらずヘタね",
         "sentence_with_furigana": "あいかわらずヘタね",
         "word_base_list": [
-            "あいかわらず",
+            "相",
+            "変わる",
+            "ず",
             "下手",
             "ね"
         ],
         "word_list": [
-            "あいかわらず",
+            "あい",
+            "かわら",
+            "ず",
             "ヘタ",
             "ね"
         ],
@@ -6753,7 +6781,7 @@
             "to",
             "you",
             ".",
-            "-thank",
+            "-thanks",
             "."
         ],
         "translation": "Good luck to you. -Thanks.",
@@ -7401,7 +7429,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-It",
+            "-it",
             "be",
             "only",
             "a",
@@ -7409,7 +7437,7 @@
             "to",
             "I",
             ".",
-            "-aw",
+            "-Aw",
             ",",
             "come",
             "on",
@@ -7878,7 +7906,7 @@
             "it",
             "here",
             "!",
-            "-It",
+            "-it",
             "be",
             "a",
             "trifle",
@@ -8195,13 +8223,13 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-thank",
+            "-Thanks",
             ",",
             "mister",
             "!",
             "bye",
             "!",
-            "-Don't",
+            "-don't",
             "mention",
             "it",
             "!"
@@ -8315,7 +8343,7 @@
             "！",
             " ",
             "第",
-            "一",
+            "1",
             "印象",
             "を",
             "大事",
@@ -8431,7 +8459,7 @@
             "my",
             "name",
             "be",
-            "kiki",
+            "Kiki",
             "."
         ],
         "translation": "Well, you see, I'm a witch. My name is Kiki.",
@@ -9100,7 +9128,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-Are",
+            "-are",
             "you",
             "gon",
             "na",
@@ -11230,7 +11258,8 @@
             "御",
             "様",
             " ",
-            "いつも",
+            "いつ",
+            "も",
             "の",
             "ね",
             "？"
@@ -11244,7 +11273,8 @@
             "お",
             "さま",
             "　",
-            "いつも",
+            "いつ",
+            "も",
             "の",
             "ね",
             "？"
@@ -12594,7 +12624,7 @@
         "translation_word_base_list": [
             "my",
             "name",
-            "'s",
+            "be",
             "Kiki",
             ".",
             "this",
@@ -12666,7 +12696,7 @@
             "it",
             "be",
             "all",
-            "your",
+            "yours",
             "."
         ],
         "translation": "It's not very clean, but it's all yours.",
@@ -13526,11 +13556,13 @@
         "sentence": "宅急便ね",
         "sentence_with_furigana": "宅急便[たっきゅうびん]ね",
         "word_base_list": [
-            "宅急便",
+            "宅",
+            "急便",
             "ね"
         ],
         "word_list": [
-            "宅急便",
+            "宅",
+            "急便",
             "ね"
         ],
         "translation_word_list": [
@@ -13659,7 +13691,8 @@
             " ",
             "空",
             "飛ぶ",
-            "宅急便",
+            "宅",
+            "急便",
             "って",
             "訳",
             "ね"
@@ -13670,7 +13703,8 @@
             " ",
             "空",
             "とぶ",
-            "宅急便",
+            "宅",
+            "急便",
             "って",
             "わけ",
             "ね"
@@ -13892,7 +13926,7 @@
             "up",
             "there",
             ".",
-            "-but",
+            "-But",
             "a",
             "phone",
             "cost",
@@ -13955,7 +13989,7 @@
             "up",
             "already",
             ".",
-            "-don't",
+            "-Don't",
             "waste",
             "it",
             "."
@@ -14116,48 +14150,36 @@
             "ば"
         ],
         "translation_word_list": [
-            "If",
-            "you",
+            "I",
+            "need",
             "help",
-            "around",
+            "in",
             "the",
             "bakery",
-            ",",
-            "you",
-            "wo",
-            "n't",
-            "have",
-            "to",
-            "pay",
-            "rent",
-            "or",
-            "the",
-            "phone",
-            "bill",
+            "since",
+            "I",
+            "'m",
+            "expecting",
+            "a",
+            "baby",
             "."
         ],
         "translation_word_base_list": [
-            "if",
-            "you",
+            "I",
+            "need",
             "help",
-            "around",
+            "in",
             "the",
             "bakery",
-            ",",
-            "you",
-            "wo",
-            "n't",
-            "have",
-            "to",
-            "pay",
-            "rent",
-            "or",
-            "the",
-            "phone",
-            "bill",
+            "since",
+            "I",
+            "be",
+            "expect",
+            "a",
+            "baby",
             "."
         ],
-        "translation": "If you help around the bakery, you won't have to pay rent or the phone bill.",
+        "translation": "I need help in the bakery since I'm expecting a baby.",
         "image": "A_KikisDeliveryService_1_0.29.52.676.jpg",
         "sound": "A_KikisDeliveryService_1_0.29.50.611-0.29.54.740.mp3"
     },
@@ -14195,32 +14217,38 @@
             "？"
         ],
         "translation_word_list": [
-            "I",
-            "need",
+            "You",
+            "wo",
+            "n't",
+            "have",
+            "to",
+            "pay",
+            "rent",
+            "or",
             "the",
-            "help",
-            "since",
-            "I",
-            "'m",
-            "expecting",
-            "a",
-            "baby",
-            "."
+            "phone",
+            "bill",
+            ".",
+            "Good",
+            "?"
         ],
         "translation_word_base_list": [
-            "I",
-            "need",
+            "you",
+            "wo",
+            "n't",
+            "have",
+            "to",
+            "pay",
+            "rent",
+            "or",
             "the",
-            "help",
-            "since",
-            "I",
-            "be",
-            "expect",
-            "a",
-            "baby",
-            "."
+            "phone",
+            "bill",
+            ".",
+            "good",
+            "?"
         ],
-        "translation": "I need the help since I'm expecting a baby.",
+        "translation": "You won't have to pay rent or the phone bill. Good?",
         "image": "A_KikisDeliveryService_1_0.29.55.929.jpg",
         "sound": "A_KikisDeliveryService_1_0.29.54.824-0.29.57.034.mp3"
     },
@@ -15594,14 +15622,14 @@
             "."
         ],
         "translation_word_base_list": [
-            "-You",
+            "-you",
             "be",
             "a",
             "cute",
             "little",
             "witch",
             ".",
-            "-my",
+            "-My",
             "name",
             "'s",
             "Kiki",
@@ -16053,7 +16081,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-How",
+            "-how",
             "much",
             "do",
             "you",
@@ -16729,7 +16757,8 @@
             "で",
             " ",
             "御",
-            "母さん",
+            "母",
+            "さん",
             "に",
             " ",
             "手紙",
@@ -16742,7 +16771,8 @@
             "で",
             " ",
             "お",
-            "母さん",
+            "母",
+            "さん",
             "に",
             " ",
             "手紙",
@@ -16939,7 +16969,7 @@
             "say",
             "a",
             "wind",
-            "'s",
+            "be",
             "come",
             "."
         ],
@@ -17062,8 +17092,8 @@
             "be",
             "sorry",
             ".",
-            "i--",
-            "ow",
+            "I--",
+            "Ow",
             "!"
         ],
         "translation": "I'm sorry. I-- Ow!",
@@ -17891,7 +17921,7 @@
             "魔女",
             "の",
             "召し",
-            "使",
+            "使い",
             " ",
             "だ",
             "た",
@@ -18195,7 +18225,7 @@
         "sentence_with_furigana": "おねがい 探[さが]したらすぐ 助[たす]けにいくから",
         "word_base_list": [
             "御",
-            "願い",
+            "願う",
             " ",
             "探す",
             "た",
@@ -18644,7 +18674,8 @@
         "sentence_with_furigana": "お 母[かあ]さんカナリア 移[うつ]してもいい？",
         "word_base_list": [
             "御",
-            "母さん",
+            "母",
+            "さん",
             " ",
             "カナリア",
             "移す",
@@ -18655,7 +18686,8 @@
         ],
         "word_list": [
             "お",
-            "母さん",
+            "母",
+            "さん",
             " ",
             "カナリア",
             "移し",
@@ -19854,7 +19886,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-i",
+            "-I",
             "get",
             "sort",
             "of",
@@ -19862,7 +19894,7 @@
             "of",
             "it",
             ".",
-            "-i'm",
+            "-I'm",
             "sorry",
             "."
         ],
@@ -20290,7 +20322,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "Ketto",
+            "ketto",
             ",",
             "time",
             "for",
@@ -21007,7 +21039,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-remember",
+            "-Remember",
             "to",
             "thank",
             "your",
@@ -21259,7 +21291,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-ketto",
+            "-Ketto",
             ",",
             "open",
             "the",
@@ -21361,7 +21393,7 @@
         "translation_word_base_list": [
             "-jiji",
             "!",
-            "-kiki",
+            "-Kiki",
             ",",
             "what",
             "take",
@@ -21613,7 +21645,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-I'm",
+            "-i'm",
             "famish",
             ".",
             "-yeah",
@@ -21858,7 +21890,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-naked",
+            "-nake",
             "?",
             "-don't",
             "be",
@@ -24325,7 +24357,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "kiki",
+            "Kiki",
             ",",
             "I",
             "would",
@@ -25004,7 +25036,7 @@
         "translation_word_base_list": [
             "my",
             "name",
-            "'s",
+            "be",
             "Kiki",
             ".",
             "someone",
@@ -25353,7 +25385,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "Broom",
+            "broom",
             "and",
             "a",
             "black",
@@ -26969,7 +27001,7 @@
             "で",
             " ",
             "御",
-            "願い",
+            "願う",
             "為る",
             "かしら"
         ],
@@ -27231,7 +27263,8 @@
         "sentence_with_furigana": "お 母[かあ]さまのお 仕込[しこ]みがいいのね 段取[だんど]りがいいわ",
         "word_base_list": [
             "御",
-            "母様",
+            "母",
+            "様",
             "の",
             "御",
             "仕込み",
@@ -27247,7 +27280,8 @@
         ],
         "word_list": [
             "お",
-            "母さま",
+            "母",
+            "さま",
             "の",
             "お",
             "仕込み",
@@ -27641,7 +27675,7 @@
             "?"
         ],
         "translation_word_base_list": [
-            "-So",
+            "-so",
             "why",
             "do",
             "n't",
@@ -27678,7 +27712,7 @@
             "で",
             " ",
             "御",
-            "願い",
+            "願う",
             "為る",
             "かしら"
         ],
@@ -27854,8 +27888,7 @@
         "sentence": "フルスピードでとばせば― 15分でギリギリセーフよ",
         "sentence_with_furigana": "フルスピードでとばせば― 15 分[ふん]でギリギリセーフよ",
         "word_base_list": [
-            "フル",
-            "スピード",
+            "フルスピード",
             "で",
             "飛ばす",
             "ば",
@@ -27869,8 +27902,7 @@
             "よ"
         ],
         "word_list": [
-            "フル",
-            "スピード",
+            "フルスピード",
             "で",
             "とばせ",
             "ば",
@@ -28236,7 +28268,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-what'll",
+            "-What'll",
             "I",
             "do",
             "?",
@@ -28363,12 +28395,12 @@
             "."
         ],
         "translation_word_base_list": [
-            "-is",
+            "-Is",
             "the",
             "pie",
             "ready",
             "?",
-            "-It",
+            "-it",
             "smell",
             "fine",
             ",",
@@ -28466,7 +28498,7 @@
         "translation_word_base_list": [
             "-okay",
             ".",
-            "-don't",
+            "-Don't",
             "forget",
             "your",
             "money",
@@ -28536,7 +28568,7 @@
         ],
         "translation_word_base_list": [
             "-that",
-            "be",
+            "'s",
             "way",
             "too",
             "much",
@@ -28645,7 +28677,7 @@
             "good",
             "time",
             "!",
-            "-be",
+            "-Be",
             "careful",
             "!"
         ],
@@ -28800,7 +28832,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-could",
+            "-Could",
             "we",
             "get",
             "out",
@@ -30391,7 +30423,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "oatmeal",
+            "Oatmeal",
             "be",
             "the",
             "good",
@@ -31238,7 +31270,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "jiji",
+            "Jiji",
             "!",
             "breakfast",
             "be",
@@ -31846,11 +31878,11 @@
             "?"
         ],
         "translation_word_base_list": [
-            "-You",
+            "-you",
             "have",
             "work",
             "?",
-            "-It",
+            "-it",
             "be",
             "not",
             "far",
@@ -33089,7 +33121,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-I",
+            "-i",
             "be",
             "sleep",
             ".",
@@ -33139,7 +33171,7 @@
             "with",
             "this",
             "?",
-            "-Why",
+            "-why",
             "not",
             "?"
         ],
@@ -33202,7 +33234,7 @@
             "practice",
             "anyway",
             ".",
-            "got",
+            "get",
             "ta",
             "build",
             "up",
@@ -33269,7 +33301,8 @@
         "word_base_list": [
             "私",
             " ",
-            "自転車",
+            "自転",
+            "車",
             "初めて",
             "だ",
             "の"
@@ -33277,7 +33310,8 @@
         "word_list": [
             "わたし",
             " ",
-            "自転車",
+            "自転",
+            "車",
             "はじめて",
             "な",
             "の"
@@ -33410,7 +33444,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "Brace",
+            "brace",
             "the",
             "bike",
             "with",
@@ -33852,7 +33886,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-The",
+            "-the",
             "dirigible",
             ",",
             "right",
@@ -33991,7 +34025,7 @@
             "all",
             "right",
             "?",
-            "-I'm",
+            "-i'm",
             "okay",
             "."
         ],
@@ -34303,7 +34337,8 @@
             ".",
             ".",
             " ",
-            "自転車",
+            "自転",
+            "車",
             "目茶苦茶",
             " ",
             "あっ",
@@ -34315,7 +34350,8 @@
             "",
             "",
             " ",
-            "自転車",
+            "自転",
+            "車",
             "めちゃくちゃ",
             " ",
             "あっ",
@@ -34404,7 +34440,8 @@
         "word_base_list": [
             "キキ",
             " ",
-            "自転車",
+            "自転",
+            "車",
             "を",
             "頼む",
             " ",
@@ -34427,7 +34464,8 @@
         "word_list": [
             "キキ",
             " ",
-            "自転車",
+            "自転",
+            "車",
             "を",
             "たのむ",
             " ",
@@ -34472,8 +34510,8 @@
             "for",
             "I",
             "?",
-            "-what",
-            "be",
+            "-What",
+            "'s",
             "wrong",
             "?"
         ],
@@ -34487,7 +34525,8 @@
         "sentence": "自転車 こぎすぎたんだ",
         "sentence_with_furigana": "自転車[じてんしゃ]こぎすぎたんだ",
         "word_base_list": [
-            "自転車",
+            "自転",
+            "車",
             " ",
             "漕ぐ",
             "過ぎる",
@@ -34496,7 +34535,8 @@
             "だ"
         ],
         "word_list": [
-            "自転車",
+            "自転",
+            "車",
             " ",
             "こぎ",
             "すぎ",
@@ -34782,7 +34822,8 @@
             "って",
             "―",
             " ",
-            "母さん",
+            "母",
+            "さん",
             "は",
             "言う",
             "てる",
@@ -34802,7 +34843,8 @@
             "って",
             "―",
             " ",
-            "母さん",
+            "母",
+            "さん",
             "は",
             "言っ",
             "て",
@@ -35208,7 +35250,7 @@
             "feel",
             "my",
             "confidence",
-            "slipping",
+            "slip",
             "."
         ],
         "translation": "I sort of feel my confidence slipping.",
@@ -35637,7 +35679,7 @@
             "you",
             "clown",
             "!",
-            "Quit",
+            "quit",
             "look",
             "up",
             "to",
@@ -36192,7 +36234,8 @@
             "知る",
             "てる",
             " ",
-            "宅急便",
+            "宅",
+            "急便",
             "遣る",
             "てる",
             "子",
@@ -36205,7 +36248,8 @@
             "知っ",
             "てる",
             " ",
-            "宅急便",
+            "宅",
+            "急便",
             "やっ",
             "てる",
             "子",
@@ -36290,7 +36334,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-You",
+            "-you",
             "mean",
             "she",
             "be",
@@ -36298,7 +36342,7 @@
             "work",
             "girl",
             "?",
-            "-my",
+            "-My",
             ",",
             "how",
             "independent",
@@ -38728,7 +38772,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-I'm",
+            "-i'm",
             "sorry",
             ".",
             "-well",
@@ -38883,7 +38927,8 @@
             " ",
             "今",
             " ",
-            "御茶",
+            "御",
+            "茶",
             "入れる",
             "て",
             "来る"
@@ -38902,7 +38947,8 @@
             " ",
             "今",
             " ",
-            "お茶",
+            "お",
+            "茶",
             "いれ",
             "て",
             "くる"
@@ -39273,14 +39319,14 @@
             "."
         ],
         "translation_word_base_list": [
-            "-I'm",
+            "-i'm",
             "take",
             "a",
             "break",
             "right",
             "now",
             ".",
-            "-i",
+            "-I",
             "see",
             "."
         ],
@@ -39942,7 +39988,7 @@
             "way",
             "you",
             "be",
-            "dressed",
+            "dress",
             "."
         ],
         "translation": "Well, look at the way you're dressed.",
@@ -40060,9 +40106,9 @@
             "."
         ],
         "translation_word_base_list": [
-            "-crow",
+            "-crows",
             "!",
-            "-we've",
+            "-We've",
             "become",
             "real",
             "close",
@@ -40541,7 +40587,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-You",
+            "-you",
             "mean",
             ",",
             "that",
@@ -41020,7 +41066,7 @@
             "?"
         ],
         "translation_word_base_list": [
-            "-sometimes",
+            "-sometime",
             ",",
             "I",
             "ca",
@@ -41029,7 +41075,7 @@
             "a",
             "thing",
             ".",
-            "-You",
+            "-you",
             "mean",
             "it",
             "?",
@@ -41076,7 +41122,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "kiki",
+            "Kiki",
             ",",
             "do",
             "n't",
@@ -41415,7 +41461,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-But",
+            "-but",
             "still",
             ",",
             "if",
@@ -42115,7 +42161,7 @@
             "of",
             "painting",
             "I",
-            "'d",
+            "have",
             "see",
             "."
         ],
@@ -42997,7 +43043,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "leave",
+            "left",
             "alone",
             ",",
             "I",
@@ -43276,7 +43322,8 @@
             ".",
             ".",
             " ",
-            "意地悪",
+            "意地",
+            "悪",
             "っ"
         ],
         "word_list": [
@@ -43296,7 +43343,8 @@
             "",
             "",
             " ",
-            "いじわる",
+            "いじ",
+            "わる",
             "っ"
         ],
         "translation_word_list": [
@@ -43312,14 +43360,14 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-i",
+            "-I",
             "know",
             "I",
             "could",
             "paint",
             "you",
             ".",
-            "-not",
+            "-Not",
             "fair",
             "!"
         ],
@@ -43448,7 +43496,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-sorry",
+            "-Sorry",
             "about",
             "take",
             "your",
@@ -44067,7 +44115,7 @@
             "当分",
             " ",
             "御",
-            "休む",
+            "休み",
             "って",
             "言う",
             "た",
@@ -44226,7 +44274,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-afternoon",
+            "-Afternoon",
             ",",
             "ma'am",
             ".",
@@ -44817,7 +44865,7 @@
             "?"
         ],
         "translation_word_base_list": [
-            "kiki",
+            "Kiki",
             ",",
             "would",
             "you",
@@ -45436,7 +45484,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "-what",
+            "-What",
             "happen",
             "?",
             "-there",
@@ -46745,7 +46793,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-Are",
+            "-are",
             "you",
             "sure",
             "it",
@@ -46753,7 +46801,7 @@
             "your",
             "friend",
             "?",
-            "-i",
+            "-I",
             "have",
             "to",
             "go",
@@ -47389,7 +47437,7 @@
             "？",
             " ",
             "御",
-            "願い",
+            "願う",
             " ",
             "必ず",
             "御",
@@ -47876,7 +47924,7 @@
         ],
         "translation_word_base_list": [
             "we",
-            "got",
+            "get",
             "ta",
             "get",
             "up",
@@ -48516,14 +48564,14 @@
             "!"
         ],
         "translation_word_base_list": [
-            "-hey",
+            "-Hey",
             ",",
             "look",
             "!",
             "over",
             "there",
             "!",
-            "-It",
+            "-it",
             "be",
             "a",
             "miracle",
@@ -49939,7 +49987,8 @@
         "sentence": "母さん キキからの手紙だよ",
         "sentence_with_furigana": "母[かあ]さんキキからの 手紙[てがみ]だよ",
         "word_base_list": [
-            "母さん",
+            "母",
+            "さん",
             " ",
             "キキ",
             "から",
@@ -49949,7 +49998,8 @@
             "よ"
         ],
         "word_list": [
-            "母さん",
+            "母",
+            "さん",
             " ",
             "キキ",
             "から",
@@ -49990,10 +50040,12 @@
         "word_base_list": [
             "“",
             "御",
-            "父さん",
+            "父",
+            "さん",
             " ",
             "御",
-            "母さん",
+            "母",
+            "さん",
             " ",
             "御",
             "元気",
@@ -50016,10 +50068,12 @@
         "word_list": [
             "“",
             "お",
-            "父さん",
+            "父",
+            "さん",
             " ",
             "お",
-            "母さん",
+            "母",
+            "さん",
             " ",
             "お",
             "元気",
