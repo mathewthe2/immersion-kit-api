@@ -3,7 +3,7 @@ from sudachipy import dictionary
 from wanakana import to_hiragana, is_japanese, is_katakana, is_hiragana
 import string
 
-tokenizer_obj = dictionary.Dictionary(dict_type="small").create()
+tokenizer_obj = dictionary.Dictionary(dict_type="core").create()
 mode = tokenizer.Tokenizer.SplitMode.A
 
 KANA_MAPPING = {
@@ -25,15 +25,22 @@ KANA_TO_KANJI_MAPPING = {
 
 KANJI_READING_MAPPING = {
     '私': '私[わたし]',
+    # '檻': '檻[ケージ]',
     '貴女': '貴女[あなた]',
+    '父様': '父様[とうさま]',
+    '一度': '一度[いちど]',
     '許さん': '許[ゆる]さん',
+    '目覚め': '目覚[めざ]め',
+    '目覚める': '目覚[めざ]める',
     '何が': '何[なに]が',
+    '剣': '剣[つるぎ]',
     '何を': '何[なに]を',
     '何も': '何[なに]も',
     '我国': '我国[わがくに]',
     '行き来': '行[い]き 来[き]',
     '外宇宙': '外宇宙[がいうちゅう]',
     '異星人': '異星人[いせいじん]',
+    '荒野': '荒野[こうや]',
     '優那': '優那[ゆうな]',
     '菜々美': '菜々美[ななみ]'
 }
@@ -112,3 +119,4 @@ def add_furigana(text):
         else:
             parsed += token.surface()
     return parsed
+    
