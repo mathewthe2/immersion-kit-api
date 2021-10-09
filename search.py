@@ -149,7 +149,7 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}):
     return dict(data=result)
 
 def sort_examples(examples, sorting):
-    if sorting.lower() == 'sentence length':
+    if sorting.lower() in ['sentence length', 'shortness']:
         return sorted(examples, key=lambda example: len(example['sentence']))
     return examples
 
