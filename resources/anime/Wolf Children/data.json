@@ -520,7 +520,7 @@
         "id": "A_WolfChildren_0008",
         "deck_name": "Wolf Children",
         "sentence": "♪♪～",
-        "sentence_with_furigana": "♪♪~",
+        "sentence_with_furigana": "♪♪～",
         "word_base_list": [
             "♪",
             "♪",
@@ -3637,7 +3637,7 @@
             "?"
         ],
         "translation_word_base_list": [
-            "shock",
+            "shocked",
             "?"
         ],
         "translation": "Shocked?",
@@ -4533,7 +4533,7 @@
         "id": "A_WolfChildren_0079",
         "deck_name": "Wolf Children",
         "sentence": "まんま～！ 雪！",
-        "sentence_with_furigana": "まんま~！ 雪[せつ]！",
+        "sentence_with_furigana": "まんま～！ 雪[せつ]！",
         "word_base_list": [
             "侭",
             "から",
@@ -4663,7 +4663,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "tasty",
+            "Tasty",
             "."
         ],
         "translation": "Tasty.",
@@ -4725,7 +4725,7 @@
         "id": "A_WolfChildren_0083",
         "deck_name": "Wolf Children",
         "sentence": "うわっ！　あ～っ！ え？",
-        "sentence_with_furigana": "うわっ！　あ~っ！え？",
+        "sentence_with_furigana": "うわっ！　あ～っ！え？",
         "word_base_list": [
             "うわ",
             "！",
@@ -4801,7 +4801,7 @@
         "id": "A_WolfChildren_0085",
         "deck_name": "Wolf Children",
         "sentence": "あっ！　やられた～。 ふあ～…。",
-        "sentence_with_furigana": "あっ！　やられた~。ふあ~…。",
+        "sentence_with_furigana": "あっ！　やられた～。ふあ～…。",
         "word_base_list": [
             "あっ",
             "！",
@@ -5304,7 +5304,7 @@
         "id": "A_WolfChildren_0096",
         "deck_name": "Wolf Children",
         "sentence": "あの～　危険なものでは…？",
-        "sentence_with_furigana": "あの~　 危険[きけん]なものでは…？",
+        "sentence_with_furigana": "あの～　 危険[きけん]なものでは…？",
         "word_base_list": [
             "あの",
             "から",
@@ -5848,7 +5848,7 @@
         "id": "A_WolfChildren_0106",
         "deck_name": "Wolf Children",
         "sentence": "ブルルル～！ よし　お散歩　行こう。 ウ～…　キャン　キャン　キャン…。",
-        "sentence_with_furigana": "ブルルル~！よし　お 散歩[さんぽ]　 行[い]こう。ウ~…　キャン　キャン　キャン…。",
+        "sentence_with_furigana": "ブルルル～！よし　お 散歩[さんぽ]　 行[い]こう。ウ～…　キャン　キャン　キャン…。",
         "word_base_list": [
             "ブルルル",
             "～",
@@ -5937,7 +5937,7 @@
         "id": "A_WolfChildren_0107",
         "deck_name": "Wolf Children",
         "sentence": "だから耳！　また出してる。 ク～ン…。",
-        "sentence_with_furigana": "だから 耳[みみ]！　また 出[だ]してる。ク~ン…。",
+        "sentence_with_furigana": "だから 耳[みみ]！　また 出[だ]してる。ク～ン…。",
         "word_base_list": [
             "だ",
             "から",
@@ -6016,7 +6016,7 @@
         "id": "A_WolfChildren_0108",
         "deck_name": "Wolf Children",
         "sentence": "ブルル～…　はい！",
-        "sentence_with_furigana": "ブルル~…　はい！",
+        "sentence_with_furigana": "ブルル～…　はい！",
         "word_base_list": [
             "ブルル",
             "～",
@@ -6204,7 +6204,7 @@
             "..."
         ],
         "translation_word_base_list": [
-            "I",
+            "i",
             "-",
             "I'm",
             "sorry",
@@ -6524,7 +6524,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "tch",
+            "Tch",
             ".",
             "at",
             "least",
@@ -8446,7 +8446,7 @@
         "id": "A_WolfChildren_0146",
         "deck_name": "Wolf Children",
         "sentence": "町のほうが 便利だと思うけどね～。",
-        "sentence_with_furigana": "町[まち]のほうが 便利[べんり]だと 思[おも]うけどね~。",
+        "sentence_with_furigana": "町[まち]のほうが 便利[べんり]だと 思[おも]うけどね～。",
         "word_base_list": [
             "町",
             "の",
@@ -9024,7 +9024,7 @@
         "id": "A_WolfChildren_0154",
         "deck_name": "Wolf Children",
         "sentence": "あ～　ここは 自給自足には向かないよ。",
-        "sentence_with_furigana": "あ~　ここは 自給自足[じきゅうじそく]には 向[む]かないよ。",
+        "sentence_with_furigana": "あ～　ここは 自給自足[じきゅうじそく]には 向[む]かないよ。",
         "word_base_list": [
             "あっ",
             "～",
@@ -9472,7 +9472,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "Neighborhood",
+            "neighborhood",
             "?",
             "you",
             "wo",
@@ -9769,7 +9769,7 @@
         "id": "A_WolfChildren_0165",
         "deck_name": "Wolf Children",
         "sentence": "うわ～！　フフフ！",
-        "sentence_with_furigana": "うわ~！　フフフ！",
+        "sentence_with_furigana": "うわ～！　フフフ！",
         "word_base_list": [
             "うわ",
             "～",
@@ -9791,7 +9791,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "Yay",
+            "yay",
             "!"
         ],
         "translation": "Yay!",
@@ -9908,7 +9908,7 @@
         "id": "A_WolfChildren_0168",
         "deck_name": "Wolf Children",
         "sentence": "アハハハ…。 うお～！　何これ！　うわ～っ！",
-        "sentence_with_furigana": "アハハハ…。うお~！　 何[なん]これ！　うわ~っ！",
+        "sentence_with_furigana": "アハハハ…。うお～！　 何[なん]これ！　うわ～っ！",
         "word_base_list": [
             "あはは",
             ".",
@@ -9977,7 +9977,7 @@
         "id": "A_WolfChildren_0169",
         "deck_name": "Wolf Children",
         "sentence": "ドシ～ン！　ドシ～ン！",
-        "sentence_with_furigana": "ドシ~ン！　ドシ~ン！",
+        "sentence_with_furigana": "ドシ～ン！　ドシ～ン！",
         "word_base_list": [
             "年",
             "から",
@@ -10485,7 +10485,7 @@
         "id": "A_WolfChildren_0179",
         "deck_name": "Wolf Children",
         "sentence": "（黒田） あ…　韮崎のおじいちゃ～ん→ 今度は　お手柔らかに お願いしま～す！",
-        "sentence_with_furigana": "（ 黒田[くろだ]）あ…　 韮崎[にらさき]のおじいちゃ~ん→ 今度[こんど]は　お 手柔[てやわ]らかにお 願[ねが]いしま~す！",
+        "sentence_with_furigana": "（ 黒田[くろだ]）あ…　 韮崎[にらさき]のおじいちゃ～ん→ 今度[こんど]は　お 手柔[てやわ]らかにお 願[ねが]いしま～す！",
         "word_base_list": [
             "（",
             "黒田",
@@ -10684,7 +10684,7 @@
         "id": "A_WolfChildren_0182",
         "deck_name": "Wolf Children",
         "sentence": "ジャ～ン！",
-        "sentence_with_furigana": "ジャ~ン！",
+        "sentence_with_furigana": "ジャ～ン！",
         "word_base_list": [
             "蛇",
             "から",
@@ -10717,7 +10717,7 @@
         "id": "A_WolfChildren_0183",
         "deck_name": "Wolf Children",
         "sentence": "イヤ～！ イヒヒヒ…。",
-        "sentence_with_furigana": "イヤ~！イヒヒヒ…。",
+        "sentence_with_furigana": "イヤ～！イヒヒヒ…。",
         "word_base_list": [
             "嫌",
             "～",
@@ -10745,7 +10745,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "nooo",
+            "Nooo",
             "!"
         ],
         "translation": "Nooo!",
@@ -10817,7 +10817,7 @@
         "id": "A_WolfChildren_0185",
         "deck_name": "Wolf Children",
         "sentence": "ほら　おいで　ほら…。 わっ！ イヤ～！",
-        "sentence_with_furigana": "ほら　おいで　ほら…。わっ！イヤ~！",
+        "sentence_with_furigana": "ほら　おいで　ほら…。わっ！イヤ～！",
         "word_base_list": [
             "ほら",
             " ",
@@ -11199,7 +11199,7 @@
         "id": "A_WolfChildren_0193",
         "deck_name": "Wolf Children",
         "sentence": "ブルルル～！ 雪も作る！",
-        "sentence_with_furigana": "ブルルル~！ 雪[ゆき]も 作[つく]る！",
+        "sentence_with_furigana": "ブルルル～！ 雪[ゆき]も 作[つく]る！",
         "word_base_list": [
             "ブルルル",
             "～",
@@ -11975,7 +11975,7 @@
         "id": "A_WolfChildren_0207",
         "deck_name": "Wolf Children",
         "sentence": "う～ん…。",
-        "sentence_with_furigana": "う~ん…。",
+        "sentence_with_furigana": "う～ん…。",
         "word_base_list": [
             "うん",
             ".",
@@ -12006,7 +12006,7 @@
         "id": "A_WolfChildren_0208",
         "deck_name": "Wolf Children",
         "sentence": "♪♪～",
-        "sentence_with_furigana": "♪♪~",
+        "sentence_with_furigana": "♪♪～",
         "word_base_list": [
             "♪",
             "♪",
@@ -12037,7 +12037,7 @@
         "id": "A_WolfChildren_0209",
         "deck_name": "Wolf Children",
         "sentence": "あ～！",
-        "sentence_with_furigana": "あ~！",
+        "sentence_with_furigana": "あ～！",
         "word_base_list": [
             "あっ",
             "～",
@@ -12066,7 +12066,7 @@
         "id": "A_WolfChildren_0210",
         "deck_name": "Wolf Children",
         "sentence": "何で？ な～んでだろう？",
-        "sentence_with_furigana": "何[なん]で？な~んでだろう？",
+        "sentence_with_furigana": "何[なん]で？な～んでだろう？",
         "word_base_list": [
             "何",
             "で",
@@ -12113,7 +12113,7 @@
         "id": "A_WolfChildren_0211",
         "deck_name": "Wolf Children",
         "sentence": "≪あの～　すみません！≫",
-        "sentence_with_furigana": "≪あの~　すみません！≫",
+        "sentence_with_furigana": "≪あの～　すみません！≫",
         "word_base_list": [
             "≪",
             "彼の",
@@ -12281,7 +12281,7 @@
             "what",
             "?",
             "the",
-            "fallen",
+            "fall",
             "leave",
             "!"
         ],
@@ -13446,7 +13446,7 @@
         "id": "A_WolfChildren_0234",
         "deck_name": "Wolf Children",
         "sentence": "は～い。",
-        "sentence_with_furigana": "は~い。",
+        "sentence_with_furigana": "は～い。",
         "word_base_list": [
             "はあ",
             "～",
@@ -14015,7 +14015,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "team",
+            "Team",
             "!",
             "do",
             "n't",
@@ -14222,7 +14222,7 @@
         "id": "A_WolfChildren_0248",
         "deck_name": "Wolf Children",
         "sentence": "え～っと…。",
-        "sentence_with_furigana": "え~っと…。",
+        "sentence_with_furigana": "え～っと…。",
         "word_base_list": [
             "えー",
             "～",
@@ -14284,7 +14284,7 @@
         "id": "A_WolfChildren_0250",
         "deck_name": "Wolf Children",
         "sentence": "♪♪～",
-        "sentence_with_furigana": "♪♪~",
+        "sentence_with_furigana": "♪♪～",
         "word_base_list": [
             "♪",
             "♪",
@@ -14537,7 +14537,7 @@
         "id": "A_WolfChildren_0255",
         "deck_name": "Wolf Children",
         "sentence": "し～っ！",
-        "sentence_with_furigana": "し~っ！",
+        "sentence_with_furigana": "し～っ！",
         "word_base_list": [
             "為る",
             "～",
@@ -16270,7 +16270,7 @@
         "id": "A_WolfChildren_0288",
         "deck_name": "Wolf Children",
         "sentence": "あの人　怖～い。",
-        "sentence_with_furigana": "あの 人[ひと]　 怖[こわ]~い。",
+        "sentence_with_furigana": "あの 人[ひと]　 怖[こわ]～い。",
         "word_base_list": [
             "彼の",
             "人",
@@ -16496,7 +16496,7 @@
         "id": "A_WolfChildren_0292",
         "deck_name": "Wolf Children",
         "sentence": "（韮崎のおばさん） ひゃ～　ひどい　ひどい。",
-        "sentence_with_furigana": "（ 韮崎[にらさき]のおばさん）ひゃ~　ひどい　ひどい。",
+        "sentence_with_furigana": "（ 韮崎[にらさき]のおばさん）ひゃ～　ひどい　ひどい。",
         "word_base_list": [
             "（",
             "韮崎",
@@ -16555,7 +16555,7 @@
         "id": "A_WolfChildren_0293",
         "deck_name": "Wolf Children",
         "sentence": "こんにちは　あの～…。",
-        "sentence_with_furigana": "こんにちは　あの~…。",
+        "sentence_with_furigana": "こんにちは　あの～…。",
         "word_base_list": [
             "今日は",
             " ",
@@ -17179,7 +17179,7 @@
         "id": "A_WolfChildren_0305",
         "deck_name": "Wolf Children",
         "sentence": "あ～　ムダにする気か。",
-        "sentence_with_furigana": "あ~　ムダにする 気[き]か。",
+        "sentence_with_furigana": "あ～　ムダにする 気[き]か。",
         "word_base_list": [
             "あっ",
             "～",
@@ -18197,7 +18197,7 @@
         "id": "A_WolfChildren_0325",
         "deck_name": "Wolf Children",
         "sentence": "フ～　イタタタ…。",
-        "sentence_with_furigana": "フ~　イタタタ…。",
+        "sentence_with_furigana": "フ～　イタタタ…。",
         "word_base_list": [
             "フ",
             "から",
@@ -18527,7 +18527,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "planting",
+            "plant",
             "chamomile",
             "along",
             "with",
@@ -18554,7 +18554,7 @@
         "id": "A_WolfChildren_0332",
         "deck_name": "Wolf Children",
         "sentence": "あ～　ダメ！　キャベツには セロリに決まってる。",
-        "sentence_with_furigana": "あ~　ダメ！　キャベツにはセロリに 決[き]まってる。",
+        "sentence_with_furigana": "あ～　ダメ！　キャベツにはセロリに 決[き]まってる。",
         "word_base_list": [
             "あっ",
             "～",
@@ -18753,7 +18753,7 @@
             ",",
             "no",
             "!",
-            "chamomile",
+            "Chamomile",
             "ai",
             "n't",
             "gon",
@@ -19255,7 +19255,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "Nah",
+            "nah",
             ".",
             "just",
             "a",
@@ -19336,7 +19336,7 @@
         "id": "A_WolfChildren_0344",
         "deck_name": "Wolf Children",
         "sentence": "それは　お前だ！ 何を！ 何を～！",
-        "sentence_with_furigana": "それは　お 前[まえ]だ！ 何[なに]を！ 何[なに]を~！",
+        "sentence_with_furigana": "それは　お 前[まえ]だ！ 何[なに]を！ 何[なに]を～！",
         "word_base_list": [
             "其れ",
             "は",
@@ -19400,7 +19400,7 @@
             "mean",
             "!",
             "what",
-            "have",
+            "'d",
             "you",
             "just",
             "say",
@@ -20744,7 +20744,7 @@
         "id": "A_WolfChildren_0362",
         "deck_name": "Wolf Children",
         "sentence": "でも　そろそろ働かないと…。 仕事見つけるの大変だよ～。",
-        "sentence_with_furigana": "でも　そろそろ 働[はたら]かないと…。 仕事[しごと] 見[み]つけるの 大変[たいへん]だよ~。",
+        "sentence_with_furigana": "でも　そろそろ 働[はたら]かないと…。 仕事[しごと] 見[み]つけるの 大変[たいへん]だよ～。",
         "word_base_list": [
             "で",
             "も",
@@ -20845,7 +20845,7 @@
         "id": "A_WolfChildren_0363",
         "deck_name": "Wolf Children",
         "sentence": "保育園に子供預けて みんな遠くまで通勤してるもん。 ねぇ～！",
-        "sentence_with_furigana": "保育園[ほいくえん]に 子供[こども] 預[あづ]けてみんな 遠[とお]くまで 通勤[つうきん]してるもん。ねぇ~！",
+        "sentence_with_furigana": "保育園[ほいくえん]に 子供[こども] 預[あづ]けてみんな 遠[とお]くまで 通勤[つうきん]してるもん。ねぇ～！",
         "word_base_list": [
             "保育",
             "園",
@@ -21252,7 +21252,7 @@
         "id": "A_WolfChildren_0370",
         "deck_name": "Wolf Children",
         "sentence": "ウ～！　行く～!!",
-        "sentence_with_furigana": "ウ~！　 行[い]く~!!",
+        "sentence_with_furigana": "ウ～！　 行[い]く～!!",
         "word_base_list": [
             "ウ",
             "～",
@@ -21693,7 +21693,7 @@
         "id": "A_WolfChildren_0379",
         "deck_name": "Wolf Children",
         "sentence": "あっ　ええ　まぁ…。 アオ～ン！",
-        "sentence_with_furigana": "あっ　ええ　まぁ…。アオ~ン！",
+        "sentence_with_furigana": "あっ　ええ　まぁ…。アオ～ン！",
         "word_base_list": [
             "あっ",
             " ",
@@ -22109,7 +22109,7 @@
             "?",
             "the",
             "dog",
-            "be",
+            "'s",
             "go",
             ".",
             "hello",
@@ -22126,7 +22126,7 @@
         "id": "A_WolfChildren_0386",
         "deck_name": "Wolf Children",
         "sentence": "あ～ら　雪ちゃん 今日は　お愛想がいいのね。",
-        "sentence_with_furigana": "あ~ら　 雪[ゆき]ちゃん 今日[きょう]は　お 愛想[あいそ]がいいのね。",
+        "sentence_with_furigana": "あ～ら　 雪[ゆき]ちゃん 今日[きょう]は　お 愛想[あいそ]がいいのね。",
         "word_base_list": [
             "あっ",
             "～",
@@ -22201,7 +22201,7 @@
         "id": "A_WolfChildren_0387",
         "deck_name": "Wolf Children",
         "sentence": "お～　犬とおそろいのベベかい かわええの～。",
-        "sentence_with_furigana": "お~　 犬[けん]とおそろいのベベかいかわええの~。",
+        "sentence_with_furigana": "お～　 犬[けん]とおそろいのベベかいかわええの～。",
         "word_base_list": [
             "御",
             "から",
@@ -23327,7 +23327,7 @@
         "id": "A_WolfChildren_0405",
         "deck_name": "Wolf Children",
         "sentence": "な～に？　コツって。 おしっこ！",
-        "sentence_with_furigana": "な~に？　コツって。おしっこ！",
+        "sentence_with_furigana": "な～に？　コツって。おしっこ！",
         "word_base_list": [
             "だ",
             "～",
@@ -23545,7 +23545,7 @@
         "id": "A_WolfChildren_0409",
         "deck_name": "Wolf Children",
         "sentence": "わぁ～　ありがとうございます。",
-        "sentence_with_furigana": "わぁ~　ありがとうございます。",
+        "sentence_with_furigana": "わぁ～　ありがとうございます。",
         "word_base_list": [
             "わあ",
             "～",
@@ -23789,7 +23789,7 @@
         "id": "A_WolfChildren_0413",
         "deck_name": "Wolf Children",
         "sentence": "あら…　な～んて　かわいいの。",
-        "sentence_with_furigana": "あら…　な~んて　かわいいの。",
+        "sentence_with_furigana": "あら…　な～んて　かわいいの。",
         "word_base_list": [
             "あら",
             ".",
@@ -24019,7 +24019,7 @@
         "id": "A_WolfChildren_0417",
         "deck_name": "Wolf Children",
         "sentence": "え～　でも…。 もらって。",
-        "sentence_with_furigana": "え~　でも…。もらって。",
+        "sentence_with_furigana": "え～　でも…。もらって。",
         "word_base_list": [
             "えー",
             "から",
@@ -25044,7 +25044,7 @@
         "id": "A_WolfChildren_0432",
         "deck_name": "Wolf Children",
         "sentence": "うわぁ～！ すご～い！ アハハハ！",
-        "sentence_with_furigana": "うわぁ~！すご~い！アハハハ！",
+        "sentence_with_furigana": "うわぁ～！すご～い！アハハハ！",
         "word_base_list": [
             "うわ",
             "～",
@@ -25177,8 +25177,8 @@
             "!",
             "mom",
             "!",
-            "Ame",
-            "'s",
+            "ame",
+            "be",
             "..."
         ],
         "translation": "Ame! Mom! Ame's...",
@@ -25327,7 +25327,7 @@
         "id": "A_WolfChildren_0439",
         "deck_name": "Wolf Children",
         "sentence": "雨～!!",
-        "sentence_with_furigana": "雨[あめ]~!!",
+        "sentence_with_furigana": "雨[あめ]～!!",
         "word_base_list": [
             "雨",
             "～",
@@ -25407,7 +25407,7 @@
         "id": "A_WolfChildren_0441",
         "deck_name": "Wolf Children",
         "sentence": "雨～!!",
-        "sentence_with_furigana": "雨[あめ]~!!",
+        "sentence_with_furigana": "雨[あめ]～!!",
         "word_base_list": [
             "雨",
             "～",
@@ -26355,7 +26355,7 @@
             "know",
             "already",
             ".",
-            "Jeez",
+            "jeez",
             "."
         ],
         "translation": "I know already. Jeez.",
@@ -26997,7 +26997,7 @@
         "id": "A_WolfChildren_0471",
         "deck_name": "Wolf Children",
         "sentence": "早く～！",
-        "sentence_with_furigana": "早[はや]く~！",
+        "sentence_with_furigana": "早[はや]く～！",
         "word_base_list": [
             "早い",
             "～",
@@ -27254,7 +27254,7 @@
         "id": "A_WolfChildren_0476",
         "deck_name": "Wolf Children",
         "sentence": "いってきま～す！",
-        "sentence_with_furigana": "いってきま~す！",
+        "sentence_with_furigana": "いってきま～す！",
         "word_base_list": [
             "行く",
             "て",
@@ -27444,7 +27444,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "morning",
+            "Morning",
             ",",
             "Yuki",
             "."
@@ -27729,7 +27729,7 @@
         "id": "A_WolfChildren_0487",
         "deck_name": "Wolf Children",
         "sentence": "速いね～。",
-        "sentence_with_furigana": "速[はや]いね~。",
+        "sentence_with_furigana": "速[はや]いね～。",
         "word_base_list": [
             "早い",
             "ね",
@@ -27764,7 +27764,7 @@
         "id": "A_WolfChildren_0488",
         "deck_name": "Wolf Children",
         "sentence": "雪ちゃん　すご～い！ さすが雪ちゃん！",
-        "sentence_with_furigana": "雪[ゆき]ちゃん　すご~い！さすが 雪[ゆき]ちゃん！",
+        "sentence_with_furigana": "雪[ゆき]ちゃん　すご～い！さすが 雪[ゆき]ちゃん！",
         "word_base_list": [
             "雪",
             "ちゃん",
@@ -28033,7 +28033,7 @@
         "translation_word_base_list": [
             "I",
             "be",
-            "tendou",
+            "Tendou",
             ",",
             "the",
             "park",
@@ -30149,7 +30149,7 @@
             "a",
             "lot",
             "of",
-            "wound",
+            "wounded",
             "wild",
             "bird",
             "or",
@@ -30744,7 +30744,7 @@
         "id": "A_WolfChildren_0530",
         "deck_name": "Wolf Children",
         "sentence": "＜こうして 母が仕事を見つけた時→ 私は大きな衝撃を 受けていました＞ 文子ちゃん　うま～い。 毛野ちゃんこそ上手。",
-        "sentence_with_furigana": "＜こうして 母[はは]が 仕事[しごと]を 見[み]つけた 時[とき]→ 私[わたし]は 大[おお]きな 衝撃[しょうげき]を 受[う]けていました＞ 文子[ふみこ]ちゃん　うま~い。 毛[け] 野[の]ちゃんこそ 上手[じょうず]。",
+        "sentence_with_furigana": "＜こうして 母[はは]が 仕事[しごと]を 見[み]つけた 時[とき]→ 私[わたし]は 大[おお]きな 衝撃[しょうげき]を 受[う]けていました＞ 文子[ふみこ]ちゃん　うま～い。 毛[け] 野[の]ちゃんこそ 上手[じょうず]。",
         "word_base_list": [
             "＜",
             "こう",
@@ -31010,7 +31010,7 @@
         "id": "A_WolfChildren_0534",
         "deck_name": "Wolf Children",
         "sentence": "＜たわむれにアオダイショウを→ 腕に巻きつけたりするような 女の子は→ 私の他には　いないということ＞ 見て　これ　ママのお下がり。 きれ～い！",
-        "sentence_with_furigana": "＜たわむれにアオダイショウを→ 腕[うで]に 巻[ま]きつけたりするような 女の子[おんなのこ]は→ 私[わたし]の 他[ほか]には　いないということ＞ 見[み]て　これ　ママのお 下[さ]がり。きれ~い！",
+        "sentence_with_furigana": "＜たわむれにアオダイショウを→ 腕[うで]に 巻[ま]きつけたりするような 女の子[おんなのこ]は→ 私[わたし]の 他[ほか]には　いないということ＞ 見[み]て　これ　ママのお 下[さ]がり。きれ～い！",
         "word_base_list": [
             "＜",
             "戯れ",
@@ -31216,7 +31216,7 @@
         "id": "A_WolfChildren_0536",
         "deck_name": "Wolf Children",
         "sentence": "いいな～。",
-        "sentence_with_furigana": "いいな~。",
+        "sentence_with_furigana": "いいな～。",
         "word_base_list": [
             "良い",
             "な",
@@ -31690,7 +31690,7 @@
         "id": "A_WolfChildren_0544",
         "deck_name": "Wolf Children",
         "sentence": "雪ちゃんの服　かわいい！ ステキ～！",
-        "sentence_with_furigana": "雪[ゆき]ちゃんの 服[ふく]　かわいい！ステキ~！",
+        "sentence_with_furigana": "雪[ゆき]ちゃんの 服[ふく]　かわいい！ステキ～！",
         "word_base_list": [
             "雪",
             "ちゃん",
@@ -32348,7 +32348,7 @@
         "id": "A_WolfChildren_0556",
         "deck_name": "Wolf Children",
         "sentence": "花ちゃ～ん　ちょっと手伝って！ は～い！",
-        "sentence_with_furigana": "花[はな]ちゃ~ん　ちょっと 手伝[てつだ]って！は~い！",
+        "sentence_with_furigana": "花[はな]ちゃ～ん　ちょっと 手伝[てつだ]って！は～い！",
         "word_base_list": [
             "花",
             "だ",
@@ -33011,7 +33011,7 @@
             "this",
             "smell",
             ".",
-            "smell",
+            "Smell",
             "?",
             "of",
             "what",
@@ -33082,7 +33082,7 @@
         "id": "A_WolfChildren_0570",
         "deck_name": "Wolf Children",
         "sentence": "どれかな～… よし　これだ！",
-        "sentence_with_furigana": "どれかな~…よし　これだ！",
+        "sentence_with_furigana": "どれかな～…よし　これだ！",
         "word_base_list": [
             "どれ",
             "か",
@@ -33149,7 +33149,7 @@
         "id": "A_WolfChildren_0571",
         "deck_name": "Wolf Children",
         "sentence": "ガ～ン　マジで？ ハハハ…。",
-        "sentence_with_furigana": "ガ~ン　マジで？ハハハ…。",
+        "sentence_with_furigana": "ガ～ン　マジで？ハハハ…。",
         "word_base_list": [
             "がっ",
             "～",
@@ -33272,7 +33272,7 @@
             "we",
             ".",
             "Souhei",
-            "'s",
+            "be",
             "really",
             "funny",
             "."
@@ -34464,7 +34464,7 @@
         "id": "A_WolfChildren_0594",
         "deck_name": "Wolf Children",
         "sentence": "花ちゃ～ん　外線。",
-        "sentence_with_furigana": "花[はな]ちゃ~ん　 外線[がいせん]。",
+        "sentence_with_furigana": "花[はな]ちゃ～ん　 外線[がいせん]。",
         "word_base_list": [
             "花",
             "だ",
@@ -34507,7 +34507,7 @@
         "id": "A_WolfChildren_0595",
         "deck_name": "Wolf Children",
         "sentence": "は～い。",
-        "sentence_with_furigana": "は~い。",
+        "sentence_with_furigana": "は～い。",
         "word_base_list": [
             "はあ",
             "～",
@@ -36271,7 +36271,7 @@
         ],
         "translation_word_base_list": [
             "why",
-            "have",
+            "'d",
             "he",
             "get",
             "hurt",
@@ -36354,7 +36354,7 @@
         "id": "A_WolfChildren_0630",
         "deck_name": "Wolf Children",
         "sentence": "え～っと…。",
-        "sentence_with_furigana": "え~っと…。",
+        "sentence_with_furigana": "え～っと…。",
         "word_base_list": [
             "えー",
             "～",
@@ -36811,7 +36811,7 @@
         "id": "A_WolfChildren_0639",
         "deck_name": "Wolf Children",
         "sentence": "ごめんなさい～！ （泣き声）",
-        "sentence_with_furigana": "ごめんなさい~！（ 泣き声[なきごえ]）",
+        "sentence_with_furigana": "ごめんなさい～！（ 泣き声[なきごえ]）",
         "word_base_list": [
             "御免",
             "為す",
@@ -37006,7 +37006,7 @@
         "id": "A_WolfChildren_0644",
         "deck_name": "Wolf Children",
         "sentence": "フ～　イタタタ…。 あっ。",
-        "sentence_with_furigana": "フ~　イタタタ…。あっ。",
+        "sentence_with_furigana": "フ～　イタタタ…。あっ。",
         "word_base_list": [
             "フ",
             "から",
@@ -37038,7 +37038,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "owww",
+            "Owww",
             "."
         ],
         "translation": "Owww.",
@@ -38161,7 +38161,7 @@
         "id": "A_WolfChildren_0665",
         "deck_name": "Wolf Children",
         "sentence": "えっ…。 いっ…　つ～！",
-        "sentence_with_furigana": "えっ…。いっ…　つ~！",
+        "sentence_with_furigana": "えっ…。いっ…　つ～！",
         "word_base_list": [
             "えっ",
             ".",
@@ -38203,7 +38203,7 @@
         "translation_word_base_list": [
             "wha",
             "—",
-            "oww",
+            "Oww",
             "!"
         ],
         "translation": "Wha— Oww!",
@@ -39280,7 +39280,7 @@
         "id": "A_WolfChildren_0688",
         "deck_name": "Wolf Children",
         "sentence": "さ～てね。",
-        "sentence_with_furigana": "さ~てね。",
+        "sentence_with_furigana": "さ～てね。",
         "word_base_list": [
             "さ",
             "～",
@@ -40074,7 +40074,7 @@
             "much",
             "well",
             "at",
-            "hunting",
+            "hunt",
             "."
         ],
         "translation": "You'll get much better at hunting.",
@@ -40537,7 +40537,7 @@
         "translation_word_base_list": [
             "the",
             "mountain",
-            "be",
+            "'s",
             "more",
             "interesting",
             "."
@@ -41402,7 +41402,7 @@
         "id": "A_WolfChildren_0724",
         "deck_name": "Wolf Children",
         "sentence": "イヤだ！　う～っ！ あっ！",
-        "sentence_with_furigana": "イヤだ！　う~っ！あっ！",
+        "sentence_with_furigana": "イヤだ！　う～っ！あっ！",
         "word_base_list": [
             "嫌",
             "だ",
@@ -42804,7 +42804,7 @@
             "!"
         ],
         "translation_word_base_list": [
-            "shoot",
+            "Shoot",
             ",",
             "Nobumichi",
             "!"
@@ -43020,7 +43020,7 @@
         "id": "A_WolfChildren_0754",
         "deck_name": "Wolf Children",
         "sentence": "え～　ウソ！　結婚！",
-        "sentence_with_furigana": "え~　ウソ！　 結婚[けっこん]！",
+        "sentence_with_furigana": "え～　ウソ！　 結婚[けっこん]！",
         "word_base_list": [
             "えー",
             "から",
@@ -43289,7 +43289,7 @@
         "id": "A_WolfChildren_0759",
         "deck_name": "Wolf Children",
         "sentence": "え～！　ウソ！ 何で何で？",
-        "sentence_with_furigana": "え~！　ウソ！ 何[なん]で 何[なん]で？",
+        "sentence_with_furigana": "え～！　ウソ！ 何[なん]で 何[なん]で？",
         "word_base_list": [
             "えー",
             "～",
@@ -43415,7 +43415,7 @@
         "id": "A_WolfChildren_0761",
         "deck_name": "Wolf Children",
         "sentence": "よっしゃ！ よっしゃ　入った　イェ～イ！",
-        "sentence_with_furigana": "よっしゃ！よっしゃ　 入[はい]った　イェ~イ！",
+        "sentence_with_furigana": "よっしゃ！よっしゃ　 入[はい]った　イェ～イ！",
         "word_base_list": [
             "よっしゃ",
             "！",
@@ -43472,7 +43472,7 @@
         "id": "A_WolfChildren_0762",
         "deck_name": "Wolf Children",
         "sentence": "今　何点？ クッソ～！",
-        "sentence_with_furigana": "今[いま]　 何[なん] 点[てん]？クッソ~！",
+        "sentence_with_furigana": "今[いま]　 何[なん] 点[てん]？クッソ～！",
         "word_base_list": [
             "今",
             " ",
@@ -43517,8 +43517,8 @@
             "?",
             "shit",
             "!",
-            "Nice",
-            "shoot",
+            "nice",
+            "shot",
             "!"
         ],
         "translation": "What's the score now? Shit! Nice shot!",
@@ -43529,7 +43529,7 @@
         "id": "A_WolfChildren_0763",
         "deck_name": "Wolf Children",
         "sentence": "蒸し暑～い！",
-        "sentence_with_furigana": "蒸し暑[むしあつ]~い！",
+        "sentence_with_furigana": "蒸し暑[むしあつ]～い！",
         "word_base_list": [
             "蒸し暑い",
             "から",
@@ -43708,7 +43708,7 @@
         "id": "A_WolfChildren_0768",
         "deck_name": "Wolf Children",
         "sentence": "バス　間に合わないよ。 は～い。",
-        "sentence_with_furigana": "バス　 間に合[まにあ]わないよ。は~い。",
+        "sentence_with_furigana": "バス　 間に合[まにあ]わないよ。は～い。",
         "word_base_list": [
             "バス",
             " ",
@@ -43822,7 +43822,7 @@
         "id": "A_WolfChildren_0770",
         "deck_name": "Wolf Children",
         "sentence": "いってきま～す！ いってらっしゃい。",
-        "sentence_with_furigana": "いってきま~す！いってらっしゃい。",
+        "sentence_with_furigana": "いってきま～す！いってらっしゃい。",
         "word_base_list": [
             "行く",
             "て",
@@ -44483,7 +44483,7 @@
         "id": "A_WolfChildren_0779",
         "deck_name": "Wolf Children",
         "sentence": "うわぁ！　やった～！",
-        "sentence_with_furigana": "うわぁ！　やった~！",
+        "sentence_with_furigana": "うわぁ！　やった～！",
         "word_base_list": [
             "うわ",
             "！",
@@ -45098,7 +45098,7 @@
             "?"
         ],
         "translation_word_base_list": [
-            "Ame",
+            "ame",
             ",",
             "where",
             "be",
@@ -45144,7 +45144,7 @@
         "id": "A_WolfChildren_0794",
         "deck_name": "Wolf Children",
         "sentence": "♪♪～ タカヒロ～！",
-        "sentence_with_furigana": "♪♪~タカヒロ~！",
+        "sentence_with_furigana": "♪♪～タカヒロ～！",
         "word_base_list": [
             "♪",
             "♪",
@@ -45179,7 +45179,7 @@
         "id": "A_WolfChildren_0795",
         "deck_name": "Wolf Children",
         "sentence": "お母さん！ あ～。",
-        "sentence_with_furigana": "お 母[かあ]さん！あ~。",
+        "sentence_with_furigana": "お 母[かあ]さん！あ～。",
         "word_base_list": [
             "御",
             "母さん",
@@ -45214,7 +45214,7 @@
         "id": "A_WolfChildren_0796",
         "deck_name": "Wolf Children",
         "sentence": "ケイコ～！",
-        "sentence_with_furigana": "ケイコ~！",
+        "sentence_with_furigana": "ケイコ～！",
         "word_base_list": [
             "ケイコ",
             "～",
@@ -45241,7 +45241,7 @@
         "id": "A_WolfChildren_0797",
         "deck_name": "Wolf Children",
         "sentence": "パパ～！",
-        "sentence_with_furigana": "パパ~！",
+        "sentence_with_furigana": "パパ～！",
         "word_base_list": [
             "パパ",
             "～",
@@ -45268,7 +45268,7 @@
         "id": "A_WolfChildren_0798",
         "deck_name": "Wolf Children",
         "sentence": "♪～　アルプス　一万尺… （雷鳴）",
-        "sentence_with_furigana": "♪~　アルプス　一 万[まん] 尺[しゃく]…（ 雷鳴[らいめい]）",
+        "sentence_with_furigana": "♪～　アルプス　一 万[まん] 尺[しゃく]…（ 雷鳴[らいめい]）",
         "word_base_list": [
             "♪",
             "～",
@@ -45779,7 +45779,7 @@
         "id": "A_WolfChildren_0807",
         "deck_name": "Wolf Children",
         "sentence": "バ～カ！ こら　ケンカしない！",
-        "sentence_with_furigana": "バ~カ！こら　ケンカしない！",
+        "sentence_with_furigana": "バ～カ！こら　ケンカしない！",
         "word_base_list": [
             "バ",
             "から",
@@ -45816,7 +45816,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "Dumbass",
+            "dumbass",
             ".",
             "hey",
             "!",
@@ -45846,7 +45846,7 @@
             "."
         ],
         "translation_word_base_list": [
-            "shino",
+            "Shino",
             "."
         ],
         "translation": "Shino.",
@@ -45953,7 +45953,7 @@
             ".",
             "the",
             "weather",
-            "'s",
+            "be",
             "crazy",
             "out",
             "there",
@@ -46087,7 +46087,7 @@
         "id": "A_WolfChildren_0813",
         "deck_name": "Wolf Children",
         "sentence": "え～　でも…。",
-        "sentence_with_furigana": "え~　でも…。",
+        "sentence_with_furigana": "え～　でも…。",
         "word_base_list": [
             "えー",
             "から",
@@ -46321,7 +46321,7 @@
         "id": "A_WolfChildren_0817",
         "deck_name": "Wolf Children",
         "sentence": "そうだよ～。",
-        "sentence_with_furigana": "そうだよ~。",
+        "sentence_with_furigana": "そうだよ～。",
         "word_base_list": [
             "そう",
             "だ",
@@ -46536,7 +46536,7 @@
         "id": "A_WolfChildren_0822",
         "deck_name": "Wolf Children",
         "sentence": "雨～！",
-        "sentence_with_furigana": "雨[あめ]~！",
+        "sentence_with_furigana": "雨[あめ]～！",
         "word_base_list": [
             "雨",
             "～",
@@ -46563,7 +46563,7 @@
         "id": "A_WolfChildren_0823",
         "deck_name": "Wolf Children",
         "sentence": "どこなの？　雨～！",
-        "sentence_with_furigana": "どこなの？　 雨[あめ]~！",
+        "sentence_with_furigana": "どこなの？　 雨[あめ]～！",
         "word_base_list": [
             "どこ",
             "だ",
@@ -46593,7 +46593,7 @@
             "?"
         ],
         "translation_word_base_list": [
-            "Ame",
+            "ame",
             ",",
             "where",
             "be",
@@ -46608,7 +46608,7 @@
         "id": "A_WolfChildren_0824",
         "deck_name": "Wolf Children",
         "sentence": "雨～！",
-        "sentence_with_furigana": "雨[あめ]~！",
+        "sentence_with_furigana": "雨[あめ]～！",
         "word_base_list": [
             "雨",
             "～",
@@ -46861,7 +46861,7 @@
         "id": "A_WolfChildren_0831",
         "deck_name": "Wolf Children",
         "sentence": "残った人は学校の車で送ります 靴を持って　こっちに集合～！",
-        "sentence_with_furigana": "残[のこ]った 人[ひと]は 学校[がっこう]の 車[くるま]で 送[おく]ります 靴[くつ]を 持[も]って　こっちに 集合[しゅうごう]~！",
+        "sentence_with_furigana": "残[のこ]った 人[ひと]は 学校[がっこう]の 車[くるま]で 送[おく]ります 靴[くつ]を 持[も]って　こっちに 集合[しゅうごう]～！",
         "word_base_list": [
             "残る",
             "た",
@@ -47460,7 +47460,7 @@
             "something",
             "happen",
             "to",
-            "mom",
+            "Mom",
             "..."
         ],
         "translation": "I wonder if something happened to Mom...",
@@ -48001,7 +48001,7 @@
             "be",
             "impossible",
             ".",
-            "nobody'd",
+            "Nobody'd",
             "hire",
             "we",
             "."
@@ -50753,7 +50753,7 @@
         "id": "A_WolfChildren_0903",
         "deck_name": "Wolf Children",
         "sentence": "((ず～っと君を見ていた))",
-        "sentence_with_furigana": "((ず~っと 君[きみ]を 見[み]ていた))",
+        "sentence_with_furigana": "((ず～っと 君[きみ]を 見[み]ていた))",
         "word_base_list": [
             "（",
             "（",
@@ -51081,7 +51081,7 @@
             "..."
         ],
         "translation_word_base_list": [
-            "Nah",
+            "nah",
             ",",
             "I",
             "mean",
@@ -51150,15 +51150,15 @@
             "."
         ],
         "translation_word_base_list": [
-            "Ame",
-            "'s",
+            "ame",
+            "be",
             "...",
             "that",
             "be",
             "right",
             ".",
-            "Ame",
-            "'s",
+            "ame",
+            "be",
             "missing",
             "."
         ],
@@ -51170,7 +51170,7 @@
         "id": "A_WolfChildren_0910",
         "deck_name": "Wolf Children",
         "sentence": "((雨～！))",
-        "sentence_with_furigana": "(( 雨[う]~！))",
+        "sentence_with_furigana": "(( 雨[う]～！))",
         "word_base_list": [
             "（",
             "（",
@@ -51783,7 +51783,7 @@
         "id": "A_WolfChildren_0925",
         "deck_name": "Wolf Children",
         "sentence": "雨～！",
-        "sentence_with_furigana": "雨[あめ]~！",
+        "sentence_with_furigana": "雨[あめ]～！",
         "word_base_list": [
             "雨",
             "～",
@@ -51810,7 +51810,7 @@
         "id": "A_WolfChildren_0926",
         "deck_name": "Wolf Children",
         "sentence": "雨～！",
-        "sentence_with_furigana": "雨[あめ]~！",
+        "sentence_with_furigana": "雨[あめ]～！",
         "word_base_list": [
             "雨",
             "～",
