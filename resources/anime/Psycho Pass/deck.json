@@ -65639,9 +65639,9 @@
             "__type__": "Note",
             "fields": [
                 "A_PsychoPassS01_E16_3480",
-                "「誰かがパスカルを引用したら用心すべきだ」とかなり前に学んでいる　そうくると思ってたよ",
-                "Sorry, but “I have long since learned, as a measure of elementary hygiene, to be on guard when anyone quotes Pascal.\"",
-                "「 誰[だれ]かがパスカルを 引用[いんよう]したら 用心[ようじん]すべきだ」とかなり 前[まえ]に 学[まな]んでいる　そうくると 思[おも]ってたよ",
+                "「誰かがパスカルを引用したら用心すべきだ」とかなり前に学んでいる、そうくると思ってたよ",
+                "Sorry, but “I have long since learned, as a measure of elementary hygiene, to be on guard when anyone quotes Pascal.　I knew you'd say that.",
+                "「 誰[だれ]かがパスカルを 引用[いんよう]したら 用心[ようじん]すべきだ」とかなり 前[まえ]に 学[まな]んでいる、そうくると 思[おも]ってたよ",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.29.485.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.25.550-0.16.33.420.mp3]",
                 "",
@@ -65657,7 +65657,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3481",
                 "オルテガだな",
-                "I knew you'd say that.",
+                "That's Ortega, right?",
                 "オルテガだな",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.34.620.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.34.110-0.16.35.130.mp3]",
@@ -65674,7 +65674,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3482",
                 "もしも君がパスカルを引用したら",
-                "That's Ortega, right?",
+                "If you'd quoted Pascal,",
                 "もしも 君[きみ]がパスカルを 引用[いんよう]したら",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.36.900.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.35.560-0.16.38.240.mp3]",
@@ -65691,7 +65691,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3483",
                 "やっぱり僕も同じ言葉を返しただろう　貴様と意見が合ったところでうれしくはないな",
-                "If you'd quoted Pascal, I would've said the same words to you.",
+                "I would've said the same words to you.　Finding something we agree on doesn't really make me happy.",
                 "やっぱり 僕[ぼく]も 同[おな]じ 言葉[ことば]を 返[かえ]しただろう　 貴様[きさま]と 意見[いけん]が 合[あ]ったところでうれしくはないな",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.41.445.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.38.440-0.16.44.450.mp3]",
@@ -65708,7 +65708,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3484",
                 "語り明かすのも楽しそうだが",
-                "Finding something we agree on doesn't really make me happy.",
+                "I'd love to talk the night away with you, but...",
                 "語り明[かたりあ]かすのも 楽[たの]しそうだが",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.46.960.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.45.860-0.16.48.060.mp3]",
@@ -65724,8 +65724,8 @@
             "__type__": "Note",
             "fields": [
                 "A_PsychoPassS01_E16_3485",
-                "あいにく今僕は他の用件で忙しい　知ったことか",
-                "I'd love to talk the night away with you, but unfortunately I'm rather preoccupied at the moment.",
+                "あいにく今僕は他の用件で忙しい、知ったことか",
+                "unfortunately I'm rather preoccupied at the moment. That's not my problem.",
                 "あいにく 今[いま] 僕[ぼく]は 他[た]の 用件[ようけん]で 忙[いそが]しい　 知[し]ったことか",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.50.895.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.48.810-0.16.52.980.mp3]",
@@ -65742,7 +65742,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3486",
                 "この場で殺してやる",
-                "That's not my problem.",
+                "I'll kill you right here, right now.",
                 "この 場[ば]で 殺[ころ]してやる",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.53.995.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.53.190-0.16.54.800.mp3]",
@@ -65759,7 +65759,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3487",
                 "刑事の言葉とは思えない",
-                "I'll kill you right here, right now.",
+                "I'm surprised to hear those words from a detective.",
                 "刑事[けいじ]の 言葉[ことば]とは 思[おも]えない",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.56.175.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.55.070-0.16.57.280.mp3]",
@@ -65776,7 +65776,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3488",
                 "お前に黒幕はいない",
-                "I'm surprised to hear those words from a detective.",
+                "There's no one else pulling your strings.",
                 "お 前[まえ]に 黒幕[くろまく]はいない",
                 "<img src=\"A_PsychoPassS01_E16_1_0.16.58.400.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.57.570-0.16.59.230.mp3]",
@@ -65793,7 +65793,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3489",
                 "他の雑魚はお前に操られているだけだ",
-                "There's no one else pulling your strings.",
+                "All the other small-timers are just being manipulated by you.",
                 "他[た]の 雑魚[じゃこ]はお 前[まえ]に 操[あやつ]られているだけだ",
                 "<img src=\"A_PsychoPassS01_E16_1_0.17.00.935.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.16.59.490-0.17.02.380.mp3]",
@@ -65810,7 +65810,7 @@
             "fields": [
                 "A_PsychoPassS01_E16_3490",
                 "事件の真相はお前を殺した後でゆっくり調べればいい",
-                "All the other small-timers are just being manipulated by you. There'll be time to investigate the truth behind this case after I kill you.",
+                "There'll be time to investigate the truth behind this case after I kill you.",
                 "事件[じけん]の 真相[しんそう]はお 前[まえ]を 殺[ころ]した 後[のち]でゆっくり 調[しら]べればいい",
                 "<img src=\"A_PsychoPassS01_E16_1_0.17.04.820.jpg\">",
                 "[sound:A_PsychoPassS01_E16_1_0.17.02.590-0.17.07.050.mp3]",
