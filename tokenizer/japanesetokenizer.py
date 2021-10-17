@@ -55,7 +55,8 @@ def analyze_japanese(text):
     tokens = [m for m in tokenizer_obj.tokenize(text, mode)]
     return {
         'tokens': [token.surface() for token in tokens],
-        'base_tokens': [token.normalized_form() for token in tokens]
+        # 'base_tokens': [token.normalized_form() for token in tokens],
+        'base_tokens': [token.dictionary_form() for token in tokens]
     }
 
 def is_japanese_extended(text):
@@ -119,4 +120,3 @@ def add_furigana(text):
         else:
             parsed += token.surface()
     return parsed
-    
