@@ -1,0 +1,487 @@
+{
+    "__type__": "Deck",
+    "children": [],
+    "crowdanki_uuid": "0fd1c4a6-3167-11ec-8ba2-1e007b02ae9a",
+    "deck_config_uuid": "bce30de4-c6b9-11eb-b91e-acde48001122",
+    "deck_configurations": [
+        {
+            "__type__": "DeckConfig",
+            "autoplay": true,
+            "crowdanki_uuid": "bce30de4-c6b9-11eb-b91e-acde48001122",
+            "dyn": false,
+            "interdayLearningMix": 0,
+            "lapse": {
+                "delays": [
+                    10.0
+                ],
+                "leechAction": 0,
+                "leechFails": 8,
+                "minInt": 1,
+                "mult": 0.0
+            },
+            "maxTaken": 60,
+            "name": "Default",
+            "new": {
+                "bury": false,
+                "delays": [
+                    1.0,
+                    10.0
+                ],
+                "initialFactor": 2500,
+                "ints": [
+                    1,
+                    4,
+                    0
+                ],
+                "order": 1,
+                "perDay": 20,
+                "separate": true
+            },
+            "newGatherPriority": 0,
+            "newMix": 0,
+            "newPerDayMinimum": 0,
+            "newSortOrder": 0,
+            "replayq": true,
+            "rev": {
+                "bury": false,
+                "ease4": 1.3,
+                "fuzz": 0.05,
+                "hardFactor": 1.2,
+                "ivlFct": 1.0,
+                "maxIvl": 36500,
+                "minSpace": 1,
+                "perDay": 9999
+            },
+            "reviewOrder": 0,
+            "timer": 0
+        }
+    ],
+    "desc": "",
+    "dyn": 0,
+    "extendNew": 0,
+    "extendRev": 0,
+    "media_files": [
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.07.300-0.00.11.940.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.07.300-0.00.11.940.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.11.940-0.00.19.140.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.11.940-0.00.19.140.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.20.140-0.00.24.620.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.20.140-0.00.24.620.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.24.620-0.00.29.220.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.24.620-0.00.29.220.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.29.680-0.00.33.920.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.29.680-0.00.33.920.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.33.920-0.00.39.300.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.33.920-0.00.39.300.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.39.300-0.00.46.240.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.39.300-0.00.46.240.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.46.240-0.00.53.360.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.46.240-0.00.53.360.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.53.370-0.01.01.910.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.53.370-0.01.01.910.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.01.910-0.01.10.040.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.01.910-0.01.10.040.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.10.040-0.01.14.640.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.10.040-0.01.14.640.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.14.940-0.01.20.560.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.14.940-0.01.20.560.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.20.560-0.01.25.040.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.20.560-0.01.25.040.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.25.040-0.01.29.700.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.25.040-0.01.29.700.mp3",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.29.700-0.01.40.400.jpg",
+        "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.29.700-0.01.40.400.mp3"
+    ],
+    "name": "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+    "note_models": [
+        {
+            "__type__": "NoteModel",
+            "crowdanki_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "css": ".card {\n font-family: arial;\n font-size: 20px;\n text-align: center;\n color: black;\n background-color: white;\n}\n\n.expression {\n font-size: 22px;\n}\n\n.meaning {\n font-size: 18px;\n color: #000080;\n}\n\n.notes {\n font-size: 18px;\n}\n\n.media {\n margin: 2px;\n}\n\n.snapshot {\n margin-bottom: 10px;\n}\n\nimg {\n max-width: 100%;\n height: auto;\n}",
+            "flds": [
+                {
+                    "font": "Arial",
+                    "name": "Id",
+                    "ord": 0,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Source",
+                    "ord": 1,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Path",
+                    "ord": 2,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Audio",
+                    "ord": 3,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Video",
+                    "ord": 4,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Expression",
+                    "ord": 5,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Meaning",
+                    "ord": 6,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Notes",
+                    "ord": 7,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Snapshot",
+                    "ord": 8,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "font": "Arial",
+                    "name": "Audio Sound",
+                    "ord": 9,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                }
+            ],
+            "latexPost": "\\end{document}",
+            "latexPre": "\\documentclass[12pt]{article}\n\\special{papersize=3in,5in}\n\\usepackage[utf8]{inputenc}\n\\usepackage{amssymb,amsmath}\n\\pagestyle{empty}\n\\setlength{\\parindent}{0in}\n\\begin{document}\n",
+            "latexsvg": false,
+            "name": "movies2anki - subs2srs",
+            "req": [
+                [
+                    0,
+                    "any",
+                    [
+                        3,
+                        5,
+                        8
+                    ]
+                ]
+            ],
+            "sortf": 0,
+            "tmpls": [
+                {
+                    "afmt": "{{FrontSide}}\n\n{{#Meaning}}\n<hr id=answer>\n<div class=\"meaning\">{{Meaning}}</div>\n{{/Meaning}}\n<div class=\"notes\">{{Notes}}</div>",
+                    "bafmt": "",
+                    "bfont": "",
+                    "bqfmt": "",
+                    "bsize": 0,
+                    "did": null,
+                    "name": "Card 1",
+                    "ord": 0,
+                    "qfmt": "<div class=\"snapshot\">{{Snapshot}}</div>\n<div class=\"expression\">{{Expression}}</div>\n<div class=\"media\">[sound:{{Audio}}]</div>"
+                }
+            ],
+            "type": 0
+        }
+    ],
+    "notes": [
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.07.300-0.00.11.940",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.07.300-0.00.11.940.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.07.300-0.00.11.940.mp4",
+                "お正月の初詣客に振る舞う甘酒の仕込みが",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.07.300-0.00.11.940.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.07.300-0.00.11.940.mp3]"
+            ],
+            "guid": "2L&c-8j{!",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.11.940-0.00.19.140",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.11.940-0.00.19.140.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.11.940-0.00.19.140.mp4",
+                "平成30年12月13日から阿蘇市一の宮町の 阿蘇神社で始まりました",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.11.940-0.00.19.140.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.11.940-0.00.19.140.mp3]"
+            ],
+            "guid": "oV36GT)cl=",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.20.140-0.00.24.620",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.20.140-0.00.24.620.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.20.140-0.00.24.620.mp4",
+                "寒い中お正月に阿蘇神社を訪れる初詣客に",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.20.140-0.00.24.620.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.20.140-0.00.24.620.mp3]"
+            ],
+            "guid": "ASDmzq9Axu",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.24.620-0.00.29.220",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.24.620-0.00.29.220.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.24.620-0.00.29.220.mp4",
+                "美味しくて温かい甘酒を飲んで体を温めてもらおうと",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.24.620-0.00.29.220.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.24.620-0.00.29.220.mp3]"
+            ],
+            "guid": "L/G0p+Q1aM",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.29.680-0.00.33.920",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.29.680-0.00.33.920.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.29.680-0.00.33.920.mp4",
+                "毎年この時期に甘酒の仕込みを行っています",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.29.680-0.00.33.920.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.29.680-0.00.33.920.mp3]"
+            ],
+            "guid": "r|%qExkCsn",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.33.920-0.00.39.300",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.33.920-0.00.39.300.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.33.920-0.00.39.300.mp4",
+                "甘酒の仕込みは阿蘇神社の神饌所で行われ",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.33.920-0.00.39.300.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.33.920-0.00.39.300.mp3]"
+            ],
+            "guid": "n;K|@[flnB",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.39.300-0.00.46.240",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.39.300-0.00.46.240.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.39.300-0.00.46.240.mp4",
+                "柔らかく炊き上げたもち米を四斗樽に入れて 神職や巫女が竹の棒でつつき",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.39.300-0.00.46.240.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.39.300-0.00.46.240.mp3]"
+            ],
+            "guid": "suW[%8X<IT",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.46.240-0.00.53.360",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.46.240-0.00.53.360.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.46.240-0.00.53.360.mp4",
+                "さらに甘酒の素の米麹を入れて 丁寧に混ぜ合わせていきます",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.46.240-0.00.53.360.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.46.240-0.00.53.360.mp3]"
+            ],
+            "guid": "keYiQ2ZOy?",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.53.370-0.01.01.910",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.53.370-0.01.01.910.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.53.370-0.01.01.910.mp4",
+                "出来上がった甘酒の素を寒い場所に置いておくと 1週間もすれば甘い甘酒が出来上がります",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.53.370-0.01.01.910.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.00.53.370-0.01.01.910.mp3]"
+            ],
+            "guid": "D770]cIV^E",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.01.910-0.01.10.040",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.01.910-0.01.10.040.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.01.910-0.01.10.040.mp4",
+                "甘酒の仕込みはもち米280キロ 米麹230キロを使って1週間がかりで行い",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.01.910-0.01.10.040.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.01.910-0.01.10.040.mp3]"
+            ],
+            "guid": "G!swcBV!B|",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.10.040-0.01.14.640",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.10.040-0.01.14.640.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.10.040-0.01.14.640.mp4",
+                "およそ3万人分の甘酒を準備するという事です",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.10.040-0.01.14.640.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.10.040-0.01.14.640.mp3]"
+            ],
+            "guid": "nStH8w{EB>",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.14.940-0.01.20.560",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.14.940-0.01.20.560.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.14.940-0.01.20.560.mp4",
+                "阿蘇神社では今年は寒いので おいしい甘酒ができそうです",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.14.940-0.01.20.560.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.14.940-0.01.20.560.mp3]"
+            ],
+            "guid": "IF=)R.*31U",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.20.560-0.01.25.040",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.20.560-0.01.25.040.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.20.560-0.01.25.040.mp4",
+                "ぜひ参拝して 美味しい甘酒を飲んでほしいと言っています",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.20.560-0.01.25.040.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.20.560-0.01.25.040.mp3]"
+            ],
+            "guid": "GVty~k>U.9",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.25.040-0.01.29.700",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.25.040-0.01.29.700.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.25.040-0.01.29.700.mp4",
+                "阿蘇神社では10万人の参拝客を見込んでいて",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.25.040-0.01.29.700.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.25.040-0.01.29.700.mp3]"
+            ],
+            "guid": "E%ozZl%O%e",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        },
+        {
+            "__type__": "Note",
+            "fields": [
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.29.700-0.01.40.400",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk",
+                "/Users/mathew/Downloads/平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk.mp4",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.29.700-0.01.40.400.mp3",
+                "平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.29.700-0.01.40.400.mp4",
+                "しめ縄も新調され売店には来年の神宮歴も並べられ 正月準備も着々と行われています",
+                "",
+                "",
+                "<img src=\"平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.29.700-0.01.40.400.jpg\">",
+                "[sound:平成30年阿蘇神社で甘酒の仕込み始まる-xmTJKLbqHbk_0.01.29.700-0.01.40.400.mp3]"
+            ],
+            "guid": "xqV_&>SS5k",
+            "note_model_uuid": "0fd207cc-3167-11ec-8ba2-1e007b02ae9a",
+            "tags": []
+        }
+    ]
+}
