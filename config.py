@@ -7,6 +7,7 @@ DICTIONARY_PATH = Path(bundle_path, 'resources', 'dictionaries')
 ANIME_PATH = Path(bundle_path, 'resources', 'anime')
 GAMES_PATH = Path(bundle_path, 'resources', 'games')
 LIVE_ACTION_PATH = Path(bundle_path, 'resources', 'live_action')
+NEWS_PATH = Path(bundle_path, 'resources', 'news')
 GAMEGENGO_PATH = Path(bundle_path, 'resources', 'gamegengo')
 LITERATURE_PATH = Path(bundle_path, 'resources', 'literature')
 
@@ -34,6 +35,12 @@ DECK_CATEGORIES = {
         'has_sound': True,
         "has_resource_url": False
     },
+    'news': {
+        'path': NEWS_PATH,
+        'has_image': True,
+        'has_sound': True,
+        "has_resource_url": False
+    },
     'literature': {
         'path': LITERATURE_PATH,
         'has_image': False,
@@ -52,6 +59,7 @@ EXTENSION_MIMETYPE_MAP = {
 SENTENCE_FIELDS = [
     "id", 
     "category",
+    'channel', # news
     "deck_name",
     "deck_name_japanese", # literature
     "author_japanese", # literature
