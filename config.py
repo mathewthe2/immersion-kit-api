@@ -60,8 +60,9 @@ SENTENCE_FIELDS = [
     "id", 
     "category",
     'channel', # news
+    'timestamp', # news
     "deck_name",
-    "deck_name_japanese", # literature
+    "deck_name_japanese", # literature, news
     "author_japanese", # literature
     "sentence",
     "sentence_with_furigana",
