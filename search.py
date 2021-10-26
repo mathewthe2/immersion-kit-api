@@ -52,7 +52,6 @@ def get_sentence_with_context(sentence_id, category=DEFAULT_CATEGORY):
     return sentence
 
 def get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags=[], user_levels={}, is_exact_match=False):
- 
     examples = []
     category_count = {}
     for category in DECK_CATEGORIES:
@@ -151,6 +150,8 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}):
 def sort_examples(examples, sorting):
     if sorting.lower() in ['sentence length', 'shortness']:
         return sorted(examples, key=lambda example: len(example['sentence']))
+    elif sorting.lower() == 'longness':
+        return sorted(examples, key=lambda example: len(example['sentence']), reverse=True)
     return examples
 
 def get_text_definition(text, dictionary_words):
