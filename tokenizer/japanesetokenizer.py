@@ -26,6 +26,8 @@ KANA_TO_KANJI_MAPPING = {
 KANJI_READING_MAPPING = {
     '私': '私[わたし]',
     # '檻': '檻[ケージ]',
+    '筋トレ': '筋[すじ]トレ',
+    '脱サラ': '脱[だつ]サラ',
     '貴女': '貴女[あなた]',
     '父様': '父様[とうさま]',
     '一度': '一度[いちど]',
@@ -106,7 +108,7 @@ def add_furigana(text):
                                 break
                             else:
                                 reading_index_tail = reading_index
-                                while reading[reading_index_tail] != token.surface()[next_index] or (reading_index_tail < len(reading)-1 and reading[reading_index_tail] == reading[reading_index_tail+1]):
+                                while (reading_index_tail < len(reading)-1 and reading[reading_index_tail] != token.surface()[next_index]) or (reading_index_tail < len(reading)-1 and reading[reading_index_tail] == reading[reading_index_tail+1]):
                                     reading_index_tail += 1
                                 parsed += to_anki_format(
                                   index=surface_index, 
@@ -120,7 +122,6 @@ def add_furigana(text):
         else:
             parsed += token.surface()
     return parsed
-
 
 # print(analyze_japanese('其れ'))
 # print(analyze_japanese('然し'))
