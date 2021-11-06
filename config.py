@@ -6,7 +6,7 @@ RESOURCES_PATH = Path(bundle_path, 'resources')
 DICTIONARY_PATH = Path(bundle_path, 'resources', 'dictionaries')
 ANIME_PATH = Path(bundle_path, 'resources', 'anime')
 GAMES_PATH = Path(bundle_path, 'resources', 'games')
-LIVE_ACTION_PATH = Path(bundle_path, 'resources', 'live_action')
+DRAMA_PATH = Path(bundle_path, 'resources', 'drama')
 NEWS_PATH = Path(bundle_path, 'resources', 'news')
 GAMEGENGO_PATH = Path(bundle_path, 'resources', 'gamegengo')
 LITERATURE_PATH = Path(bundle_path, 'resources', 'literature')
@@ -29,8 +29,8 @@ DECK_CATEGORIES = {
         'has_sound': True,
         "has_resource_url": True
     },
-     'live_action': {
-        'path': LIVE_ACTION_PATH,
+     'drama': {
+        'path': DRAMA_PATH,
         'has_image': True,
         'has_sound': True,
         "has_resource_url": False
