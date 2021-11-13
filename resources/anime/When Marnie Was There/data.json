@@ -20021,33 +20021,30 @@
     {
         "id": "A_WhenMarnieWasThere_0360",
         "deck_name": "When Marnie Was There",
-        "sentence": "さあ　そのまま　こいで",
-        "sentence_with_furigana": "さあ　そのまま　こいで",
+        "sentence": "さあ、そのまま漕いで",
+        "sentence_with_furigana": "さあ、そのまま 漕[こ]いで",
         "word_base_list": [
             "さあ",
-            " ",
+            "、",
             "其の",
             "侭",
-            " ",
-            "恋",
-            "だ"
+            "漕ぐ",
+            "で"
         ],
         "word_dictionary_list": [
             "さあ",
-            " ",
+            "、",
             "その",
             "まま",
-            " ",
-            "こい",
-            "だ"
+            "漕ぐ",
+            "で"
         ],
         "word_list": [
             "さあ",
-            "　",
+            "、",
             "その",
             "まま",
-            "　",
-            "こい",
+            "漕い",
             "で"
         ],
         "translation_word_list": [
