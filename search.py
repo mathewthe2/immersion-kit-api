@@ -51,7 +51,7 @@ def get_sentence_with_context(sentence_id, category=DEFAULT_CATEGORY):
     sentence["posttext_sentences"] = decks.get_category_sentences(sentence["posttext"])
     return sentence
 
-def get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags=[], user_levels={}, is_exact_match=False):
+def get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags=[], user_levels={}, is_exact_match=False, min_length=None, max_length=None):
     examples = []
     category_count = {}
     for category in DECK_CATEGORIES:
@@ -69,6 +69,7 @@ def get_examples_and_category_count(text_is_japanese, words_map, text, word_base
             examples = decks.get_sentences(example_ids_for_search_category)
             category_count = count_examples_for_category(example_ids)
     if len(examples) > 0:
+        examples = filter_examples_by_length(examples, min_length, max_length)
         examples = filter_examples_by_tags(examples, tags)
         examples = filter_examples_by_level(user_levels, examples)
         examples = limit_examples(examples)
@@ -101,7 +102,7 @@ def parse_examples(examples, text_is_japanese, word_bases):
             example['translation_word_index'] = [index for index, word in enumerate(example['translation_word_base_list']) if word in word_bases]
     return examples
 
-def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}):
+def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, min_length=None, max_length=None):
 
     is_exact_match = '「' in text and '」' in text
     if is_exact_match:
@@ -134,7 +135,7 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}):
     words_map = decks.get_sentence_map() if text_is_japanese else decks.get_sentence_translation_map()
     text = text.replace(" ", "") if text_is_japanese else text
     word_bases = analyze_japanese(text)['base_tokens'] if text_is_japanese else analyze_english(text)['base_tokens']
-    examples_and_count = get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags, user_levels, is_exact_match)
+    examples_and_count = get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags, user_levels, is_exact_match, min_length, max_length)
     examples = examples_and_count["examples"]
     if sorting:
         examples = sort_examples(examples, sorting)
@@ -184,6 +185,16 @@ def filter_example_ids_by_category(example_ids, category):
         return []
     else:   
         return [example_id for example_id in example_ids if get_category_of_example_id(example_id) == category]
+
+def filter_examples_by_length(examples, min_length, max_length):
+    if min_length and max_length:
+        return [example for example in examples if len(example['sentence']) >= min_length and len(example['sentence']) <= max_length]
+    elif min_length:
+        return [example for example in examples if len(example['sentence']) >= min_length]
+    elif max_length:
+        return [example for example in examples if len(example['sentence']) <= max_length]
+    else:
+        return examples
 
 def filter_examples_by_tags(examples, tags):
     if len(tags) <= 0:
