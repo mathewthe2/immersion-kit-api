@@ -128208,7 +128208,7 @@
         "id": "A_Noragami_E09_2262",
         "deck_name": "Noragami",
         "sentence": "ユッキーが　罰を受けなきゃ",
-        "sentence_with_furigana": "ユッキーが　 罰[ばち]を 受[う]けなきゃ",
+        "sentence_with_furigana": "ユッキーが　 罰[ばつ]を 受[う]けなきゃ",
         "word_base_list": [
             "ユッキー",
             "が",
@@ -128387,11 +128387,11 @@
     {
         "id": "A_Noragami_E09_2265",
         "deck_name": "Noragami",
-        "sentence": "な　何をするんですか　雪音くんの罰って",
-        "sentence_with_furigana": "な　 何[なに]をするんですか　 雪[ゆき] 音[おん]くんの 罰[ばち]って",
+        "sentence": "な、何をするんですか　雪音くんの罰って",
+        "sentence_with_furigana": "な、 何[なに]をするんですか　 雪[ゆき] 音[おん]くんの 罰[ばつ]って",
         "word_base_list": [
             "だ",
-            " ",
+            "、",
             "何",
             "を",
             "為る",
@@ -128407,7 +128407,7 @@
         ],
         "word_dictionary_list": [
             "だ",
-            " ",
+            "、",
             "何",
             "を",
             "する",
@@ -128423,7 +128423,7 @@
         ],
         "word_list": [
             "な",
-            "　",
+            "、",
             "何",
             "を",
             "する",
