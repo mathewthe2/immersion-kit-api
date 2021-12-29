@@ -1,4 +1,3 @@
-import pathlib
 import genanki
 import random
 import requests
@@ -41,15 +40,17 @@ def generate_deck(sentence):
 
   # Download Image
   response = requests.get(sentence["image_url"])
-  image_file_name = Path(RESOURCES_PATH, "images", sentence["image"])
-  file = open(image_file_name, "wb")
+  image_name = os.path.basename(sentence["image_url"])
+  image_file_path = Path(RESOURCES_PATH, "images", image_name)
+  file = open(image_file_path, "wb")
   file.write(response.content)
   file.close()
 
   # Download Sound
   response = requests.get(sentence["sound_url"])
-  sound_file_name = Path(RESOURCES_PATH, "sound", sentence["sound"])
-  file = open(sound_file_name, "wb")
+  sound_name = os.path.basename(sentence["sound_url"])
+  sound_file_path = Path(RESOURCES_PATH, "sound", sound_name)
+  file = open(sound_file_path, "wb")
   file.write(response.content)
   file.close()
 
@@ -60,8 +61,8 @@ def generate_deck(sentence):
     sentence["sentence"], 
     sentence["translation"], 
     sentence["sentence_with_furigana"], 
-    '<img src="{}">'.format(sentence["image"]), 
-    '[sound:{}]'.format(sentence["sound"])
+    '<img src="{}">'.format(image_name), 
+    '[sound:{}]'.format(sound_name)
   ])
 
   my_deck.add_note(my_note)
@@ -71,10 +72,10 @@ def generate_deck(sentence):
     open(file_name_with_path, 'w').close()
   if os.path.exists(file_name_with_path):
     my_package = genanki.Package(my_deck)
-    my_package.media_files = [image_file_name, sound_file_name]
+    my_package.media_files = [image_file_path, sound_file_path]
     my_package.write_to_file(file_name_with_path)
-  os.remove(image_file_name)
-  os.remove(sound_file_name)
+  os.remove(image_file_path)
+  os.remove(sound_file_path)
   return file_name
 
 
@@ -88,6 +89,8 @@ def generate_list_deck(deck_name, sentences):
   media_paths = []
 
   for sentence in sentences:
+    image_name = os.path.basename(sentence["image_url"])
+    sound_name = os.path.basename(sentence["sound_url"])
     note = genanki.Note(
       model=anime_model,
       fields=[
@@ -95,13 +98,13 @@ def generate_list_deck(deck_name, sentences):
         sentence["sentence"], 
         sentence["translation"], 
         sentence["sentence_with_furigana"], 
-        '<img src="{}">'.format(sentence["image"]), 
-        '[sound:{}]'.format(sentence["sound"])
+        '<img src="{}">'.format(image_name), 
+        '[sound:{}]'.format(sound_name)
       ])
     
     list_deck.add_note(note)
-    media_paths.append(Path(RESOURCES_PATH, "images", sentence["sound"]))
-    media_paths.append(Path(RESOURCES_PATH, "sound", sentence["sound"]))
+    media_paths.append(Path(RESOURCES_PATH, "images", sound_name))
+    media_paths.append(Path(RESOURCES_PATH, "sound", sound_name))
 
   file_name = '{}.apkg'.format(deck_name)
   file_name_with_path = Path(RESOURCES_PATH, "decks", file_name)

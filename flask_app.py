@@ -1,6 +1,7 @@
 import io
 import os
 import requests
+import urllib
 from pathlib import Path
 from flask import Flask, Response, request 
 from flask_cors import CORS
@@ -14,7 +15,7 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-    return 'API Documentation not avaiable currently. If you are interested, please contact us at support@immersionkit.com.'
+    return 'API Documentation: https://docs.immersionkit.com/public api/search/'
 
 @app.route('/look_up_dictionary')
 def look_up_dictionary():
@@ -86,6 +87,7 @@ def download_file(file_path, filename, mimetype):
     return_data.seek(0)
     w = FileWrapper(return_data)
     os.remove(file_path)
+    filename = urllib.parse.quote(filename)
     return Response(w, mimetype=mimetype, headers = {'Content-disposition': 'attachment; filename={}'.format(filename)})
 
 def download_static_file(request_url, filename, mimetype):
@@ -110,7 +112,7 @@ def download_sentence_image():
         else:
             return download_static_file(
                 request_url=sentence["image_url"],
-                filename=sentence["image"],
+                filename=os.path.basename(sentence["image_url"]),
                 mimetype='image/jpeg'
             )
 
@@ -129,7 +131,7 @@ def download_sentence_audio():
         else:
             return download_static_file(
                 request_url=sentence["sound_url"],
-                filename=sentence["sound"],
+                filename=os.path.basename(sentence["sound_url"]),
                 mimetype='audio/mpeg'
             )
 
