@@ -867,7 +867,7 @@
         "id": "A_TonarinoTotoro_016",
         "deck_name": "My Neighbor Totoro",
         "sentence": "どうだ　気に入ったかい？",
-        "sentence_with_furigana": "どうだ　 気に入[きにい]ったかい？",
+        "sentence_with_furigana": "どうだ　 気[き]に 入[い]ったかい？",
         "word_base_list": [
             "どう",
             "だ",
@@ -15593,7 +15593,7 @@
         "id": "A_TonarinoTotoro_238",
         "deck_name": "My Neighbor Totoro",
         "sentence": "おとうさんは　この木を見て　あの家がとっても気に入ったんだ。　おかあさんも　きっと好きになると思ってね。",
-        "sentence_with_furigana": "おとうさんは　この 木[き]を 見[み]て　あの 家[うち]がとっても 気に入[きにい]ったんだ。　おかあさんも　きっと 好[す]きになると 思[おも]ってね。",
+        "sentence_with_furigana": "おとうさんは　この 木[き]を 見[み]て　あの 家[うち]がとっても 気[き]に 入[い]ったんだ。　おかあさんも　きっと 好[す]きになると 思[おも]ってね。",
         "word_base_list": [
             "御",
             "父さん",

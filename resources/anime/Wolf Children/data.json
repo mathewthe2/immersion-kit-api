@@ -12377,7 +12377,7 @@
         "id": "A_WolfChildren_0171",
         "deck_name": "Wolf Children",
         "sentence": "どう？　気に入った？",
-        "sentence_with_furigana": "どう？　 気に入[きにい]った？",
+        "sentence_with_furigana": "どう？　 気[き]に 入[い]った？",
         "word_base_list": [
             "どう",
             "？",
@@ -12434,7 +12434,7 @@
         "id": "A_WolfChildren_0172",
         "deck_name": "Wolf Children",
         "sentence": "気に入った！",
-        "sentence_with_furigana": "気に入[きにい]った！",
+        "sentence_with_furigana": "気[き]に 入[い]った！",
         "word_base_list": [
             "気",
             "に",
@@ -30142,7 +30142,7 @@
         "id": "A_WolfChildren_0426",
         "deck_name": "Wolf Children",
         "sentence": "気に入らん。 え？",
-        "sentence_with_furigana": "気に入[きにい]らん。え？",
+        "sentence_with_furigana": "気[き]に 入[い]らん。え？",
         "word_base_list": [
             "気",
             "に",
@@ -41456,7 +41456,7 @@
         "id": "A_WolfChildren_0583",
         "deck_name": "Wolf Children",
         "sentence": "俺が転校生だから 気に入らないのか　そうだろ？",
-        "sentence_with_furigana": "俺[おれ]が 転校生[てんこうせい]だから 気に入[きにい]らないのか　そうだろ？",
+        "sentence_with_furigana": "俺[おれ]が 転校生[てんこうせい]だから 気[き]に 入[い]らないのか　そうだろ？",
         "word_base_list": [
             "俺",
             "が",
