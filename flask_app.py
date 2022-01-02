@@ -7,7 +7,7 @@ from flask import Flask, Response, request
 from flask_cors import CORS
 from werkzeug.wsgi import FileWrapper
 from anki import generate_deck
-from config import DEFAULT_CATEGORY, RESOURCES_PATH, MEDIA_FILE_HOST, EXTENSION_MIMETYPE_MAP
+from config import DEFAULT_CATEGORY, DEFAULT_ANKI_MODEL, RESOURCES_PATH, MEDIA_FILE_HOST, EXTENSION_MIMETYPE_MAP
 from search import get_deck_by_id, look_up, get_sentence_by_id, get_sentence_with_context, get_sentences_with_combinatory_ids
 
 app = Flask(__name__)
@@ -160,11 +160,14 @@ def download_sentence_apkg():
         return 'No sentence id specified.'
     else:
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
-        sentence = get_sentence_by_id(sentence_id, category=DEFAULT_CATEGORY if not has_category else request.args.get('category'))
+        has_model_type = request.args.get('model_type') is not None and request.args.get('model_type') != ''
+        category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
+        model_type = DEFAULT_ANKI_MODEL if not has_model_type else request.args.get('model_type')
+        sentence = get_sentence_by_id(sentence_id, category)
         if sentence is None:
             return 'File not found.'
         else:
-            deck_name = generate_deck(sentence)
+            deck_name = generate_deck(sentence, model_type)
             file_path = Path(RESOURCES_PATH, 'decks', deck_name)
             return download_file(
                 file_path=file_path,

@@ -84,6 +84,9 @@ SENTENCE_FIELDS = [
 
 SENTENCE_KEYS_FOR_LISTS = ['pretext', 'posttext', 'word_list', 'word_dictionary_list', 'word_base_list', 'translation_word_list', 'translation_word_base_list']
 
+# Anki
+DEFAULT_ANKI_MODEL = 'sentence'
+
 # Serving
 MEDIA_FILE_HOST = 'https://immersion-kit.sfo3.digitaloceanspaces.com/media'
 EXAMPLE_LIMIT = 50 # example limit per deck
