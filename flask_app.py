@@ -163,11 +163,13 @@ def download_sentence_apkg():
         has_model_type = request.args.get('model_type') is not None and request.args.get('model_type') != ''
         category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
         model_type = DEFAULT_ANKI_MODEL if not has_model_type else request.args.get('model_type')
+        has_vocabulary = request.args.get('vocabulary_position') is not None and request.args.get('vocabulary_position') != ''
+        vocabulary_position = None if not has_vocabulary else int(request.args.get('vocabulary_position'))
         sentence = get_sentence_by_id(sentence_id, category)
         if sentence is None:
             return 'File not found.'
         else:
-            deck_name = generate_deck(sentence, model_type)
+            deck_name = generate_deck(sentence, vocabulary_position, model_type)
             file_path = Path(RESOURCES_PATH, 'decks', deck_name)
             return download_file(
                 file_path=file_path,

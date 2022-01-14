@@ -1,7 +1,7 @@
 import json
 import zipfile
 from pathlib import Path
-from config import DICTIONARY_PATH
+from config import DICTIONARY_PATH, DICTIONARY_MEDIA_HOST
 
 class Dictionary:
     def __init__(self):
@@ -43,19 +43,36 @@ class Dictionary:
 
     def load_dictionary(self, dictionary_name):
         dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.zip')
-        if dictionary_path:
-            self.dictionary_map = self.load_dictionary_by_path(str(dictionary_path))
-        else:
-            print('failed to find path for dictionary')
+        archive = zipfile.ZipFile(dictionary_path, 'r')
+
+        for file in archive.namelist():
+            if file.endswith('.json'):
+                with archive.open(file) as f:
+                    data = f.read()
+                    self.dictionary_map = json.loads(data.decode("utf-8"))
+
+        # dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.zip')
+        # if dictionary_path:
+        #     self.dictionary_map = self.load_dictionary_by_path(str(dictionary_path))
+        # else:
+        #     print('failed to find path for dictionary')
 
     def get_definition(self, word):
         return self.parse_dictionary_entries(self.dictionary_map[word])
 
+    def lookup_vocabulary(self, vocabulary):
+        if self.is_entry(vocabulary):
+            entry = self.get_first_entry(vocabulary)
+            return self.parse_dictionary_entries([entry])[0]
+        else:
+            return None
+
     def parse_dictionary_entries(self, entries):
         return  [{
             'headword': entry[0],
-            'reading': entry[1],
+            'reading': entry[1] if entry[1] != "" else entry[0],
             'tags': entry[2],
             'glossary_list': entry[5],
-            'sequence': entry[6],
+            # 'sequence': entry[6],
+            'sound': '{}/{}'.format(DICTIONARY_MEDIA_HOST, entry[8]) if len(entry[8]) > 0 else "" 
         } for entry in entries]

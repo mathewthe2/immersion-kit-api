@@ -1,6 +1,6 @@
 from glob import glob
 from typing import MappingView
-from config import ANIME_PATH, CONTEXT_RANGE, SENTENCE_FIELDS, RESOURCES_PATH
+from config import ANIME_PATH, CONTEXT_RANGE, SENTENCE_FIELDS
 import json
 import string
 from pathlib import Path
@@ -32,6 +32,8 @@ class Decks:
 
     def load_decks(self, cur, sentence_map, translation_map):
         deck_folders = glob(str(self.path) + '/*/')
+        # if IS_TESTING:
+        #     deck_folders = deck_folders[:1]
         for deck_folder in deck_folders:
             sentences, sentence_map, translation_map = self.load_deck_by_path(deck_folder, sentence_map, translation_map)
             self.load_sentences_to_db(sentences, cur)
