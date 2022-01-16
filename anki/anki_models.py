@@ -82,6 +82,7 @@ VOCABULARY_MODEL = genanki.Model(
     {'name': 'Vocabulary-English'},
     {'name': 'Vocabulary-Audio'},
     {'name': 'Expression'}, # Sentence
+    {'name': 'Sentence-Reading'},
     {'name': 'Sentence-English'},
     {'name': 'Screenshot'},
     {'name': 'Sentence-Audio'},
@@ -107,7 +108,7 @@ VOCABULARY_MODEL = genanki.Model(
   {{Screenshot}}
 </div>
 <div class="expression">
-  {{Expression}}
+  {{furigana:Sentence-Reading}}
 </div>
 <div style="font-size: 25px">
   {{Sentence-English}}

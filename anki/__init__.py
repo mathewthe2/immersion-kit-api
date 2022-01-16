@@ -91,8 +91,8 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
         ', '.join(vocabulary_entry["glossary_list"]), # vocab-english
         vocabulary_sound_file_name, # vocab-audio,
         sentence["sentence"], 
+        sentence["sentence_with_furigana"], 
         sentence["translation"], 
-        # sentence["sentence_with_furigana"], 
         '<img src="{}">'.format(image_name), 
         '[sound:{}]'.format(sound_name),
         sentence["id"], 
