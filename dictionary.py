@@ -3,6 +3,10 @@ import zipfile
 from pathlib import Path
 from config import DICTIONARY_PATH, DICTIONARY_MEDIA_HOST
 
+CUSTOM_MAPPER = {
+    '食える': '食えない'
+}
+
 class Dictionary:
     def __init__(self):
         self.dictionary_map = {}  
@@ -43,6 +47,12 @@ class Dictionary:
 
     def load_dictionary(self, dictionary_name):
         dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.zip')
+        if dictionary_path:
+            self.dictionary_map = self.load_dictionary_by_path(str(dictionary_path))
+        else:
+            print('failed to find path for dictionary')
+
+        dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.zip')
         archive = zipfile.ZipFile(dictionary_path, 'r')
 
         for file in archive.namelist():
@@ -51,11 +61,13 @@ class Dictionary:
                     data = f.read()
                     self.dictionary_map = json.loads(data.decode("utf-8"))
 
-        # dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.zip')
-        # if dictionary_path:
-        #     self.dictionary_map = self.load_dictionary_by_path(str(dictionary_path))
-        # else:
-        #     print('failed to find path for dictionary')
+    def load_unpacked_dictionary(self, dictionary_name):
+        dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.json')
+        if dictionary_path:
+            with open(dictionary_path, encoding='utf-8') as f:
+                self.dictionary_map = json.load(f)
+        else:
+            print('failed to find path for dictionary')
 
     def get_definition(self, word):
         return self.parse_dictionary_entries(self.dictionary_map[word])
@@ -64,6 +76,8 @@ class Dictionary:
         if self.is_entry(vocabulary):
             entry = self.get_first_entry(vocabulary)
             return self.parse_dictionary_entries([entry])[0]
+        elif vocabulary in CUSTOM_MAPPER:
+            return self.lookup_vocabulary(CUSTOM_MAPPER[vocabulary])
         else:
             return None
 

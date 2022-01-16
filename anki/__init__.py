@@ -62,6 +62,14 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
     vocabulary = dictionary_list[vocabulary_position]
     vocabulary_entry = dictionary.lookup_vocabulary(vocabulary)
 
+    if vocabulary_entry is None:
+      vocabulary_entry = {
+        'headword': vocabulary,
+        'reading': vocabulary,
+        'sound': '',
+        'glossary_list': ''
+      }
+
     vocabulary_sound_url = vocabulary_entry['sound']
     vocabulary_sound_file_name = ""
     vocabulary_sound_name = ""
@@ -86,7 +94,7 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
       asset_file_paths.append(vocabulary_sound_file_path)
 
     fields = [
-      vocabulary, # vocab-kanji
+      vocabulary_entry['headword'], # vocab-kanji
       vocabulary_entry['reading'], # vocab-reading
       ', '.join(vocabulary_entry["glossary_list"]), # vocab-english
       vocabulary_sound_file_name, # vocab-audio,
