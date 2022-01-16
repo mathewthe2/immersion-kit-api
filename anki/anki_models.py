@@ -15,6 +15,11 @@ img {
  max-height: 400px;
 }
 
+.mobile img {
+ max-width: 300px;
+ max-height: 300px;
+}
+
 .expression {
  margin-bottom: -0.0em;
  margin-top: 1.2em;
