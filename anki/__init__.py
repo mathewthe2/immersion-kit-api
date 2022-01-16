@@ -85,18 +85,18 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
       file.close()
       asset_file_paths.append(vocabulary_sound_file_path)
 
-      fields = [
-        vocabulary, # vocab-kanji
-        vocabulary_entry['reading'], # vocab-reading
-        ', '.join(vocabulary_entry["glossary_list"]), # vocab-english
-        vocabulary_sound_file_name, # vocab-audio,
-        sentence["sentence"], 
-        sentence["sentence_with_furigana"], 
-        sentence["translation"], 
-        '<img src="{}">'.format(image_name), 
-        '[sound:{}]'.format(sound_name),
-        sentence["id"], 
-      ]
+    fields = [
+      vocabulary, # vocab-kanji
+      vocabulary_entry['reading'], # vocab-reading
+      ', '.join(vocabulary_entry["glossary_list"]), # vocab-english
+      vocabulary_sound_file_name, # vocab-audio,
+      sentence["sentence"], 
+      sentence["sentence_with_furigana"], 
+      sentence["translation"], 
+      '<img src="{}">'.format(image_name), 
+      '[sound:{}]'.format(sound_name),
+      sentence["id"], 
+    ]
 
   my_note = genanki.Note(
   model=ANKI_MODELS[model_type],
