@@ -1,24 +1,50 @@
 import genanki
 
-custom_css = ".card {\n font-family: 'localnoto', 'notosans', 'ヒラギノ明朝 ProN', 'Hiragino Mincho Pro', 'serif';\n font-size: 25px;\n text-align: center;\n color: White; \n background-color: Black;\n}\n"
+custom_css = """.card {
+font-family: 'localnoto', 'notosans', 'ヒラギノ明朝 ProN', 'Hiragino Mincho Pro', 'serif';
+font-size: 50px;
+text-align: center;
+color: White;
+background-color: Black;
+}
+
+img {
+ width: auto;
+ height: auto;
+ max-width: 400px;
+ max-height: 400px;
+}
+
+.expression {
+ margin-bottom: -0.0em;
+ margin-top: 1.2em;
+ font-size: 25px;
+}"""
 
 SENTENCE_MODEL = genanki.Model(
   1239585222,
   'Immersion Kit Sentence',
   css=custom_css,
   fields=[
-    {'name': 'ID'},
     {'name': 'Expression'},
     {'name': 'English'},
     {'name': 'Reading'},
     {'name': 'Screenshot'},
     {'name': 'Audio Sentence'},
+    {'name': 'ID'}
   ],
   templates=[
     {
       'name': 'Sentence',
-      'qfmt': '<h1>{{Expression}}</h1>{{Screenshot}}',
-      'afmt': '{{FrontSide}}<hr id="answer"><div style="font-size: 20px">{{Audio Sentence}} {{furigana:Reading}}</div ><br/><div style="font-size: 20px">{{English}}</div>',
+      'qfmt': """<div style="font-size: 25px">{{Expression}}</div>
+<br/>
+{{Screenshot}}""",
+      'afmt': """{{FrontSide}}
+<hr id="answer">
+<div style="font-size: 25px">{{English}}</div>
+<br/>
+<div style="font-size: 20px">{{Audio Sentence}} {{furigana:Reading}}</div >
+<br/>"""
     },
   ])
 
@@ -27,18 +53,22 @@ AUDIO_MODEL = genanki.Model(
   'Immersion Kit Audio',
   css=custom_css,
   fields=[
-    {'name': 'ID'},
     {'name': 'Expression'},
     {'name': 'English'},
     {'name': 'Reading'},
     {'name': 'Screenshot'},
     {'name': 'Audio Sentence'},
+    {'name': 'ID'}
   ],
   templates=[
     {
       'name': 'Audio',
       'qfmt': '<div style="display: none">{{Audio Sentence}}</div>{{Screenshot}}',
-      'afmt': '{{FrontSide}}<hr id="answer"><div style="font-size: 20px">{{Audio Sentence}} {{furigana:Reading}}</div ><br/><div style="font-size: 20px">{{English}}</div>',
+      'afmt': """{{FrontSide}}
+<hr id="answer">
+<div style="font-size: 25px">{{furigana:Reading}}</div >
+<div style="font-size: 20px">{{English}}</div>
+{{Audio Sentence}}"""
     },
   ])
 
@@ -47,7 +77,6 @@ VOCABULARY_MODEL = genanki.Model(
     'Immersion Kit Vocabulary',
     css=custom_css,
   fields=[
-    {'name': 'ID'},
     {'name': 'Vocabulary-Kanji'},
     {'name': 'Vocabulary-Reading'},
     {'name': 'Vocabulary-English'},
@@ -56,12 +85,33 @@ VOCABULARY_MODEL = genanki.Model(
     {'name': 'Sentence-English'},
     {'name': 'Screenshot'},
     {'name': 'Sentence-Audio'},
+    {'name': 'ID'},
   ],
   templates=[
     {
       'name': 'Vocabulary',
-      'qfmt': '<span style="font-size: 50px;  ">{{Vocabulary-Kanji}}</span>',
-      'afmt': '<div>{{Vocabulary-Audio}}{{Sentence-Audio}}</div>{{FrontSide}}<hr id="answer">{{Screenshot}}<div style="font-size: 20px">{{Vocabulary-Reading}}</div><div style="font-size: 20px">{{Vocabulary-English}}</div ><br/><div style="font-size: 20px">{{Expression}}</div><div style="font-size: 20px">{{Sentence-English}}</div>',
+      'qfmt': '{{Vocabulary-Kanji}}',
+      'afmt': """<div>
+  {{Vocabulary-Audio}} {{Sentence-Audio}}
+<div>
+{{FrontSide}}
+<hr id="answer">
+<div>
+  {{Vocabulary-Reading}}
+</div>
+<div style="font-size: 25px">
+  {{Vocabulary-English}}
+</div>
+<br>
+<div>
+  {{Screenshot}}
+</div>
+<div class="expression">
+  {{Expression}}
+</div>
+<div style="font-size: 25px">
+  {{Sentence-English}}
+</div>""",
     },
   ])
 

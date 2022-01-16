@@ -48,12 +48,12 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
   fields = []
   if model_type in ['audio', 'sentence']:
     fields = [
-    sentence["id"], 
     sentence["sentence"], 
     sentence["translation"], 
     sentence["sentence_with_furigana"], 
     '<img src="{}">'.format(image_name), 
-    '[sound:{}]'.format(sound_name)
+    '[sound:{}]'.format(sound_name),
+    sentence["id"]
   ]
   elif model_type == 'vocabulary' and vocabulary_position is not None:
     dictionary_list = sentence["word_dictionary_list"]
@@ -86,7 +86,6 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
       asset_file_paths.append(vocabulary_sound_file_path)
 
       fields = [
-        sentence["id"], 
         vocabulary, # vocab-kanji
         vocabulary_entry['reading'], # vocab-reading
         ', '.join(vocabulary_entry["glossary_list"]), # vocab-english
@@ -95,7 +94,8 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
         sentence["translation"], 
         # sentence["sentence_with_furigana"], 
         '<img src="{}">'.format(image_name), 
-        '[sound:{}]'.format(sound_name)
+        '[sound:{}]'.format(sound_name),
+        sentence["id"], 
       ]
 
   my_note = genanki.Note(
