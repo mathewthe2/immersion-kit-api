@@ -52,14 +52,14 @@ class Dictionary:
         else:
             print('failed to find path for dictionary')
 
-        dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.zip')
-        archive = zipfile.ZipFile(dictionary_path, 'r')
+        # dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.zip')
+        # archive = zipfile.ZipFile(dictionary_path, 'r')
 
-        for file in archive.namelist():
-            if file.endswith('.json'):
-                with archive.open(file) as f:
-                    data = f.read()
-                    self.dictionary_map = json.loads(data.decode("utf-8"))
+        # for file in archive.namelist():
+        #     if file.endswith('.json'):
+        #         with archive.open(file) as f:
+        #             data = f.read()
+        #             self.dictionary_map = json.loads(data.decode("utf-8"))
 
     def load_unpacked_dictionary(self, dictionary_name):
         dictionary_path = Path(DICTIONARY_PATH, dictionary_name + '.json')
@@ -88,5 +88,5 @@ class Dictionary:
             'tags': entry[2],
             'glossary_list': entry[5],
             # 'sequence': entry[6],
-            'sound': '{}/{}'.format(DICTIONARY_MEDIA_HOST, entry[8]) if len(entry[8]) > 0 else "" 
+            'sound': '' # '{}/{}'.format(DICTIONARY_MEDIA_HOST, entry[8]) if len(entry[8]) > 0 else "" 
         } for entry in entries]

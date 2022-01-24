@@ -11,7 +11,7 @@ tagger = Tagger()
 tagger.load_tags()
 
 dictionary = Dictionary()
-dictionary.load_dictionary('jmdict_combined')
+dictionary.load_dictionary('JMdict+')
 
 decks = DecksManager()
 decks.load_decks()
