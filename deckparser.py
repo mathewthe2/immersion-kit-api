@@ -5,7 +5,7 @@ from tokenizer.englishtokenizer import analyze_english
 from tokenizer.japanesetokenizer import add_furigana
 from sudachipy import tokenizer
 from sudachipy import dictionary
-from config import ANIME_PATH, DRAMA_PATH, NEWS_PATH, LITERATURE_PATH, GAMEGENGO_PATH, GAMES_PATH
+from config import ANIME_PATH, DECK_CATEGORIES, DRAMA_PATH, NEWS_PATH, LITERATURE_PATH, GAMEGENGO_PATH, GAMES_PATH
 # from db_scripts import get_data
 
 tokenizer_obj = dictionary.Dictionary(dict_type="core").create()
@@ -172,7 +172,7 @@ def check_empty_sentences(filename, path=ANIME_PATH):
         notes = data['notes']
         for note in notes:
             # segmentation
-            text = note['fields'][deck_structure['text-column']]
+            text = note['fields'][deck_structure['translation-column']]
             if len(text) == 0:
                 print(note['fields'][deck_structure['id-column']])
     print("done")
@@ -191,11 +191,21 @@ def parse_deck(filename, path=ANIME_PATH, ignoreUntranslated=True):
     ids = set()
     with open(file, encoding='utf-8') as f:
         data = json.load(f)
-        notes = data['notes']
+        is_single_deck = "children" not in data
+        notes = []
+        episode_numbers = []
+        if is_single_deck:
+            notes = data['notes']
+            if (ignoreUntranslated):
+                notes = [note for note in notes if len(note['fields'][deck_structure['translation-column']]) > 0]
+        else:
+            for subdeck_index, child in enumerate(data['children']):
+                for note in child['notes']:
+                    if (not ignoreUntranslated or len(note['fields'][deck_structure['translation-column']]) > 0):
+                        notes.append(note)
+                        episode_numbers.append(subdeck_index+1)
         deck_name = data['name']
-        if (ignoreUntranslated):
-            notes = [note for note in notes if len(note['fields'][deck_structure['translation-column']]) > 0]
-        for note in notes:
+        for noteIndex, note in enumerate(notes):
             # segmentation
             text = note['fields'][deck_structure['text-column']]
             text = normalizeSentence(text)
@@ -233,6 +243,8 @@ def parse_deck(filename, path=ANIME_PATH, ignoreUntranslated=True):
                 'image': note['fields'][deck_structure['image-column']].split('src="')[1].split('">')[0],
                 'sound': note['fields'][deck_structure['sound-column']].split('sound:')[1].split(']')[0]
             }
+            if not is_single_deck:
+                example['episode'] = episode_numbers[noteIndex]
             examples.append(example)
 
     with open(Path(path, filename, 'data.json'), 'w+', encoding='utf8') as outfile:
@@ -364,17 +376,15 @@ def add_column_to_gamegengo(filename, column):
 #         json.dump(examples, outfile, indent=4, ensure_ascii=False)
 
 # parse_game_deck("NieR Reincarnation")
-# parse_deck("Steins Gate")
+# parse_deck("Overprotected Kahoko", path=DRAMA_PATH)
 # parse_all_decks(NEWS_PATH)
 # check_empty_sentences("Steins Gate")
-# check_empty_sentences("Cardcaptor Sakura")
+# check_empty_sentences("I am Mita, Your Housekeeper", path=DRAMA_PATH)
 # parse_all_decks(NEWS_PATH)
 # export_deck_statistics(DRAMA_PATH)
-# print_deck_statistics(GAMES_PATH)
+# print_deck_statistics(DRAMA_PATH)
 # parse_game_deck('Nier Reincarnation')
 # parse_game_deck('Zelda Breath of the Wild')
-
-# print_deck_statistics(ANIME_PATH)
 
 # parse_grammar_deck('Game Gengo Grammar N4')
 # add_column_to_gamegengo('Game Gengo Grammar N4', 'timestamp')
