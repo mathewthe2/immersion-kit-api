@@ -3,6 +3,7 @@ from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
 from config import DEFAULT_CATEGORY, DECK_CATEGORIES, EXAMPLE_LIMIT, RESULTS_LIMIT, NEW_WORDS_TO_USER_PER_SENTENCE, RESULT_EXCLUDED_FIELDS
 from tagger import Tagger
+from data.deckData import DECK_LIST
 from decks.decksmanager import DecksManager
 from dictionary import Dictionary
 from dictionarytags import word_is_within_difficulty
@@ -24,6 +25,11 @@ decks.set_category('anime')
 def get_deck_by_id(deck_name, category=DEFAULT_CATEGORY):
     decks.set_category(category)
     return dict(data=decks.get_deck_by_name(deck_name))
+
+def get_sentences_for_reader(deck_name, offset, limit, category=DEFAULT_CATEGORY):
+    decks.set_category(category)
+    deck_data = next(deck for deck in DECK_LIST if deck["id"] == deck_name)
+    return dict(data=decks.get_ranged_sentences(deck_name, offset, limit), total=deck_data["sentences"])   
 
 def get_sentence_by_id(sentence_id, category=DEFAULT_CATEGORY):
     decks.set_category(category)
