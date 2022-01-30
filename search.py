@@ -28,7 +28,9 @@ def get_deck_by_id(deck_name, category=DEFAULT_CATEGORY):
 
 def get_sentences_for_reader(deck_name, offset, limit, category=DEFAULT_CATEGORY):
     decks.set_category(category)
-    deck_data = next(deck for deck in DECK_LIST if deck["id"] == deck_name)
+    deck_data = next((deck for deck in DECK_LIST if deck["id"] == deck_name), None)
+    if deck_data is None:
+        return dict(data=[], error="Deck not ready yet")
     return dict(data=decks.get_ranged_sentences(deck_name, offset, limit), total=deck_data["sentences"])   
 
 def get_sentence_by_id(sentence_id, category=DEFAULT_CATEGORY):
