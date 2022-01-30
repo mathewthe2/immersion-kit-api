@@ -85,6 +85,12 @@ class DecksManager:
         else:
             return None
 
+    def get_ranged_sentences(self, deck_name, offset, limit):
+        self.cur.execute("select * from sentences where category = ? and deck_name = ? limit ? offset ?", (self.category, deck_name, limit, offset))
+        result = self.cur.fetchall()
+        sentences = self.query_result_to_sentences(result)
+        return sentences
+
     def parse_sentence(self, sentence):
         if sentence:
             category = self.category if 'category' not in sentence else sentence['category']

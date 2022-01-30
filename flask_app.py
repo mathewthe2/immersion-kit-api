@@ -3,12 +3,13 @@ import os
 import requests
 import urllib
 from pathlib import Path
-from flask import Flask, Response, request 
+from flask import Flask, Response, request, jsonify 
 from flask_cors import CORS
 from werkzeug.wsgi import FileWrapper
 from anki import generate_deck
-from config import DEFAULT_CATEGORY, DEFAULT_ANKI_MODEL, RESOURCES_PATH, MEDIA_FILE_HOST, EXTENSION_MIMETYPE_MAP
-from search import get_deck_by_id, look_up, get_sentence_by_id, get_sentence_with_context, get_sentences_with_combinatory_ids
+from config import DEFAULT_CATEGORY, DEFAULT_ANKI_MODEL, RESOURCES_PATH, MEDIA_FILE_HOST, EXTENSION_MIMETYPE_MAP, EXAMPLE_LIMIT
+from search import get_deck_by_id, look_up, get_sentence_by_id, get_sentences_for_reader, get_sentence_with_context, get_sentences_with_combinatory_ids
+from data.deckData import DECK_LIST
 
 app = Flask(__name__)
 CORS(app)
@@ -57,9 +58,24 @@ def deck():
     deck_id = request.args.get('id')
     has_category = request.args.get('category') is not None and request.args.get('category') != ''
     if deck_id is None:
-        return 'No idspecified.'
+        return 'No id specified.'
     else: 
         return get_deck_by_id(request.args.get('id'), category=DEFAULT_CATEGORY if not has_category else request.args.get('category'))
+
+@app.route('/decks')
+def decks():
+    return jsonify(DECK_LIST)
+
+@app.route('/read')
+def read():
+    deck_id = request.args.get('id')
+    has_category = request.args.get('category') is not None and request.args.get('category') != ''
+    offset = request.args.get('offset', type=int, default=0)
+    limit = min(EXAMPLE_LIMIT, request.args.get('limit', type=int, default=10))
+    if deck_id is None:
+        return 'No id specified.'
+    else: 
+        return get_sentences_for_reader(request.args.get('id'), offset=offset, limit=limit, category=DEFAULT_CATEGORY if not has_category else request.args.get('category'))
 
 @app.route('/sentences', methods=["GET", "POST"])
 def sentences():
