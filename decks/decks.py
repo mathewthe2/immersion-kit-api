@@ -69,6 +69,7 @@ class Decks:
             sentence["pretext"] = [sentence["id"] for sentence in pretext_sentences]
             sentence["posttext"] = [sentence["id"] for sentence in posttext_sentences]
             sentence['category'] = self.category
+            sentence["position"] = index + 1
 
             filtered_sentence = self.filter_fields(sentence, ['id'])
             sentence_data_key = self.category + '-' + sentence["id"]

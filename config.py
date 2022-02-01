@@ -58,9 +58,10 @@ EXTENSION_MIMETYPE_MAP = {
 # Sentence Format
 SENTENCE_FIELDS = [
     "id", 
+    "position",
     "category",
-    'channel', # news
-    'timestamp', # news
+    "channel", # news
+    "timestamp", # news
     "deck_name",
     "deck_name_japanese", # literature, news
     "author_japanese", # literature

@@ -69,13 +69,12 @@ def decks():
 @app.route('/read')
 def read():
     deck_id = request.args.get('id')
-    has_category = request.args.get('category') is not None and request.args.get('category') != ''
     offset = request.args.get('offset', type=int, default=0)
     limit = min(EXAMPLE_LIMIT, request.args.get('limit', type=int, default=10))
     if deck_id is None:
         return 'No id specified.'
     else: 
-        return get_sentences_for_reader(request.args.get('id'), offset=offset, limit=limit, category=DEFAULT_CATEGORY if not has_category else request.args.get('category'))
+        return get_sentences_for_reader(request.args.get('id'), offset=offset, limit=limit)
 
 @app.route('/sentences', methods=["GET", "POST"])
 def sentences():
