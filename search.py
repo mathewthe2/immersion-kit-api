@@ -1,7 +1,7 @@
 from wanakana import to_hiragana, is_japanese
 from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
-from config import DEFAULT_CATEGORY, DECK_CATEGORIES, EXAMPLE_LIMIT, RESULTS_LIMIT, NEW_WORDS_TO_USER_PER_SENTENCE, RESULT_EXCLUDED_FIELDS
+from config import DEFAULT_CATEGORY, DECK_CATEGORIES, EXAMPLE_LIMIT, RESULTS_LIMIT, NEW_WORDS_TO_USER_PER_SENTENCE, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE
 from tagger import Tagger
 from data.deckData import DECK_LIST
 from decks.decksmanager import DecksManager
@@ -56,8 +56,11 @@ def get_sentence_with_context(sentence_id, category=DEFAULT_CATEGORY):
     sentence = get_sentence_by_id(sentence_id, category)
     if not sentence:
         return None
-    sentence["pretext_sentences"] = decks.get_category_sentences(sentence["pretext"])
-    sentence["posttext_sentences"] = decks.get_category_sentences(sentence["posttext"])
+    decks.set_category(sentence["category"])
+    context_sentences = decks.get_ranged_sentences(sentence["deck_name"], max(1, sentence["position"]-CONTEXT_RANGE), CONTEXT_RANGE*2)
+    ## Improvement: Refactor filtering with better mathematical formula
+    sentence["pretext_sentences"] = [s for s in context_sentences if s["position"] < sentence["position"]]
+    sentence["posttext_sentences"] = [s for s in context_sentences if s["position"] > sentence["position"]]
     return sentence
 
 def get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags=[], user_levels={}, is_exact_match=False, min_length=None, max_length=None):

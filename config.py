@@ -79,11 +79,9 @@ SENTENCE_FIELDS = [
     "sound_begin", # literature
     "sound_end", # literature
     "sound_url", # games
-    "pretext",
-    "posttext"
 ]
 
-SENTENCE_KEYS_FOR_LISTS = ['pretext', 'posttext', 'word_list', 'word_dictionary_list', 'word_base_list', 'translation_word_list', 'translation_word_base_list']
+SENTENCE_KEYS_FOR_LISTS = ['word_list', 'word_dictionary_list', 'word_base_list', 'translation_word_list', 'translation_word_base_list']
 
 # Anki
 DEFAULT_ANKI_MODEL = 'sentence'

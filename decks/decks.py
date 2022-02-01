@@ -45,13 +45,7 @@ class Decks:
         with open(file, encoding='utf-8') as f:
             sentences = json.load(f)
         
-        for index, sentence in enumerate(sentences):
-            pretext_sentences  = sentences[0:index] if index < CONTEXT_RANGE else sentences[index-CONTEXT_RANGE:index] 
-            posttext_sentences = []
-            if index < len(sentences):
-                posttext_sentences = sentences[index+1:len(sentences)] if index+CONTEXT_RANGE > len(sentences) else sentences[index+1:index+CONTEXT_RANGE] 
-            sentence["pretext"] = [sentence["id"] for sentence in pretext_sentences]
-            sentence["posttext"] = [sentence["id"] for sentence in posttext_sentences]
+        for sentence in sentences:
             if 'word_base_list' in sentence:
                 sentence_map = self.map_sentence(sentence['word_base_list'], sentence['id'], sentence_map)
             if 'translation_word_base_list' in sentence:
@@ -62,12 +56,6 @@ class Decks:
     def load_sentences_to_db(self, sentences, cur):
         sentence_tuple_list = []
         for index, sentence in enumerate(sentences):
-            pretext_sentences  = sentences[0:index] if index < CONTEXT_RANGE else sentences[index-CONTEXT_RANGE:index] 
-            posttext_sentences = []
-            if index < len(sentences):
-                posttext_sentences = sentences[index+1:len(sentences)] if index+CONTEXT_RANGE > len(sentences) else sentences[index+1:index+CONTEXT_RANGE] 
-            sentence["pretext"] = [sentence["id"] for sentence in pretext_sentences]
-            sentence["posttext"] = [sentence["id"] for sentence in posttext_sentences]
             sentence['category'] = self.category
             sentence["position"] = index + 1
 
