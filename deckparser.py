@@ -191,7 +191,7 @@ def parse_deck(filename, path=ANIME_PATH, ignoreUntranslated=True):
     ids = set()
     with open(file, encoding='utf-8') as f:
         data = json.load(f)
-        is_single_deck = "children" not in data
+        is_single_deck = True if "children" not in data else len(data["children"]) == 0 
         notes = []
         episode_numbers = []
         if is_single_deck:
@@ -376,7 +376,7 @@ def add_column_to_gamegengo(filename, column):
 #         json.dump(examples, outfile, indent=4, ensure_ascii=False)
 
 # parse_game_deck("NieR Reincarnation")
-# parse_deck("Overprotected Kahoko", path=DRAMA_PATH)
+# parse_deck("Sailor Suit and Machine Gun (2006)", path=DRAMA_PATH)
 # parse_all_decks(NEWS_PATH)
 # check_empty_sentences("Steins Gate")
 # check_empty_sentences("I am Mita, Your Housekeeper", path=DRAMA_PATH)
@@ -389,5 +389,4 @@ def add_column_to_gamegengo(filename, column):
 # parse_grammar_deck('Game Gengo Grammar N4')
 # add_column_to_gamegengo('Game Gengo Grammar N4', 'timestamp')
 # parse_all_decks(ANIME_PATH)
-# parse_deck("Kill la Kill", ANIME_PATH)
-# parse_deck('1 Litre of Tears', DRAMA_PATH)
+# parse_deck("Princess Mononoke", ANIME_PATH)
