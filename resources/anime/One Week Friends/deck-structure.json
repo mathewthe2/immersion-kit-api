@@ -1,0 +1,8 @@
+{
+    "id-column": 1,
+    "text-column": 4,
+    "translation-column": 5,
+    "text-with-furigana-column": 6,
+    "image-column": 3,
+    "sound-column": 2
+}
