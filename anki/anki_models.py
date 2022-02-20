@@ -1,7 +1,6 @@
 import genanki
 
 custom_css = """.card {
-font-family: 'localnoto', 'notosans', 'ヒラギノ明朝 ProN', 'Hiragino Mincho Pro', 'serif';
 font-size: 50px;
 text-align: center;
 color: White;
