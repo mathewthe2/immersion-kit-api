@@ -62,7 +62,7 @@ DECK_LIST = [
         "contributor": "Jo Mako"
     },
      {
-        "id": "Spirited Away",
+        "id": "The Cat Returns",
         "ja_name": "猫の恩返し", 
         "category": "anime",
         "episodes": 1,
