@@ -64,13 +64,13 @@ class DecksManager:
         return self.get_sentences(combinatory_sentence_ids)
 
     def get_category_sentences_exact(self, text):
-        self.cur.execute("select * from sentences where category = ? and sentence like '% ? %' limit ?", (self.category, text, RESULTS_LIMIT))
+        self.cur.execute("select * from sentences where category = ? and sentence like ? limit ?", (self.category, '%' + text + '%', RESULTS_LIMIT))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
         return sentences
 
     def count_categories_for_exact_sentence(self, text):
-        self.cur.execute("select category, count(case when sentence like '%{}%' then 1 else null end) as `number_of_examples` from sentences group by category".format(text))
+        self.cur.execute("select category, count(case when sentence like ? then 1 else null end) as `number_of_examples` from sentences group by category", ('%' + text + '%',))
         result = self.cur.fetchall()
         category_count = {}
         for category, count in result:
