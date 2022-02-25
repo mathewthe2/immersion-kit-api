@@ -26,13 +26,20 @@ def get_deck_by_id(deck_name, category=DEFAULT_CATEGORY):
     decks.set_category(category)
     return dict(data=decks.get_deck_by_name(deck_name))
 
-def get_sentences_for_reader(deck_name, offset, limit):
+def get_sentences_for_reader(deck_name, episode, offset, limit):
     deck_data = next((deck for deck in DECK_LIST if deck["id"].lower() == deck_name.lower()), None)
     if deck_data is None:
         return dict(data=[], error="Deck not ready yet")
     else:
         decks.set_category(deck_data["category"])
-        return dict(data=decks.get_ranged_sentences(deck_name, offset, limit), total=deck_data["sentences"])   
+        if "deck_name" in deck_data:
+            deck_name = deck_data["deck_name"]
+        total = deck_data["sentences"]
+        if deck_data["episodes"] > 1:
+            total = decks.count_ranged_sentences(deck_name, episode)
+        else:
+            episode = -1 # only one episode or chapter
+        return dict(data=decks.get_ranged_sentences(deck_name, episode, offset, limit), episodes=deck_data["episodes"], total=total)   
 
 def get_sentence_by_id(sentence_id, category=DEFAULT_CATEGORY):
     decks.set_category(category)
@@ -57,7 +64,7 @@ def get_sentence_with_context(sentence_id, category=DEFAULT_CATEGORY):
     if not sentence:
         return None
     decks.set_category(sentence["category"])
-    context_sentences = decks.get_ranged_sentences(sentence["deck_name"], max(1, sentence["position"]-CONTEXT_RANGE), CONTEXT_RANGE*2)
+    context_sentences = decks.get_ranged_sentences(sentence["deck_name"], episode=None, offset=max(1, sentence["position"]-CONTEXT_RANGE), limit=CONTEXT_RANGE*2)
     ## Improvement: Refactor filtering with better mathematical formula
     sentence["pretext_sentences"] = [s for s in context_sentences if s["position"] < sentence["position"]]
     sentence["posttext_sentences"] = [s for s in context_sentences if s["position"] > sentence["position"]]

@@ -42,6 +42,16 @@ DECK_LIST = [
         "contributor": "Jo Mako"
     },
     {
+        "id": "New Game!",
+        "ja_name": "ニューゲーム!", 
+        "category": "anime",
+        "episodes": 12,
+        "year": 2017,
+        "tags": ["SLice of Life", "Comedy"],
+        "sentences": 3412,
+        "contributor": "Anonymous"
+    },
+    {
         "id": "Sailor Suit and Machine Gun (2006)",
         "ja_name": "セーラー服と機関銃", 
         "category": "drama",
@@ -80,5 +90,16 @@ DECK_LIST = [
         "tags": ["Studio Ghibli"],
         "sentences": 830,
         "contributor": "Jo Mako"
-    }
+    },
+    {
+        "id": "Nier Automata",
+        "deck_name": "NieR:Automata",
+        "ja_name": "ニーア オートマタ", 
+        "category": "games",
+        "episodes": 5,
+        "year": 2017,
+        "tags": [],
+        "sentences": 840,
+        "contributor": "Mathew Chan"
+    },
 ]

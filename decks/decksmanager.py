@@ -64,7 +64,7 @@ class DecksManager:
         return self.get_sentences(combinatory_sentence_ids)
 
     def get_category_sentences_exact(self, text):
-        self.cur.execute("select * from sentences where category = '{}' and sentence like '%{}%' limit {}".format(self.category, text, RESULTS_LIMIT))
+        self.cur.execute("select * from sentences where category = ? and sentence like '% ? %' limit ?", (self.category, text, RESULTS_LIMIT))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
         return sentences
@@ -85,11 +85,19 @@ class DecksManager:
         else:
             return None
 
-    def get_ranged_sentences(self, deck_name, offset, limit):
-        self.cur.execute("select * from sentences where category = ? and deck_name = ? limit ? offset ?", (self.category, deck_name, limit, offset))
+    def get_ranged_sentences(self, deck_name, episode, offset, limit):
+        if episode is None or episode <= 0:
+            self.cur.execute("select * from sentences where category = ? and deck_name = ? limit ? offset ?", (self.category, deck_name, limit, offset))
+        else:
+            self.cur.execute("select * from sentences where category = ? and deck_name = ? and episode = ? limit ? offset ?", (self.category, deck_name, episode, limit, offset))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
         return sentences
+
+    def count_ranged_sentences(self, deck_name, episode):
+        self.cur.execute("select count(*) from sentences where category = ? and deck_name = ? and episode = ?", (self.category, deck_name, episode))
+        result = self.cur.fetchone()
+        return result[0]
 
     def parse_sentence(self, sentence):
         if sentence:

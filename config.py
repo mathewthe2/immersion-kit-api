@@ -60,6 +60,7 @@ SENTENCE_FIELDS = [
     "id", 
     "position",
     "category",
+    "episode", # for reader
     "channel", # news
     "timestamp", # news
     "deck_name",

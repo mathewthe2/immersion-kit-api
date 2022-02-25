@@ -69,12 +69,13 @@ def decks():
 @app.route('/read')
 def read():
     deck_id = request.args.get('id')
+    episode = request.args.get('episode', type=int, default=1)
     offset = request.args.get('offset', type=int, default=0)
     limit = min(EXAMPLE_LIMIT, request.args.get('limit', type=int, default=10))
     if deck_id is None:
         return 'No id specified.'
     else: 
-        return get_sentences_for_reader(request.args.get('id'), offset=offset, limit=limit)
+        return get_sentences_for_reader(deck_id, episode=episode, offset=offset, limit=limit)
 
 @app.route('/sentences', methods=["GET", "POST"])
 def sentences():
