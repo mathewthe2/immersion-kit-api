@@ -123,7 +123,7 @@ def download_sentence_image():
     else:
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
         category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
-        sentence = get_sentence_by_id(sentence_id, category)
+        sentence = get_sentence_by_id(sentence_id)
         if sentence is None:
             return 'File not found.'
         else:
