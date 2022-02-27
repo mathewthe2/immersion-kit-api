@@ -142,7 +142,7 @@ def download_sentence_audio():
     else:
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
         category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
-        sentence = get_sentence_by_id(sentence_id, category)
+        sentence = get_sentence_by_id(sentence_id)
         if sentence is None:
             return 'File not found.'
         else:
@@ -182,7 +182,7 @@ def download_sentence_apkg():
         model_type = DEFAULT_ANKI_MODEL if not has_model_type else request.args.get('model_type')
         has_vocabulary = request.args.get('vocabulary_position') is not None and request.args.get('vocabulary_position') != ''
         vocabulary_position = None if not has_vocabulary else int(request.args.get('vocabulary_position'))
-        sentence = get_sentence_by_id(sentence_id, category)
+        sentence = get_sentence_by_id(sentence_id)
         if sentence is None:
             return 'File not found.'
         else:
