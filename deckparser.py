@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 from glob import glob
 from tokenizer.englishtokenizer import analyze_english
@@ -183,7 +184,7 @@ def normalizeSentence(text):
         text = text.replace("~", "～")
     return text
 
-def parse_deck(filename, path=ANIME_PATH, ignoreUntranslated=True):
+def parse_deck(filename, path=ANIME_PATH, ignore_untranslated=True, add_episode=False):
     deck_structure = get_deck_structure(path, filename)
     file = Path(path, filename, 'deck.json')
     examples = []
@@ -196,12 +197,12 @@ def parse_deck(filename, path=ANIME_PATH, ignoreUntranslated=True):
         episode_numbers = []
         if is_single_deck:
             notes = data['notes']
-            if (ignoreUntranslated):
+            if (ignore_untranslated):
                 notes = [note for note in notes if len(note['fields'][deck_structure['translation-column']]) > 0]
         else:
             for subdeck_index, child in enumerate(data['children']):
                 for note in child['notes']:
-                    if (not ignoreUntranslated or len(note['fields'][deck_structure['translation-column']]) > 0):
+                    if (not ignore_untranslated or len(note['fields'][deck_structure['translation-column']]) > 0):
                         notes.append(note)
                         episode_numbers.append(subdeck_index+1)
         deck_name = data['name']
@@ -245,6 +246,9 @@ def parse_deck(filename, path=ANIME_PATH, ignoreUntranslated=True):
             }
             if not is_single_deck:
                 example['episode'] = episode_numbers[noteIndex]
+            if add_episode:
+                episode = int(note['fields'][deck_structure['image-column']].split(".")[0].split("_")[-2])
+                example['episode'] = episode
             examples.append(example)
 
     with open(Path(path, filename, 'data.json'), 'w+', encoding='utf8') as outfile:
@@ -266,6 +270,35 @@ def parse_generic(PATH, deck_folder):
     #     parse_game_deck(Path(deck_folder).name)
     elif PATH == NEWS_PATH:
         parse_news_deck(Path(deck_folder).name)
+
+def add_id(filename, prefix_name, path=ANIME_PATH):
+    file = Path(path, filename, 'deck.json')
+    deck_structure = get_deck_structure(path, filename)
+    with open(file, encoding='utf-8') as f:
+        data = json.load(f)
+        for i, note in enumerate(data['notes']):
+            raw_id = data['notes'][i]['fields'][deck_structure["id-column"]]
+            if len(raw_id) == 0:
+                image_string = data['notes'][i]['fields'][deck_structure["image-column"]]
+                raw_id = image_string.split('src="')[1].split('.jpg')[0]
+            else:
+                raw_id = prefix_name + '_' + raw_id
+            data['notes'][i]['fields'][deck_structure["id-column"]] = raw_id
+    with open(Path(path, filename, 'out.json'), 'w+', encoding='utf8') as outfile:
+        json.dump(data, outfile, indent=4, ensure_ascii=False)
+
+
+def add_furigana_to_deck(filename, path=ANIME_PATH):
+    file = Path(path, filename, 'deck.json')
+    deck_structure = get_deck_structure(path, filename)
+    with open(file, encoding='utf-8') as f:
+        data = json.load(f)
+        for i, note in enumerate(data['notes']):
+            furigana = add_furigana(data['notes'][i]['fields'][deck_structure["text-column"]])
+            print(furigana)
+            data['notes'][i]['fields'][deck_structure['text-with-furigana-column']] = furigana
+    with open(Path(path, filename, 'out.json'), 'w+', encoding='utf8') as outfile:
+        json.dump(data, outfile, indent=4, ensure_ascii=False)
 
 def parse_all_decks(PATH=ANIME_PATH):
     deck_folders = glob(str(PATH) + '/*/')
@@ -339,6 +372,81 @@ def add_column_to_gamegengo(filename, column):
     with open(Path(GAMEGENGO_PATH, filename, 'new.json'), 'w+', encoding='utf8') as outfile:
         json.dump(newdata, outfile, indent=4, ensure_ascii=False)
 
+def combine_deck(filename, filename2, out, path=ANIME_PATH):
+    # Assuming no sub-decks for either deck
+    file = Path(path, filename, 'deck.json')
+    file_structure = Path(path, filename, 'deck-structure.json')
+    file2 = Path(path, filename2, 'deck.json')
+    file2_structure = Path(path, filename2, 'deck-structure.json')
+    with open(file, encoding='utf-8') as f:
+        data = json.load(f)
+    with open(file2, encoding='utf-8') as f2:
+        data2 = json.load(f2)
+    data["media_files"] += data2["media_files"]
+    with open(file_structure, encoding='utf-8') as f:
+        deck_structure = json.load(f)
+    with open(file2_structure, encoding='utf-8') as f:
+        deck2_structure = json.load(f)
+    same_deck_structure = True
+    for field in deck_structure:
+        if deck_structure[field] != deck2_structure[field]:
+            same_deck_structure = False
+    if same_deck_structure:
+        data["notes"] += data2["notes"]
+    else:
+        data2_notes = data2["notes"]
+        for noteIndex, note in enumerate(data2["notes"]):
+            new_field = [""] * (1+max(deck_structure.values()))
+            for field in deck_structure:
+                new_field[deck_structure[field]] = note["fields"][deck2_structure[field]]
+            data2_notes[noteIndex]["fields"] = new_field
+        data["notes"] += data2_notes
+    with open(Path(path, out, 'deck.json'), 'w+', encoding='utf8') as outfile:
+        json.dump(data, outfile, indent=4, ensure_ascii=False)
+
+def remove_artifcats_in_translation(filename, path=ANIME_PATH):
+    file = Path(path, filename, 'deck.json')
+    file_structure = Path(path, filename, 'deck-structure.json')
+    with open(file_structure, encoding='utf-8') as f:
+        deck_structure = json.load(f)
+    with open(file, encoding='utf-8') as f:
+        data = json.load(f)
+        total = 0
+        for note in data['notes']:
+            translation = note['fields'][deck_structure['translation-column']]
+            if '{' in translation  and '}' in translation:
+                print(translation)
+                total += 1
+
+        print(total)
+                # print(re.sub("[\(\[].*?[\)\]]", "", translation))
+
+def add_chapter_to_game(filename):
+    file = Path(GAMES_PATH, filename, 'data.json')
+    sentences = []
+    with open(file, encoding='utf-8') as f:
+        data = json.load(f)
+        for sentence in data:
+            chapter = sentence["id"].split('-')[1]
+            sentence["episode"] = int(chapter)
+            sentences.append(sentence)
+
+    with open(Path(GAMES_PATH, filename, 'out.json'), 'w+', encoding='utf8') as outfile:
+        json.dump(sentences, outfile, indent=4, ensure_ascii=False)
+
+def add_chapter_to_game(filename):
+    file = Path(GAMES_PATH, filename, 'data.json')
+    sentences = []
+    with open(file, encoding='utf-8') as f:
+        data = json.load(f)
+        for sentence in data:
+            chapter = sentence["id"].split('-')[1]
+            sentence["episode"] = int(chapter)
+            sentences.append(sentence)
+
+    with open(Path(GAMES_PATH, filename, 'out.json'), 'w+', encoding='utf8') as outfile:
+        json.dump(sentences, outfile, indent=4, ensure_ascii=False)
+
 # def parse_game_deck(filename):
 #     meta_data_file = Path(GAMES_PATH, filename, 'metadata.json')
 #     metadata = {}
@@ -375,14 +483,17 @@ def add_column_to_gamegengo(filename, column):
 #     with open(Path(GAMES_PATH, filename, 'data.json'), 'w+', encoding='utf8') as outfile:
 #         json.dump(examples, outfile, indent=4, ensure_ascii=False)
 
+# remove_artifcats_in_translation("Clannad After Story")
+# combine_deck("k1", "k2", "God's Blessing on this Wonderful World!")
+# add_furigana_to_deck("Chobits")
+# add_id("New Game!", 'New_Game!')
 # parse_game_deck("NieR Reincarnation")
-# parse_deck("Sailor Suit and Machine Gun (2006)", path=DRAMA_PATH)
+# parse_deck("Angel Beats!")
 # parse_all_decks(NEWS_PATH)
 # check_empty_sentences("Steins Gate")
 # check_empty_sentences("I am Mita, Your Housekeeper", path=DRAMA_PATH)
 # parse_all_decks(NEWS_PATH)
-# export_deck_statistics(DRAMA_PATH)
-# print_deck_statistics(DRAMA_PATH)
+# print_deck_statistics(ANIME_PATH)
 # parse_game_deck('Nier Reincarnation')
 # parse_game_deck('Zelda Breath of the Wild')
 
