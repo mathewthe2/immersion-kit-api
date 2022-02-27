@@ -41,52 +41,42 @@ def get_sentences_for_reader(deck_name, episode, offset, limit):
             episode = -1 # only one episode or chapter
         return dict(data=decks.get_ranged_sentences(deck_name, episode, offset, limit), episodes=deck_data["episodes"], total=total)   
 
-def get_sentence_by_id(sentence_id, category=DEFAULT_CATEGORY):
-    decks.set_category(category)
-    return decks.get_sentence(sentence_id)
+def get_sentence_by_id(id):
+    return decks.get_sentence(id)
 
 def deconstruct_combinatory_sentence_id(sentence_id):
     if '-' in sentence_id:
         return {
             'category': sentence_id.split('-', 1)[0],
-            'example_id': sentence_id.split('-', 1)[1]
+            'sentence_id': sentence_id.split('-', 1)[1]
         }
     else:
         return None
 
 def get_sentences_with_combinatory_ids(combinatory_sentence_ids):
-    search_list = [sentence_id for sentence_id in combinatory_sentence_ids if deconstruct_combinatory_sentence_id(sentence_id)]
+    search_list = [deconstruct_combinatory_sentence_id(sentence_id)['sentence_id'] for sentence_id in combinatory_sentence_ids if deconstruct_combinatory_sentence_id(sentence_id)]
     result = decks.get_sentences(search_list)
     return dict(data=result)
 
-def get_sentence_with_context(sentence_id, category=DEFAULT_CATEGORY):
-    sentence = get_sentence_by_id(sentence_id, category)
+def get_sentence_with_context(id):
+    sentence = get_sentence_by_id(id)
     if not sentence:
         return None
-    decks.set_category(sentence["category"])
-    context_sentences = decks.get_ranged_sentences(sentence["deck_name"], episode=None, offset=max(1, sentence["position"]-CONTEXT_RANGE), limit=CONTEXT_RANGE*2)
+    context_sentences = decks.get_ranged_sentences(sentence["category"], sentence["deck_name"], episode=None, offset=max(1, sentence["position"]-CONTEXT_RANGE), limit=CONTEXT_RANGE*2)
     ## Improvement: Refactor filtering with better mathematical formula
     sentence["pretext_sentences"] = [s for s in context_sentences if s["position"] < sentence["position"]]
     sentence["posttext_sentences"] = [s for s in context_sentences if s["position"] > sentence["position"]]
     return sentence
 
-def get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags=[], user_levels={}, is_exact_match=False, min_length=None, max_length=None):
+def get_examples_and_category_count(search_category, text_is_japanese, text, word_bases, tags=[], user_levels={}, is_exact_match=False, min_length=None, max_length=None):
     examples = []
     category_count = {}
-    for category in DECK_CATEGORIES:
-        category_count[category] = 0
     # Exact match through SQL
     if is_exact_match:
-        examples = decks.get_category_sentences_exact(text)
-        category_count = decks.count_categories_for_exact_sentence(text)
+        examples, category_count = decks.get_category_sentences_exact(search_category, text)
     else:
-        # Server side full text search
-        results = [words_map.get(token, set()) for token in word_bases]
-        if results:
-            example_ids = list(set.intersection(*results))
-            example_ids_for_search_category = filter_example_ids_by_category(example_ids, decks.get_category())
-            examples = decks.get_sentences(example_ids_for_search_category)
-            category_count = count_examples_for_category(example_ids)
+        examples, category_count = decks.get_category_sentences_fts(search_category, ' '.join(word_bases), text_is_japanese)
+
     if len(examples) > 0:
         examples = filter_examples_by_length(examples, min_length, max_length)
         examples = filter_examples_by_tags(examples, tags)
@@ -151,10 +141,9 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, m
     # if not is_exact_match:
     #     is_exact_match = text_is_japanese and dictionary.is_uninflectable_entry(text)
     decks.set_category(category)
-    words_map = decks.get_sentence_map() if text_is_japanese else decks.get_sentence_translation_map()
     text = text.replace(" ", "") if text_is_japanese else text
     word_bases = analyze_japanese(text)['base_tokens'] if text_is_japanese else analyze_english(text)['base_tokens']
-    examples_and_count = get_examples_and_category_count(text_is_japanese, words_map, text, word_bases, tags, user_levels, is_exact_match, min_length, max_length)
+    examples_and_count = get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags, user_levels, is_exact_match, min_length, max_length)
     examples = examples_and_count["examples"]
     if sorting:
         examples = sort_examples(examples, sorting)
@@ -181,29 +170,6 @@ def get_text_definition(text, dictionary_words):
         return [dictionary.get_definition(word) for word in dictionary_words]
     else:
         return []
-
-def get_category_of_example_id(example_id):
-    deconstructed = deconstruct_combinatory_sentence_id(example_id)
-    return None if not deconstructed else deconstructed['category']
-
-def count_examples_for_category(example_ids):
-    # print('example ids', example_ids)
-    # print('example ids', [id for id in example_ids if id.split('-')[0] == 'anime'])
-    categories = [key for key in DECK_CATEGORIES]
-    category_example_count = {}
-    for category in categories:
-        category_example_count[category] = 0
-    for example_id in example_ids:
-        category = get_category_of_example_id(example_id)
-        if category in categories:
-            category_example_count[category] += 1
-    return category_example_count
-
-def filter_example_ids_by_category(example_ids, category):
-    if example_ids == []:
-        return []
-    else:   
-        return [example_id for example_id in example_ids if get_category_of_example_id(example_id) == category]
 
 def filter_examples_by_length(examples, min_length, max_length):
     if min_length and max_length:

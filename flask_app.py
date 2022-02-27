@@ -47,11 +47,12 @@ def look_up_dictionary():
 @app.route('/sentence_with_context')
 def sentence_with_context():
     sentence_id = request.args.get('id')
-    has_category = request.args.get('category') is not None and request.args.get('category') != ''
     if sentence_id is None:
         return 'No sentence id specified.'
-    else: 
-        return get_sentence_with_context(request.args.get('id'), category=DEFAULT_CATEGORY if not has_category else request.args.get('category'))
+    elif not sentence_id.isdigit():
+        return {}
+    else:
+        return get_sentence_with_context(int(sentence_id))
 
 @app.route('/deck')
 def deck():

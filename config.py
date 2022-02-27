@@ -55,9 +55,12 @@ EXTENSION_MIMETYPE_MAP = {
     'jpeg': 'image/jpeg'
 }
 
+SENTENCE_CATEGORY_INDEX = 3 # 3rd item in sentence fields
+
 # Sentence Format
 SENTENCE_FIELDS = [
     "id", 
+    "sentence_id",
     "position",
     "category",
     "episode", # for reader
@@ -68,6 +71,8 @@ SENTENCE_FIELDS = [
     "author_japanese", # literature
     "sentence",
     "sentence_with_furigana",
+    "norms",
+    'eng_norms',
     "word_base_list",
     "word_dictionary_list",
     "word_list",

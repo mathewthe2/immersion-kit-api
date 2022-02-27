@@ -1,6 +1,6 @@
-
+from unicodedata import category
 from decks.decks import Decks 
-from config import DECK_CATEGORIES, DEFAULT_CATEGORY, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
+from config import DECK_CATEGORIES, DEFAULT_CATEGORY, SENTENCE_CATEGORY_INDEX, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json
 import sqlite3
 
@@ -9,11 +9,28 @@ class DecksManager:
     con = sqlite3.connect(":memory:", check_same_thread=False)
     cur = con.cursor()
     cur.execute("create table sentences ({})".format(','.join(SENTENCE_FIELDS)))
+    cur.execute("""CREATE VIRTUAL TABLE sentences_idx
+                 USING fts5(norms,
+                            eng_norms,
+                            content=sentences,
+                            content_rowid=id,
+                            tokenize = "unicode61 tokenchars '-_'");
+    """)
+    for category in list(DECK_CATEGORIES.keys()):
+        cur.execute("""CREATE VIRTUAL TABLE {}
+                 USING fts5(norms,
+                            eng_norms,
+                            content=sentences,
+                            content_rowid=id,
+                            tokenize = "unicode61 tokenchars '-_'");
+        """.format(category + "_sentences_idx"))
+    cur.execute("CREATE VIRTUAL TABLE sentence_idx_row USING fts5vocab('sentences_idx', 'instance');")
 
     def __init__(self, category=DEFAULT_CATEGORY):
         self.decks = {}
         self.sentence_map = {}
         self.translation_map = {}
+        self.category_range = []
         self.category = category
 
     def get_category(self):
@@ -22,23 +39,31 @@ class DecksManager:
     def set_category(self, category):
         if category in self.decks:
             self.category = category
-    
+
     def load_decks(self):
+        sentence_counter = 0
         for deck_category in DECK_CATEGORIES:
-            self.decks[deck_category] = Decks(
+            sentence_counter = Decks(
                 category=deck_category, 
                 path=DECK_CATEGORIES[deck_category]["path"],
                 has_image=DECK_CATEGORIES[deck_category]["has_image"],
                 has_sound=DECK_CATEGORIES[deck_category]["has_sound"],
-                has_resource_url=DECK_CATEGORIES[deck_category]["has_resource_url"])
-            self.decks[deck_category].load_decks(self.cur, self.sentence_map, self.translation_map)
+                has_resource_url=DECK_CATEGORIES[deck_category]["has_resource_url"]).load_decks(sentence_counter, self.cur)
+            self.category_range.append(sentence_counter)
+        # print("sentence counter", sentence_counter)
 
+    def get_category_for_row_id(self, row_id):
+        for index, id in enumerate(self.category_range):
+            if row_id <= id:
+                return list(DECK_CATEGORIES.keys())[index]
+        return None
+            
     def get_deck_by_name(self, deck_name):
         return [self.parse_sentence(sentence) for sentence in self.decks[self.category].get_deck_by_name(deck_name)]
 
-    def get_sentences(self, combinatory_sentence_ids):
-        search_list = combinatory_sentence_ids[:SENTENCES_LIMIT]
-        self.cur.execute("select * from sentences where id in ({seq})".format(
+    def get_sentences(self, ids):
+        search_list = ids[:SENTENCES_LIMIT]
+        self.cur.execute("select * from sentences where sentence_id in ({seq})".format(
             seq=','.join(['?']*len(search_list))), search_list)
         result = self.cur.fetchall()
         return self.query_result_to_sentences(result)
@@ -47,27 +72,58 @@ class DecksManager:
         sentences = []
         for sentence_tuple in result:
             sentence = {}
-            for data_index, value in enumerate(sentence_tuple):
+            for data_index, value in enumerate(sentence_tuple[:len(SENTENCE_FIELDS)]):
                 key = SENTENCE_FIELDS[data_index]
-                sentence[SENTENCE_FIELDS[data_index]] = value
-                if value == '':
-                    sentence[key] = ''
-                else:
-                    sentence[key] = json.loads(value) if key in SENTENCE_KEYS_FOR_LISTS else value
-            sentence["category"] = sentence["id"].split('-', 1)[0] # isolate category into different field
-            sentence["id"] = sentence["id"].split('-', 1)[1] # remove category from id
-            sentences.append(self.parse_sentence(sentence))
+                sentence[key] = '' if value == '' else json.loads(value) if key in SENTENCE_KEYS_FOR_LISTS else value
+            sentence = self.parse_sentence(sentence)
+            sentences.append(sentence)
         return sentences
-    
-    def get_category_sentences(self, sentence_ids):
-        combinatory_sentence_ids = [self.category + '-' + sentence_id for sentence_id in sentence_ids]
-        return self.get_sentences(combinatory_sentence_ids)
+
+    def get_category_sentences_fts(self, category, text, text_is_japanese=True):
+        token_column = "norms" if text_is_japanese else "eng_norms"
+        self.cur.execute("""SELECT *
+        FROM sentences
+        WHERE id IN (SELECT rowid
+                    FROM {}_sentences_idx
+                    WHERE {} MATCH ?)
+        LIMIT ?
+        """.format(category, token_column), (text, RESULTS_LIMIT))
+        result = self.cur.fetchall()
+        sentences = self.query_result_to_sentences(result)
+        category_count = self.count_categories_for_ffs(text)
+        return sentences, category_count
 
     def get_category_sentences_exact(self, text):
         self.cur.execute("select * from sentences where category = ? and sentence like ? limit ?", (self.category, '%' + text + '%', RESULTS_LIMIT))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
-        return sentences
+        category_count = self.count_categories_for_exact_sentence(text)
+        return sentences, category_count
+
+    def count_categories_for_ffs(self, text):
+        self.cur.row_factory = lambda cursor, row: row[0]
+        TERM_LIMIT = 20
+        terms = [term for term in text.split(" ") if len(term) > 0][:TERM_LIMIT]
+        row_ids = []
+        for term in terms:
+            self.cur.execute("""SELECT doc
+            FROM sentence_idx_row
+            WHERE term = ?
+            """, (term,))
+            row_ids_for_term = self.cur.fetchall()
+            if len(row_ids) == 0:
+                row_ids = row_ids_for_term
+            else:
+                row_ids = list(set(row_ids) & set(row_ids_for_term))
+        self.cur.row_factory = None
+        category_count = {}
+        for category in DECK_CATEGORIES:
+            category_count[category] = 0
+        for row_id in row_ids:
+            category = self.get_category_for_row_id(row_id)
+            if category in DECK_CATEGORIES:
+                category_count[category] += 1
+        return category_count
 
     def count_categories_for_exact_sentence(self, text):
         self.cur.execute("select category, count(case when sentence like ? then 1 else null end) as `number_of_examples` from sentences group by category", ('%' + text + '%',))
@@ -78,18 +134,19 @@ class DecksManager:
                 category_count[category] = count
         return category_count
 
-    def get_sentence(self, sentence_id):
-        sentences = self.get_category_sentences([sentence_id])
-        if len(sentences) > 0:
+    def get_sentence(self, id):
+        self.cur.execute("select * from sentences where id = ?", (id,))
+        result = self.cur.fetchall()
+        if result is not None:
+            sentences = self.query_result_to_sentences(result)
             return sentences[0]
-        else:
-            return None
+        return None
 
-    def get_ranged_sentences(self, deck_name, episode, offset, limit):
+    def get_ranged_sentences(self, category, deck_name, episode, offset, limit):
         if episode is None or episode <= 0:
-            self.cur.execute("select * from sentences where category = ? and deck_name = ? limit ? offset ?", (self.category, deck_name, limit, offset))
+            self.cur.execute("select * from sentences where category = ? and deck_name = ? limit ? offset ?", (category, deck_name, limit, offset))
         else:
-            self.cur.execute("select * from sentences where category = ? and deck_name = ? and episode = ? limit ? offset ?", (self.category, deck_name, episode, limit, offset))
+            self.cur.execute("select * from sentences where category = ? and deck_name = ? and episode = ? limit ? offset ?", (category, deck_name, episode, limit, offset))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
         return sentences
@@ -102,17 +159,12 @@ class DecksManager:
     def parse_sentence(self, sentence):
         if sentence:
             category = self.category if 'category' not in sentence else sentence['category']
-            if (self.decks[category].needs_image_url()):
+            needs_image_url = DECK_CATEGORIES[category]['has_image'] and not DECK_CATEGORIES[category]['has_resource_url']
+            if (needs_image_url):
                 image_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, category, sentence['deck_name'], sentence['image'])
                 sentence['image_url'] = image_path.replace(" ", "%20")
-            
-            if (self.decks[category].needs_sound_url()):
+            needs_sound_url= DECK_CATEGORIES[category]['has_sound'] and not DECK_CATEGORIES[category]['has_resource_url']
+            if (needs_sound_url):
                 sound_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, category, sentence['deck_name'], sentence['sound'])
                 sentence['sound_url'] = sound_path.replace(" ", "%20")
         return sentence
-
-    def get_sentence_map(self):
-        return self.sentence_map
-
-    def get_sentence_translation_map(self):
-        return self.translation_map
