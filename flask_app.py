@@ -21,7 +21,7 @@ def hello_world():
 @app.route('/look_up_dictionary')
 def look_up_dictionary():
     keyword = request.args.get('keyword')
-    if keyword is None:
+    if not keyword:
         return 'No keyword specified.'
     else:
         has_tags = request.args.get('tags') is not None and request.args.get('tags') != ''
