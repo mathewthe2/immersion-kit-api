@@ -104,16 +104,16 @@ class DecksManager:
                                 OVER (PARTITION BY deck_name ORDER BY id ASC) AS rn
                             FROM sentences
                             WHERE id IN (SELECT rowid
-                                        FROM {}_sentences_idx
-                                        WHERE {} MATCH ?
-                            {}
-                            {}
+                                        FROM {category}_sentences_idx
+                                        WHERE {token_column} MATCH ?
+                            {filtering}
+                            {ordering}
                             ))
                             SELECT * 
                             FROM ranked
                             WHERE rn <= ?
                             LIMIT ?
-        """.format(category, token_column, filter_string, self.search_order.get_order()), (text, EXAMPLE_LIMIT, RESULTS_LIMIT))
+        """.format(category=category, token_column=token_column, filtering=filter_string, ordering=self.search_order.get_order()), (text, EXAMPLE_LIMIT, RESULTS_LIMIT))
         result = self.cur.fetchall()
 
         sentences = self.query_result_to_sentences(result)
