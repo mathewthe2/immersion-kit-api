@@ -1,4 +1,6 @@
 from wanakana import to_hiragana, is_japanese
+from search.searchFilter import SearchFilter
+from search.searchOrder import SearchOrder
 from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
 from config import DEFAULT_CATEGORY, DECK_CATEGORIES, EXAMPLE_LIMIT, RESULTS_LIMIT, NEW_WORDS_TO_USER_PER_SENTENCE, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE
@@ -68,17 +70,22 @@ def get_sentence_with_context(id):
     sentence["posttext_sentences"] = [s for s in context_sentences if s["position"] > sentence["position"]]
     return sentence
 
-def get_examples_and_category_count(search_category, text_is_japanese, text, word_bases, tags=[], user_levels={}, is_exact_match=False, min_length=None, max_length=None):
+def get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags=[], user_levels={}, is_exact_match=False):
     examples = []
     category_count = {}
-    # Exact match through SQL
+    
     if is_exact_match:
-        examples, category_count = decks.get_category_sentences_exact(search_category, text)
+        examples, category_count = decks.get_category_sentences_exact(
+            category, 
+            text
+        )
     else:
-        examples, category_count = decks.get_category_sentences_fts(search_category, ' '.join(word_bases), text_is_japanese)
-
+        examples, category_count = decks.get_category_sentences_fts(
+            category=category, 
+            text=' '.join(word_bases), 
+            text_is_japanese=text_is_japanese
+        )
     if len(examples) > 0:
-        examples = filter_examples_by_length(examples, min_length, max_length)
         examples = filter_examples_by_tags(examples, tags)
         examples = filter_examples_by_level(user_levels, examples)
         examples = limit_examples(examples)
@@ -141,12 +148,13 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, m
     # if not is_exact_match:
     #     is_exact_match = text_is_japanese and dictionary.is_uninflectable_entry(text)
     decks.set_category(category)
+    decks.set_search_filter(SearchFilter(min_length, max_length))
+    decks.set_search_order(SearchOrder(sorting))
     text = text.replace(" ", "") if text_is_japanese else text
     word_bases = analyze_japanese(text)['base_tokens'] if text_is_japanese else analyze_english(text)['base_tokens']
-    examples_and_count = get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags, user_levels, is_exact_match, min_length, max_length)
+    examples_and_count = get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags, user_levels, is_exact_match)
     examples = examples_and_count["examples"]
-    if sorting:
-        examples = sort_examples(examples, sorting)
+
     dictionary_words = [] if not text_is_japanese else [word for word in word_bases if dictionary.is_entry(word)]
     result = [{
         'dictionary': get_text_definition(text, dictionary_words),
@@ -156,13 +164,6 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, m
     }]
     return dict(data=result)
 
-def sort_examples(examples, sorting):
-    if sorting.lower() in ['sentence length', 'shortness']:
-        return sorted(examples, key=lambda example: len(example['sentence']))
-    elif sorting.lower() == 'longness':
-        return sorted(examples, key=lambda example: len(example['sentence']), reverse=True)
-    return examples
-
 def get_text_definition(text, dictionary_words):
     if dictionary.is_entry(text):
         return [dictionary.get_definition(text)]
@@ -170,16 +171,6 @@ def get_text_definition(text, dictionary_words):
         return [dictionary.get_definition(word) for word in dictionary_words]
     else:
         return []
-
-def filter_examples_by_length(examples, min_length, max_length):
-    if min_length and max_length:
-        return [example for example in examples if len(example['sentence']) >= min_length and len(example['sentence']) <= max_length]
-    elif min_length:
-        return [example for example in examples if len(example['sentence']) >= min_length]
-    elif max_length:
-        return [example for example in examples if len(example['sentence']) <= max_length]
-    else:
-        return examples
 
 def filter_examples_by_tags(examples, tags):
     if len(tags) <= 0:
@@ -201,9 +192,6 @@ def filter_examples_by_level(user_levels, examples):
         if new_word_count <= NEW_WORDS_TO_USER_PER_SENTENCE:
             new_examples.append(example)
     return new_examples
-
-def filter_examples_by_exact_match(examples, text):
-    return [example for example in examples if text in example['sentence']]
 
 def limit_examples(examples):
     example_count_map = {}

@@ -1,5 +1,6 @@
-from unicodedata import category
 from decks.decks import Decks 
+from search.searchFilter import SearchFilter
+from search.searchOrder import SearchOrder
 from config import DECK_CATEGORIES, DEFAULT_CATEGORY, SENTENCE_CATEGORY_INDEX, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json
 import sqlite3
@@ -32,6 +33,8 @@ class DecksManager:
         self.translation_map = {}
         self.category_range = []
         self.category = category
+        self.search_filter = SearchFilter()
+        self.search_order = SearchOrder()
 
     def get_category(self):
         return self.category
@@ -39,6 +42,12 @@ class DecksManager:
     def set_category(self, category):
         if category in self.decks:
             self.category = category
+
+    def set_search_filter(self, search_filter):
+        self.search_filter = search_filter
+        
+    def set_search_order(self, search_order):
+        self.search_order = search_order
 
     def load_decks(self):
         sentence_counter = 0
@@ -79,16 +88,20 @@ class DecksManager:
             sentences.append(sentence)
         return sentences
 
-    def get_category_sentences_fts(self, category, text, text_is_japanese=True):
+    def get_category_sentences_fts(self, category, text, search_filter=None, text_is_japanese=True):
         token_column = "norms" if text_is_japanese else "eng_norms"
+        filter_string = "" if not self.search_filter.has_filters() else "AND id IN ({})".format(self.search_filter.get_query_string())
         self.cur.execute("""SELECT *
-        FROM sentences
-        WHERE id IN (SELECT rowid
-                    FROM {}_sentences_idx
-                    WHERE {} MATCH ?)
-        LIMIT ?
-        """.format(category, token_column), (text, RESULTS_LIMIT))
+                            FROM sentences
+                            WHERE id IN (SELECT rowid
+                                        FROM {}_sentences_idx
+                                        WHERE {} MATCH ?)
+                            {}
+                            {}
+                            LIMIT ?
+        """.format(category, token_column, filter_string, self.search_order.get_order()), (text, RESULTS_LIMIT))
         result = self.cur.fetchall()
+
         sentences = self.query_result_to_sentences(result)
         category_count = self.count_categories_for_ffs(text)
         return sentences, category_count
@@ -107,8 +120,8 @@ class DecksManager:
         row_ids = []
         for term in terms:
             self.cur.execute("""SELECT doc
-            FROM sentence_idx_row
-            WHERE term = ?
+                                FROM sentence_idx_row
+                                WHERE term = ?
             """, (term,))
             row_ids_for_term = self.cur.fetchall()
             if len(row_ids) == 0:
