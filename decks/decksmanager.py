@@ -106,12 +106,12 @@ class DecksManager:
                             WHERE id IN (SELECT rowid
                                         FROM {category}_sentences_idx
                                         WHERE {token_column} MATCH ?
-                            {filtering}
-                            {ordering}
                             ))
                             SELECT * 
                             FROM ranked
                             WHERE rn <= ?
+                            {filtering}
+                            {ordering}
                             LIMIT ?
         """.format(category=category, token_column=token_column, filtering=filter_string, ordering=self.search_order.get_order()), (text, EXAMPLE_LIMIT, RESULTS_LIMIT))
         result = self.cur.fetchall()
