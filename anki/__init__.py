@@ -53,7 +53,7 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
     sentence["sentence_with_furigana"], 
     '<img src="{}">'.format(image_name), 
     '[sound:{}]'.format(sound_name),
-    sentence["id"]
+    sentence["sentence_id"]
   ]
   elif model_type == 'vocabulary' and vocabulary_position is not None:
     dictionary_list = sentence["word_dictionary_list"]
@@ -103,7 +103,7 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
       sentence["translation"], 
       '<img src="{}">'.format(image_name), 
       '[sound:{}]'.format(sound_name),
-      sentence["id"], 
+      sentence["sentence_id"], 
     ]
 
   my_note = genanki.Note(
@@ -111,7 +111,7 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
   fields=fields)
 
   my_deck.add_note(my_note)
-  file_name = '{}.apkg'.format(sentence['id'])
+  file_name = '{}.apkg'.format(sentence['sentence_id'])
   file_name_with_path = Path(RESOURCES_PATH, "decks", file_name)
   if not os.path.exists(file_name_with_path):
     open(file_name_with_path, 'w').close()
@@ -139,7 +139,7 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
 #     note = genanki.Note(
 #       model=anime_model,
 #       fields=[
-#         sentence["id"], 
+#         sentence["sentence_id"], 
 #         sentence["sentence"], 
 #         sentence["translation"], 
 #         sentence["sentence_with_furigana"], 

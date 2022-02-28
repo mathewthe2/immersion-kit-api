@@ -118,9 +118,12 @@ def download_static_file(request_url, filename, mimetype):
 @app.route('/download_sentence_image')
 def download_sentence_image():
     sentence_id = request.args.get('id')
-    if sentence_id is None:
+    if not sentence_id:
         return 'No sentence id specified.'
-    else:
+    elif not sentence_id.isdigit():
+        return 'Invalid sentence id format.'
+    else: 
+        sentence_id = int(sentence_id)
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
         category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
         sentence = get_sentence_by_id(sentence_id)
@@ -137,9 +140,12 @@ def download_sentence_image():
 @app.route('/download_sentence_audio')
 def download_sentence_audio():
     sentence_id = request.args.get('id')
-    if sentence_id is None:
+    if not sentence_id:
         return 'No sentence id specified.'
+    elif not sentence_id.isdigit():
+        return 'Invalid sentence id format.'
     else:
+        sentence_id = int(sentence_id)
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
         category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
         sentence = get_sentence_by_id(sentence_id)
@@ -173,9 +179,12 @@ def download_media():
 @app.route('/download_sentence')
 def download_sentence_apkg():
     sentence_id = request.args.get('id')
-    if sentence_id is None:
+    if not sentence_id:
         return 'No sentence id specified.'
+    elif not sentence_id.isdigit():
+        return 'Invalid sentence id format.'
     else:
+        sentence_id = int(sentence_id)
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
         has_model_type = request.args.get('model_type') is not None and request.args.get('model_type') != ''
         category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
