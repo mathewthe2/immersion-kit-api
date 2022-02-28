@@ -96,9 +96,11 @@ class DecksManager:
             sentences.append(sentence)
         return sentences
 
+    def get_filter_string(self):
+        return "" if not self.search_filter.has_filters() else "AND id IN ({})".format(self.search_filter.get_query_string())
+
     def get_category_sentences_fts(self, category, text, text_is_japanese=True):
         token_column = "norms" if text_is_japanese else "eng_norms"
-        filter_string = "" if not self.search_filter.has_filters() else "AND id IN ({})".format(self.search_filter.get_query_string())
         self.cur.execute("""WITH ranked AS
                             (SELECT *, row_number() 
                                 OVER (PARTITION BY deck_name ORDER BY id ASC) AS rn
@@ -113,15 +115,21 @@ class DecksManager:
                             {filtering}
                             {ordering}
                             LIMIT ?
-        """.format(category=category, token_column=token_column, filtering=filter_string, ordering=self.search_order.get_order()), (text, EXAMPLE_LIMIT, RESULTS_LIMIT))
+        """.format(category=category, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, EXAMPLE_LIMIT, RESULTS_LIMIT))
         result = self.cur.fetchall()
 
         sentences = self.query_result_to_sentences(result)
         category_count = self.count_categories_for_ffs(text)
         return sentences, category_count
 
-    def get_category_sentences_exact(self, text):
-        self.cur.execute("select * from sentences where category = ? and sentence like ? limit ?", (self.category, '%' + text + '%', RESULTS_LIMIT))
+    def get_category_sentences_exact(self, category, text):
+        self.cur.execute("""SELECT * from sentences
+                            WHERE category = ? 
+                            AND sentence like ? 
+                            {filtering}
+                            {ordering}
+                            LIMIT ?                            
+                        """.format(filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (category, '%' + text + '%', RESULTS_LIMIT))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
         category_count = self.count_categories_for_exact_sentence(text)
