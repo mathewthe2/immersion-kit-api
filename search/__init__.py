@@ -88,7 +88,6 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
     if len(examples) > 0:
         examples = filter_examples_by_tags(examples, tags)
         examples = filter_examples_by_level(user_levels, examples)
-        examples = limit_examples(examples)
         examples = parse_examples(examples, text_is_japanese, word_bases)
     return {
         "examples": filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS),
@@ -192,15 +191,3 @@ def filter_examples_by_level(user_levels, examples):
         if new_word_count <= NEW_WORDS_TO_USER_PER_SENTENCE:
             new_examples.append(example)
     return new_examples
-
-def limit_examples(examples):
-    example_count_map = {}
-    new_examples = []
-    for example in examples:
-        deck_name = example['deck_name']
-        if deck_name not in example_count_map:
-            example_count_map[deck_name] = 0
-        example_count_map[deck_name] += 1
-        if (example_count_map[deck_name] <= EXAMPLE_LIMIT):
-            new_examples.append(example)
-    return new_examples[:RESULTS_LIMIT] 
