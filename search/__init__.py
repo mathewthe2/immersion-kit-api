@@ -8,7 +8,6 @@ from tagger import Tagger
 from data.deckData import DECK_LIST
 from decks.decksmanager import DecksManager
 from dictionary import Dictionary
-from dictionarytags import word_is_within_difficulty
 
 tagger = Tagger()
 tagger.load_tags()
@@ -16,9 +15,8 @@ tagger.load_tags()
 dictionary = Dictionary()
 dictionary.load_dictionary('JMdict+')
 
-decks = DecksManager()
+decks = DecksManager(category=DEFAULT_CATEGORY, dictionary=dictionary)
 decks.load_decks()
-decks.set_category('anime')
 
 # def close():
 #     decks.con.commit()
@@ -70,7 +68,7 @@ def get_sentence_with_context(id):
     sentence["posttext_sentences"] = [s for s in context_sentences if s["position"] > sentence["position"]]
     return sentence
 
-def get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags=[], user_levels={}, is_exact_match=False):
+def get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags=[], is_exact_match=False):
     examples = []
     category_count = {}
     
@@ -87,7 +85,6 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
         )
     if len(examples) > 0:
         examples = filter_examples_by_tags(examples, tags)
-        examples = filter_examples_by_level(user_levels, examples)
         examples = parse_examples(examples, text_is_japanese, word_bases)
     return {
         "examples": filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS),
@@ -147,11 +144,11 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, m
     # if not is_exact_match:
     #     is_exact_match = text_is_japanese and dictionary.is_uninflectable_entry(text)
     decks.set_category(category)
-    decks.set_search_filter(SearchFilter(min_length, max_length))
+    decks.set_search_filter(SearchFilter(min_length, max_length, user_levels))
     decks.set_search_order(SearchOrder(sorting))
     text = text.replace(" ", "") if text_is_japanese else text
     word_bases = analyze_japanese(text)['base_tokens'] if text_is_japanese else analyze_english(text)['base_tokens']
-    examples_and_count = get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags, user_levels, is_exact_match)
+    examples_and_count = get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags, is_exact_match)
     examples = examples_and_count["examples"]
 
     dictionary_words = [] if not text_is_japanese else [word for word in word_bases if dictionary.is_entry(word)]
@@ -176,18 +173,3 @@ def filter_examples_by_tags(examples, tags):
         return examples
     deck_names = tagger.get_decks_by_tags(tags)
     return [example for example in examples if example['deck_name'] in deck_names]
-
-def filter_examples_by_level(user_levels, examples):
-    if not user_levels:
-        return examples
-    new_examples = []
-    for example in examples:
-        new_word_count = 0
-        for word in example['word_base_list']:
-            if dictionary.is_entry(word):
-                first_entry = dictionary.get_first_entry(word)
-                if not word_is_within_difficulty(user_levels, first_entry):
-                    new_word_count += 1
-        if new_word_count <= NEW_WORDS_TO_USER_PER_SENTENCE:
-            new_examples.append(example)
-    return new_examples

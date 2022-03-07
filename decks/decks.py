@@ -1,17 +1,21 @@
 from glob import glob
+from re import S
 from typing import MappingView
-from config import ANIME_PATH, CONTEXT_RANGE, SENTENCE_FIELDS
+from config import ANIME_PATH, CONTEXT_RANGE, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE
 import json
 import string
+import bisect
 from pathlib import Path
+from dictionarytags import get_level
 
 class Decks:
-    def __init__(self, category="anime", path=ANIME_PATH, has_image=True, has_sound=True, has_resource_url=False):
+    def __init__(self, category="anime", path=ANIME_PATH, has_image=True, has_sound=True, has_resource_url=False, dictionary=None):
         self.category = category
         self.path = path
         self.has_image = has_image
         self.has_sound = has_sound
         self.has_resource_url = has_resource_url
+        self.dictionary = dictionary
 
     def get_deck_by_name(self, deck_name):
         sentences = []
@@ -57,7 +61,8 @@ class Decks:
                 sentence["eng_norms"] = ' '.join([base for base in sentence["translation_word_base_list"] if base != ' '])
             else:
                 sentence["eng_norms"] = ''
-
+            sentence['jlpt_level'], sentence['wk_level'] = self.get_sentence_levels(sentence['word_base_list'])
+            
             sentence_data = [sentence["id"]]
             for key in SENTENCE_FIELDS[1:]:
                 if key in sentence:
@@ -75,7 +80,8 @@ class Decks:
         cur.executemany("insert into sentences values ({})".format(",".join(['?']*len(SENTENCE_FIELDS))), sentence_tuple_list)
         cur.executemany("insert into sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)", tokenized_sentence_list)
         cur.executemany("insert into {}_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
-
+        # cur.execute("insert INTO sentences_idx(sentences_idx) VALUES('optimize')")
+        # cur.execute("insert INTO {}_sentences_idx({}_sentences_idx) VALUES('optimize')".format(self.category, self.category))
         return sentence_counter
 
     def filter_fields(self, sentence, excluded_fields):
@@ -99,3 +105,23 @@ class Decks:
                 output_map[word] = set()
             output_map[word].add(self.format_sentence_key(example_id))
         return output_map
+
+    def get_sentence_levels(self, tokens):
+        curriculums = {
+            "JLPT": None,
+            "WK": None
+        }
+        for curriculum in curriculums.keys():
+            levels = []
+            for token in tokens:
+                if self.dictionary.is_entry(token):
+                    level = get_level(self.dictionary.get_first_entry(token), curriculum)
+                    if level:
+                        if curriculum == 'JLPT':
+                            bisect.insort_left(levels, level)
+                        elif curriculum == 'WK':
+                            bisect.insort_right(levels, level)
+            if len(levels) > NEW_WORDS_TO_USER_PER_SENTENCE:
+                curriculums[curriculum] =  levels[NEW_WORDS_TO_USER_PER_SENTENCE]
+        return curriculums['JLPT'], curriculums['WK']
+        

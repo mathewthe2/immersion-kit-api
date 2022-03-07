@@ -1,11 +1,12 @@
 class SearchFilter():
-    def __init__(self, min_length=None, max_length=None):
+    def __init__(self, min_length=None, max_length=None, user_levels=None):
         self.min_length = min_length
         self.max_length = max_length
+        self.user_levels = user_levels
         self.cur = None
 
     def has_filters(self):
-        return self.min_length or self.max_length
+        return self.min_length or self.max_length or self.user_levels
 
     def get_min_length(self):
         return self.min_length
@@ -18,7 +19,7 @@ class SearchFilter():
 
     def get_length_filter_string(self):
         if self.min_length and self.max_length:
-            return "WHERE length(sentence) BETWEEN {} and {}".format(self.min_length, self.max_length)
+            return "WHERE length(sentence) BETWEEN {} AND {}".format(self.min_length, self.max_length)
         elif self.min_length:
             return "WHERE length(sentence) >= {}".format(self.min_length)
         elif self.max_length:
@@ -26,9 +27,25 @@ class SearchFilter():
         else:
             return None
 
+    def get_user_level_filter_string(self):
+        if self.user_levels:
+            if "JLPT" in self.user_levels and "WK" in self.user_levels:
+                if self.user_levels["JLPT"] and self.user_levels["WK"]:
+                    return "WHERE jlpt_level >= {} AND wk_level <= {}".format(self.user_levels['JLPT'], self.user_levels['WK'])
+                elif self.user_levels["JLPT"]:
+                    return "WHERE jlpt_level >= {}".format(self.user_levels['JLPT'])
+                elif self.user_levels["WK"]:
+                    return "WHERE wk_level <= {}".format(self.user_levels['WK'])
+        return None
+    
     def get_query_string(self):
         if self.has_filters():
-            filter_condition = " AND ".join([s for s in [self.get_length_filter_string()] if s])
+            filter_condition = " AND ".join([
+                s for s in [
+                    self.get_length_filter_string(),
+                    self.get_user_level_filter_string()
+                ] if s
+            ])
             return """SELECT id
                     FROM sentences
                     {}

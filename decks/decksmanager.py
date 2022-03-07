@@ -28,12 +28,13 @@ class DecksManager:
         """.format(category + "_sentences_idx"))
     cur.execute("CREATE VIRTUAL TABLE sentence_idx_row USING fts5vocab('sentences_idx', 'instance');")
 
-    def __init__(self, category=DEFAULT_CATEGORY):
+    def __init__(self, category=DEFAULT_CATEGORY, dictionary=None):
         self.decks = {}
         self.sentence_map = {}
         self.translation_map = {}
         self.category_range = []
         self.category = category
+        self.dictionary = dictionary
         self.search_filter = SearchFilter()
         self.search_order = SearchOrder()
 
@@ -58,7 +59,9 @@ class DecksManager:
                 path=DECK_CATEGORIES[deck_category]["path"],
                 has_image=DECK_CATEGORIES[deck_category]["has_image"],
                 has_sound=DECK_CATEGORIES[deck_category]["has_sound"],
-                has_resource_url=DECK_CATEGORIES[deck_category]["has_resource_url"]).load_decks(sentence_counter, self.cur)
+                has_resource_url=DECK_CATEGORIES[deck_category]["has_resource_url"],
+                dictionary=self.dictionary
+            ).load_decks(sentence_counter, self.cur)
             self.category_range.append(sentence_counter)
 
     def get_category_for_row_id(self, row_id):
