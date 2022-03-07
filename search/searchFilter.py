@@ -40,12 +40,11 @@ class SearchFilter():
     
     def get_query_string(self):
         if self.has_filters():
-            filter_condition = " AND ".join([
-                s for s in [
-                    self.get_length_filter_string(),
-                    self.get_user_level_filter_string()
-                ] if s
-            ])
+            filter_strings = [
+                self.get_length_filter_string(),
+                self.get_user_level_filter_string()
+            ]
+            filter_condition = " AND ".join([s for s in filter_strings if s])
             return """SELECT id
                     FROM sentences
                     {}
