@@ -1,7 +1,7 @@
 from decks.decks import Decks 
 from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
-from config import DECK_CATEGORIES, DEFAULT_CATEGORY, EXAMPLE_LIMIT, SENTENCE_CATEGORY_INDEX, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
+from config import DECK_CATEGORIES, DEFAULT_CATEGORY, EXAMPLE_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json
 from bisect import bisect
 import sqlite3
