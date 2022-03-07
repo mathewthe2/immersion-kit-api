@@ -1,7 +1,5 @@
 from glob import glob
-from re import S
-from typing import MappingView
-from config import ANIME_PATH, CONTEXT_RANGE, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE
+from config import ANIME_PATH, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE
 import json
 import string
 import bisect
@@ -40,11 +38,6 @@ class Decks:
         file = Path(path, 'data.json')
         with open(file, encoding='utf-8') as f:
             sentences = json.load(f)      
-        # for sentence in sentences:
-            # if 'word_base_list' in sentence:
-            #     sentence_map = self.map_sentence(sentence['word_base_list'], sentence['id'], sentence_map)
-            # if 'translation_word_base_list' in sentence:
-            #     translation_map = self.map_sentence(sentence['translation_word_base_list'], sentence['id'], translation_map)
         return sentences
 
     def load_sentences_to_db(self, sentences, sentence_counter, cur):
