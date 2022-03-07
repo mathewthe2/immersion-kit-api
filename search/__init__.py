@@ -3,7 +3,7 @@ from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
-from config import DEFAULT_CATEGORY, DECK_CATEGORIES, EXAMPLE_LIMIT, RESULTS_LIMIT, NEW_WORDS_TO_USER_PER_SENTENCE, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE
+from config import DEFAULT_CATEGORY, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE
 from tagger import Tagger
 from data.deckData import DECK_LIST
 from decks.decksmanager import DecksManager
