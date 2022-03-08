@@ -25,9 +25,9 @@ DECK_CATEGORIES = {
     },
     'games': {
         'path': GAMES_PATH,
-        'has_image': True,
+        'has_image': False,
         'has_sound': True,
-        "has_resource_url": True
+        "has_resource_url": False
     },
      'drama': {
         'path': DRAMA_PATH,
