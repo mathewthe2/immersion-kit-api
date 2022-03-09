@@ -74,11 +74,3 @@ python flask_app.py
     parse_deck('foldernameofyourdeck')
     ```
     This extracts media data from `deck.json`, adds tokenized word lists and exports to `data.json`.
-
-## Setting up Database Credentials
-```bash
-touch .env
-echo "SUPABASE_CONNECTION_STRING=" > .env
-```
-
-Note: You can use any Relational DB such as PostgreSQL or MySQL that is supported by SQLAlchemy.
