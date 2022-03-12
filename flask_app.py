@@ -25,8 +25,8 @@ def look_up_dictionary():
         return 'No keyword specified.'
     else:
         has_tags = request.args.get('tags') is not None and request.args.get('tags') != ''
-        has_jlpt = request.args.get('jlpt') is not None and request.args.get('jlpt') != ''
-        has_wk = request.args.get('wk') is not None and request.args.get('wk') != ''
+        has_jlpt = request.args.get('jlpt') is not None and request.args.get('jlpt').isdigit()
+        has_wk = request.args.get('wk') is not None and request.args.get('wk').isdigit()
         has_sorting = request.args.get('sort') is not None and request.args.get('sort') != ''
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
         has_min_length = request.args.get('min_length') is not None and request.args.get('min_length').isdigit()
@@ -146,8 +146,6 @@ def download_sentence_audio():
         return 'Invalid sentence id format.'
     else:
         sentence_id = int(sentence_id)
-        has_category = request.args.get('category') is not None and request.args.get('category') != ''
-        category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
         sentence = get_sentence_by_id(sentence_id)
         if sentence is None:
             return 'File not found.'
@@ -185,9 +183,7 @@ def download_sentence_apkg():
         return 'Invalid sentence id format.'
     else:
         sentence_id = int(sentence_id)
-        has_category = request.args.get('category') is not None and request.args.get('category') != ''
         has_model_type = request.args.get('model_type') is not None and request.args.get('model_type') != ''
-        category = DEFAULT_CATEGORY if not has_category else request.args.get('category')
         model_type = DEFAULT_ANKI_MODEL if not has_model_type else request.args.get('model_type')
         has_vocabulary = request.args.get('vocabulary_position') is not None and request.args.get('vocabulary_position') != ''
         vocabulary_position = None if not has_vocabulary else int(request.args.get('vocabulary_position'))
