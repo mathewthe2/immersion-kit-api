@@ -11,6 +11,7 @@ class DecksManager:
     con = sqlite3.connect(":memory:", check_same_thread=False)
     cur = con.cursor()
     cur.execute("create table sentences ({})".format(','.join(SENTENCE_FIELDS)))
+    cur.execute("CREATE INDEX idx_sentences_category ON sentences (category)")
     cur.execute("""CREATE VIRTUAL TABLE sentences_idx
                  USING fts5(norms,
                             eng_norms,
