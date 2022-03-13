@@ -1,12 +1,13 @@
 class SearchFilter():
-    def __init__(self, min_length=None, max_length=None, user_levels=None):
+    def __init__(self, min_length=None, max_length=None, user_levels=None, decks=None):
         self.min_length = min_length
         self.max_length = max_length
         self.user_levels = user_levels
+        self.decks = decks
         self.cur = None
 
     def has_filters(self):
-        return self.min_length or self.max_length or self.user_levels
+        return self.min_length or self.max_length or self.user_levels or self.decks
 
     def get_min_length(self):
         return self.min_length
@@ -37,12 +38,19 @@ class SearchFilter():
                 elif self.user_levels["WK"]:
                     return "WHERE wk_level <= {}".format(self.user_levels['WK'])
         return None
+
+    def get_decks_filter_string(self):
+        if self.decks:
+            return "WHERE deck_name in {}".format(tuple(self.decks))
+        else:
+            return None 
     
     def get_query_string(self):
         if self.has_filters():
             filter_strings = [
                 self.get_length_filter_string(),
-                self.get_user_level_filter_string()
+                self.get_user_level_filter_string(),
+                self.get_decks_filter_string()
             ]
             filter_condition = " AND ".join([s for s in filter_strings if s])
             return """SELECT id

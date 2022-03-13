@@ -84,7 +84,6 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
             text_is_japanese=text_is_japanese
         )
     if len(examples) > 0:
-        examples = filter_examples_by_tags(examples, tags)
         examples = parse_examples(examples, text_is_japanese, word_bases)
     return {
         "examples": filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS),
@@ -144,7 +143,8 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, m
     # if not is_exact_match:
     #     is_exact_match = text_is_japanese and dictionary.is_uninflectable_entry(text)
     decks.set_category(category)
-    decks.set_search_filter(SearchFilter(min_length, max_length, user_levels))
+    selected_decks = None if not tags else tagger.get_decks_by_tags(tags)
+    decks.set_search_filter(SearchFilter(min_length, max_length, user_levels, selected_decks))
     decks.set_search_order(SearchOrder(sorting))
     text = text.replace(" ", "") if text_is_japanese else text
     word_bases = analyze_japanese(text)['base_tokens'] if text_is_japanese else analyze_english(text)['base_tokens']
@@ -167,9 +167,3 @@ def get_text_definition(text, dictionary_words):
         return [dictionary.get_definition(word) for word in dictionary_words]
     else:
         return []
-
-def filter_examples_by_tags(examples, tags):
-    if len(tags) <= 0:
-        return examples
-    deck_names = tagger.get_decks_by_tags(tags)
-    return [example for example in examples if example['deck_name'] in deck_names]
