@@ -95,6 +95,7 @@ SENTENCE_KEYS_FOR_LISTS = ['word_list', 'word_dictionary_list', 'word_base_list'
 DEFAULT_ANKI_MODEL = 'sentence'
 
 # Serving
+DEV_MODE = False # loads only two anime decks
 MEDIA_FILE_HOST = 'https://immersion-kit.sfo3.digitaloceanspaces.com/media'
 DICTIONARY_MEDIA_HOST = 'https://immersion-kit.sfo3.digitaloceanspaces.com/dictionary/media'
 EXAMPLE_LIMIT = 50 # example limit per deck

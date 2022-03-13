@@ -1,5 +1,5 @@
 from glob import glob
-from config import ANIME_PATH, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE
+from config import ANIME_PATH, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE, DEV_MODE
 import json
 import string
 import bisect
@@ -25,8 +25,8 @@ class Decks:
 
     def load_decks(self, sentence_counter, cur):
         deck_folders = glob(str(self.path) + '/*/')
-        # if True: # Testing
-        #     deck_folders = deck_folders[:1]
+        if DEV_MODE:
+            deck_folders = deck_folders[:2]
         for deck_folder in deck_folders:
             print("adding", deck_folder)
             sentences = self.load_one_deck(deck_folder)

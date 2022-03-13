@@ -1,7 +1,7 @@
 from decks.decks import Decks 
 from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
-from config import DECK_CATEGORIES, DEFAULT_CATEGORY, EXAMPLE_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
+from config import DECK_CATEGORIES, DEFAULT_CATEGORY, DEV_MODE, EXAMPLE_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json
 from bisect import bisect
 import sqlite3
@@ -63,6 +63,8 @@ class DecksManager:
                 dictionary=self.dictionary
             ).load_decks(sentence_counter, self.cur)
             self.category_range.append(sentence_counter)
+            if DEV_MODE:
+                break
 
     def get_category_for_row_id(self, row_id):
         index = bisect(self.category_range, row_id)
@@ -126,13 +128,20 @@ class DecksManager:
         return sentences, category_count
 
     def get_category_sentences_exact(self, category, text):
-        self.cur.execute("""SELECT * from sentences
-                            WHERE category = ? 
-                            AND sentence like ? 
+        self.cur.execute("""WITH ranked AS
+                            (SELECT *, row_number() 
+                                OVER (PARTITION BY deck_name ORDER BY id ASC) AS rn
+                            FROM sentences
+                            WHERE category = ?
+                            AND sentence LIKE ?
+                            )
+                            SELECT *
+                            FROM ranked
+                            WHERE rn <= ?
                             {filtering}
                             {ordering}
                             LIMIT ?                            
-                        """.format(filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (category, '%' + text + '%', RESULTS_LIMIT))
+                        """.format(filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (category, '%' + text + '%',EXAMPLE_LIMIT,  RESULTS_LIMIT))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
         category_count = self.count_categories_for_exact_sentence(text)
@@ -197,7 +206,7 @@ class DecksManager:
     def count_categories_for_exact_sentence(self, text):
         self.cur.execute("select category, count(case when sentence like ? then 1 else null end) as `number_of_examples` from sentences group by category", ('%' + text + '%',))
         result = self.cur.fetchall()
-        category_count = {}
+        category_count = self.zero_category_count()
         for category, count in result:
             if category in DECK_CATEGORIES:
                 category_count[category] = count
