@@ -1,4 +1,5 @@
 from decks.decks import Decks 
+from pathlib import Path
 from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from config import DECK_CATEGORIES, DEFAULT_CATEGORY, DEV_MODE, EXAMPLE_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
@@ -81,8 +82,21 @@ class DecksManager:
                 return list(DECK_CATEGORIES.keys())[index]
         return None
             
-    def get_deck_by_name(self, deck_name):
-        return [self.parse_sentence(sentence) for sentence in self.decks[self.category].get_deck_by_name(deck_name)]
+    def get_deck_by_name(self, deck_name, category):
+        sentences = []
+        path = DECK_CATEGORIES[category]['path']
+        file = Path(path, deck_name, 'data.json')
+        if file.is_file():
+            with open(file, encoding='utf-8') as f:
+                sentences = json.load(f)
+        return [self.parse_sentence(sentence, category='literature') for sentence in sentences]
+
+    def get_sentences(self, ids):
+        search_list = ids[:SENTENCES_LIMIT]
+        self.cur.execute("select * from sentences where sentence_id in ({seq})".format(
+            seq=','.join(['?']*len(search_list))), search_list)
+        result = self.cur.fetchall()
+        return self.query_result_to_sentences(result)
 
     def get_sentences(self, ids):
         search_list = ids[:SENTENCES_LIMIT]
@@ -235,9 +249,10 @@ class DecksManager:
         result = self.cur.fetchone()
         return result[0]
 
-    def parse_sentence(self, sentence):
+    def parse_sentence(self, sentence, category=None):
         if sentence:
-            category = self.category if 'category' not in sentence else sentence['category']
+            if not category:
+                category = self.category if 'category' not in sentence else sentence['category']
             needs_image_url = DECK_CATEGORIES[category]['has_image'] and not DECK_CATEGORIES[category]['has_resource_url']
             if (needs_image_url):
                 image_path = '{}/{}/{}/media/{}'.format(MEDIA_FILE_HOST, category, sentence['deck_name'], sentence['image'])

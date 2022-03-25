@@ -15,14 +15,6 @@ class Decks:
         self.has_resource_url = has_resource_url
         self.dictionary = dictionary
 
-    def get_deck_by_name(self, deck_name):
-        sentences = []
-        file = Path(self.path, deck_name, 'data.json')
-        if file.is_file():
-            with open(file, encoding='utf-8') as f:
-                sentences = json.load(f)
-        return sentences
-
     def load_decks(self, sentence_counter, cur):
         deck_folders = glob(str(self.path) + '/*/')
         if DEV_MODE:

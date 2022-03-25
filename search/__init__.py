@@ -23,8 +23,7 @@ decks.load_decks()
 #     decks.con.close()
 
 def get_deck_by_id(deck_name, category=DEFAULT_CATEGORY):
-    decks.set_category(category)
-    return dict(data=decks.get_deck_by_name(deck_name))
+    return dict(data=decks.get_deck_by_name(deck_name, category=category))
 
 def get_sentences_for_reader(deck_name, episode, offset, limit):
     deck_data = next((deck for deck in DECK_LIST if deck["id"].lower() == deck_name.lower()), None)
