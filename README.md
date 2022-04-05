@@ -20,11 +20,13 @@ brew install enchant
 #### Mac (Apple Silicon)
 ```bash
 brew install enchant
+# Locate libenchant.dylib location
 brew ls enchant
 > ...
-> /opt/homebrew/Cellar/enchant/2.3.0/lib/libenchant-2.2.dylib
+> /opt/homebrew/Cellar/enchant/2.3.2/lib/libenchant-2.2.dylib
 > ...
-echo 'export PYENCHANT_LIBRARY_PATH=/opt/homebrew/Cellar/enchant/2.3.0/lib/libenchant-2.2.dylib' >> ~/.zshenv
+# Set pyenchant library path to libenchant path
+echo 'export PYENCHANT_LIBRARY_PATH=/opt/homebrew/Cellar/enchant/2.3.2/lib/libenchant-2.2.dylib' >> ~/.zshenv
 ```
 
 #### Ubuntu
