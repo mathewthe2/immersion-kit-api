@@ -3,7 +3,7 @@ from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
-from config import DEFAULT_CATEGORY, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE
+from config import DEFAULT_CATEGORY, EXAMPLE_LIMIT, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE
 from tagger import Tagger
 from data.deckData import DECK_LIST
 from decks.decksmanager import DecksManager
@@ -70,14 +70,15 @@ def get_sentence_with_context(id):
 def get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags=[], is_exact_match=False):
     examples = []
     category_count = {}
+    deck_count = {}
     
     if is_exact_match:
-        examples, category_count = decks.get_category_sentences_exact(
+        examples, deck_count, category_count = decks.get_category_sentences_exact(
             category, 
             text
         )
     else:
-        examples, category_count = decks.get_category_sentences_fts(
+        examples, deck_count, category_count = decks.get_category_sentences_fts(
             category=category, 
             text=' '.join(word_bases), 
             text_is_japanese=text_is_japanese
@@ -86,6 +87,7 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
         examples = parse_examples(examples, text_is_japanese, word_bases)
     return {
         "examples": filter_fields(examples, excluded_fields=RESULT_EXCLUDED_FIELDS),
+        "deck_count": deck_count,
         "category_count": category_count
     }
 
@@ -112,8 +114,8 @@ def parse_examples(examples, text_is_japanese, word_bases):
             example['translation_word_index'] = [index for index, word in enumerate(example['translation_word_base_list']) if word in word_bases]
     return examples
 
-def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, min_length=None, max_length=None):
-
+def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, min_length=None, max_length=None, selected_decks=[], offset=0, limit=EXAMPLE_LIMIT):
+    
     is_exact_match = '「' in text and '」' in text
     if is_exact_match:
         text = text.split('「')[1].split('」')[0]
@@ -142,22 +144,36 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, m
     # if not is_exact_match:
     #     is_exact_match = text_is_japanese and dictionary.is_uninflectable_entry(text)
     decks.set_category(category)
-    selected_decks = None if not tags else tagger.get_decks_by_tags(tags)
-    decks.set_search_filter(SearchFilter(min_length, max_length, user_levels, selected_decks))
+    tagged_decks = None if not tags else tagger.get_decks_by_tags(tags)
+    filter_decks = get_filtered_decks(category, selected_decks, tagged_decks)
+    decks.set_search_filter(SearchFilter(min_length, max_length, user_levels, filter_decks))
     decks.set_search_order(SearchOrder(sorting))
+    decks.set_example_limit(limit)
+    decks.set_example_offset(offset)
     text = text.replace(" ", "") if text_is_japanese else text
     word_bases = analyze_japanese(text)['base_tokens'] if text_is_japanese else analyze_english(text)['base_tokens']
     examples_and_count = get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags, is_exact_match)
     examples = examples_and_count["examples"]
-
+    deck_count = examples_and_count["deck_count"] if not tagged_decks else {key: value for key, value in examples_and_count["deck_count"].items() if key in tagged_decks}
     dictionary_words = [] if not text_is_japanese else [word for word in word_bases if dictionary.is_entry(word)]
     result = [{
         'dictionary': get_text_definition(text, dictionary_words),
         'exact_match': text if is_exact_match else "",
         'examples': examples,
+        "deck_count": deck_count,
         "category_count": examples_and_count["category_count"]
     }]
     return dict(data=result)
+
+def get_filtered_decks(category, selected_decks, tagged_decks):
+    if selected_decks and tagged_decks:
+        return list(set(selected_decks) & set(tagged_decks)) # intersection
+    elif selected_decks:
+        return [deck for deck in selected_decks if decks.has_deck(category, deck)]
+    elif tagged_decks:
+        return tagged_decks
+    else:
+        return None
 
 def get_text_definition(text, dictionary_words):
     if dictionary.is_entry(text):

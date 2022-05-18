@@ -101,5 +101,6 @@ DICTIONARY_MEDIA_HOST = 'https://immersion-kit.sfo3.digitaloceanspaces.com/dicti
 EXAMPLE_LIMIT = 50 # example limit per deck
 RESULTS_LIMIT = 4000 # total result limit
 SENTENCES_LIMIT = 999 # SQL-bound limit
+TERM_LIMIT = 20
 NEW_WORDS_TO_USER_PER_SENTENCE = 1
 RESULT_EXCLUDED_FIELDS = ["image", "sound", "norms", "eng_norms", "wk_level", "jlpt_level", "translation_word_base_list", "word_base_list", "pretext", "posttext"]

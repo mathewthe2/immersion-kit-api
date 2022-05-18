@@ -41,7 +41,10 @@ class SearchFilter():
 
     def get_decks_filter_string(self):
         if self.decks:
-            return "WHERE deck_name in {}".format(tuple(self.decks))
+            if len(self.decks) == 1:
+                return "WHERE deck_name = '{}'".format(self.decks[0])
+            else:
+                return "WHERE deck_name in {}".format(tuple(self.decks))
         else:
             return None 
     

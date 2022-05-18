@@ -17,13 +17,18 @@ class Decks:
 
     def load_decks(self, sentence_counter, cur):
         deck_folders = glob(str(self.path) + '/*/')
+        deck_range = []
+        deck_names = []
         if DEV_MODE:
             deck_folders = deck_folders[:2]
         for deck_folder in deck_folders:
             print("adding", deck_folder)
             sentences = self.load_one_deck(deck_folder)
             sentence_counter = self.load_sentences_to_db(sentences, sentence_counter, cur)
-        return sentence_counter
+            deck_range.append(sentence_counter)
+            if sentences:
+                deck_names.append(sentences[0]['deck_name'])
+        return sentence_counter, deck_names, deck_range
     
     def load_one_deck(self, path):
         sentences = []

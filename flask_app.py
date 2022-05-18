@@ -35,6 +35,9 @@ def look_up_dictionary():
             'JLPT': None if not has_jlpt else int(request.args.get('jlpt')),
             'WK': None if not has_wk else int(request.args.get('wk'))
         }
+        has_decks = request.args.get('decks') is not None and request.args.get('decks') != ''
+        offset = request.args.get('offset', type=int, default=0)
+        limit = min(EXAMPLE_LIMIT, request.args.get('limit', type=int, default=EXAMPLE_LIMIT))
         return look_up(
             text = request.args.get('keyword')[:50], 
             sorting = None if not has_sorting else request.args.get('sort'),
@@ -42,7 +45,10 @@ def look_up_dictionary():
             max_length = None if not has_max_length else int(request.args.get('max_length')),
             category = DEFAULT_CATEGORY if not has_category else request.args.get('category'),
             tags = [] if not has_tags else request.args.get('tags').split(','),
-            user_levels=user_levels)
+            user_levels = user_levels,
+            selected_decks = [] if not has_decks else request.args.get('decks').split(','),
+            offset = offset,
+            limit = limit)
 
 @app.route('/sentence_with_context')
 def sentence_with_context():
@@ -187,11 +193,12 @@ def download_sentence_apkg():
         model_type = DEFAULT_ANKI_MODEL if not has_model_type else request.args.get('model_type')
         has_vocabulary = request.args.get('vocabulary_position') is not None and request.args.get('vocabulary_position') != ''
         vocabulary_position = None if not has_vocabulary else int(request.args.get('vocabulary_position'))
+        character_position = None if not has_vocabulary else int(request.args.get('character_position'))
         sentence = get_sentence_by_id(sentence_id)
         if sentence is None:
             return 'File not found.'
         else:
-            deck_name = generate_deck(sentence, vocabulary_position, model_type)
+            deck_name = generate_deck(sentence, character_position, model_type)
             file_path = Path(RESOURCES_PATH, 'decks', deck_name)
             return download_file(
                 file_path=file_path,
