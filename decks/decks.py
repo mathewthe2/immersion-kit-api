@@ -1,6 +1,6 @@
 from glob import glob
 from config import ANIME_PATH, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE, DEV_MODE
-import json
+import json, ndjson
 import string
 import bisect
 from pathlib import Path
@@ -20,7 +20,7 @@ class Decks:
         deck_range = []
         deck_names = []
         if DEV_MODE:
-            deck_folders = deck_folders[:2]
+            deck_folders = deck_folders[:1]
         for deck_folder in deck_folders:
             print("adding", deck_folder)
             sentences = self.load_one_deck(deck_folder)
@@ -32,9 +32,9 @@ class Decks:
     
     def load_one_deck(self, path):
         sentences = []
-        file = Path(path, 'data.json')
+        file = Path(path, 'data.ndjson')
         with open(file, encoding='utf-8') as f:
-            sentences = json.load(f)      
+            sentences = ndjson.load(f)      
         return sentences
 
     def load_sentences_to_db(self, sentences, sentence_counter, cur):

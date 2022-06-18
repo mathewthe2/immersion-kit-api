@@ -29,6 +29,7 @@ def look_up_dictionary():
         has_wk = request.args.get('wk') is not None and request.args.get('wk').isdigit()
         has_sorting = request.args.get('sort') is not None and request.args.get('sort') != ''
         has_category = request.args.get('category') is not None and request.args.get('category') != ''
+        has_categories = request.args.get('categories') is not None and request.args.get('categories') != ''
         has_min_length = request.args.get('min_length') is not None and request.args.get('min_length').isdigit()
         has_max_length = request.args.get('max_length') is not None and request.args.get('max_length').isdigit()
         user_levels = {
@@ -43,7 +44,7 @@ def look_up_dictionary():
             sorting = None if not has_sorting else request.args.get('sort'),
             min_length = None if not has_min_length else int(request.args.get('min_length')),
             max_length = None if not has_max_length else int(request.args.get('max_length')),
-            category = DEFAULT_CATEGORY if not has_category else request.args.get('category'),
+            category = None if not has_category else request.args.get('category'),
             tags = [] if not has_tags else request.args.get('tags').split(','),
             user_levels = user_levels,
             selected_decks = [] if not has_decks else request.args.get('decks').split(','),

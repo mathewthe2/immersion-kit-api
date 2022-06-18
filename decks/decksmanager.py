@@ -80,8 +80,8 @@ class DecksManager:
             self.deck_names_by_category[deck_category] = deck_names
             self.deck_range_by_category[deck_category] = deck_range
             self.category_range.append(sentence_counter)
-            if DEV_MODE:
-                break
+            # if DEV_MODE:
+            #     break
 
     def get_category_for_row_id(self, row_id):
         index = bisect(self.category_range, row_id)
@@ -138,12 +138,13 @@ class DecksManager:
 
     def get_category_sentences_fts(self, category, text, text_is_japanese=True):
         token_column = "norms" if text_is_japanese else "eng_norms"
+        sentence_table = 'sentences_idx' if not category else '{}_sentences_idx'.format(category)
         self.cur.execute("""WITH ranked AS
                             (SELECT *, row_number() 
                                 OVER (PARTITION BY deck_name ORDER BY id ASC) AS rn
                             FROM sentences
                             WHERE id IN (SELECT rowid
-                                        FROM {category}_sentences_idx
+                                        FROM {sentence_table}
                                         WHERE {token_column} MATCH ?
                             ))
                             SELECT * 
@@ -153,7 +154,7 @@ class DecksManager:
                             {ordering}
                             LIMIT ?
                             OFFSET ?
-        """.format(category=category, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, self.example_limit, RESULTS_LIMIT, self.example_offset))
+        """.format(sentence_table=sentence_table, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, self.example_limit, RESULTS_LIMIT, self.example_offset))
         result = self.cur.fetchall()
 
         sentences = self.query_result_to_sentences(result)
@@ -161,12 +162,14 @@ class DecksManager:
         return sentences, deck_count, category_count
 
     def get_category_sentences_exact(self, category, text):
+        category_filter = '' if not category else "category = '{}' AND ".format(category)
         self.cur.execute("""WITH ranked AS
                             (SELECT *, row_number() 
                                 OVER (PARTITION BY deck_name ORDER BY id ASC) AS rn
                             FROM sentences
-                            WHERE category = ?
-                            AND sentence LIKE ?
+                            WHERE 
+                            {category_filter} 
+                            sentence LIKE ?
                             )
                             SELECT *
                             FROM ranked
@@ -175,10 +178,10 @@ class DecksManager:
                             {ordering}
                             LIMIT ?      
                             OFFSET ?                      
-                        """.format(filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (category, '%' + text + '%', self.example_limit,  RESULTS_LIMIT, self.example_offset))
+                        """.format(category_filter=category_filter, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), ('%' + text + '%', self.example_limit,  RESULTS_LIMIT, self.example_offset))
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
-        deck_count, category_count = self.count_exact_sentence(text)
+        deck_count, category_count = self.count_exact_sentence(category, text)
         return sentences, deck_count, category_count
 
     def count_fts(self, selected_category, text):
@@ -202,7 +205,7 @@ class DecksManager:
             category = self.get_category_for_row_id(row_id)
             if category in DECK_CATEGORIES:
                 category_count[category] += 1
-            if category == selected_category:   # Only count deck_names for selected category
+            if (category == selected_category or selected_category is None): 
                 deck_name = self.get_deck_name_for_row_id(category, row_id)
                 if deck_name in deck_count:
                     deck_count[deck_name] += 1
@@ -216,18 +219,17 @@ class DecksManager:
             category_count[category] = 0
         return category_count
 
-    def count_exact_sentence(self, text):
+    def count_exact_sentence(self, selected_category, text):
         self.cur.execute("select deck_name, category, count(case when sentence like ? then 1 else null end) as `number_of_examples` from sentences group by deck_name", ('%' + text + '%',))
         result = self.cur.fetchall()
         category_count = self.zero_category_count()
         deck_count = {}
         for deck_name, category, count in result:
-            if deck_name in deck_count:
-                deck_count[deck_name] += 1
-            else:
-                deck_count[deck_name] = 1
-            if category in DECK_CATEGORIES:
-                category_count[category] = count
+            if count > 0:
+                if category == selected_category or selected_category is None:
+                    deck_count[deck_name] = count
+                if category in DECK_CATEGORIES:
+                    category_count[category] += count
         return deck_count, category_count
 
     def get_sentence(self, id):

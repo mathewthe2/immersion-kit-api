@@ -56,10 +56,13 @@ def generate_deck(sentence, vocabulary_position=None, model_type=DEFAULT_ANKI_MO
     sentence["sentence_id"]
   ]
   elif model_type == 'vocabulary' and vocabulary_position is not None:
-    dictionary_list = sentence["word_dictionary_list"]
-    if len(dictionary_list) < vocabulary_position:
-      dictionary_list = sentence["word_base_list"]
-    vocabulary = dictionary_list[vocabulary_position]
+    # dictionary_list = sentence["word_dictionary_list"]
+    # if len(dictionary_list) < vocabulary_position:
+    #   dictionary_list = sentence["word_base_list"]
+    # vocabulary = dictionary_list[vocabulary_position]
+    
+    # TODO: get vocabulary from deflection
+    vocabulary = ''
     vocabulary_entry = dictionary.lookup_vocabulary(vocabulary)
 
     if vocabulary_entry is None:

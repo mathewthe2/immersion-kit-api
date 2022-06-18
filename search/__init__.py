@@ -114,7 +114,7 @@ def parse_examples(examples, text_is_japanese, word_bases):
             example['translation_word_index'] = [index for index, word in enumerate(example['translation_word_base_list']) if word in word_bases]
     return examples
 
-def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, min_length=None, max_length=None, selected_decks=[], offset=0, limit=EXAMPLE_LIMIT):
+def look_up(text, sorting, category, tags=[], user_levels={}, min_length=None, max_length=None, selected_decks=[], offset=0, limit=EXAMPLE_LIMIT):
     
     is_exact_match = '「' in text and '」' in text
     if is_exact_match:
@@ -143,9 +143,10 @@ def look_up(text, sorting, category=DEFAULT_CATEGORY, tags=[], user_levels={}, m
     
     # if not is_exact_match:
     #     is_exact_match = text_is_japanese and dictionary.is_uninflectable_entry(text)
-    decks.set_category(category)
+    if category:
+        decks.set_category(category)
     tagged_decks = None if not tags else tagger.get_decks_by_tags(tags)
-    filter_decks = get_filtered_decks(category, selected_decks, tagged_decks)
+    filter_decks = None if not category else get_filtered_decks(category, selected_decks, tagged_decks)
     decks.set_search_filter(SearchFilter(min_length, max_length, user_levels, filter_decks))
     decks.set_search_order(SearchOrder(sorting))
     decks.set_example_limit(limit)
