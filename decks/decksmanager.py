@@ -144,11 +144,9 @@ class DecksManager:
                             (SELECT *, row_number() 
                                 OVER (PARTITION BY {partition_column} {ordering}) AS rn
                             FROM sentences
-                            WHERE id IN (
-                                            SELECT rowid
+                            WHERE id IN (SELECT rowid
                                             FROM {sentence_table}
-                                            WHERE {token_column} MATCH ?
-                                        )
+                                            WHERE {token_column} MATCH ?)
                             )
                             SELECT * 
                             FROM ranked

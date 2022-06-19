@@ -13,6 +13,6 @@ class SearchOrder():
             if self.sorting.lower() in ['sentence length', 'shortness']:
                 return "ORDER BY length(sentence)"
             elif self.sorting.lower() == 'longness':
-                return "ORDER BY length(sentence) desc"
+                return "ORDER BY length(sentence) DESC"
         else:
             return ""
