@@ -76,7 +76,6 @@ SENTENCE_FIELDS = [
     "wk_level",
     "jlpt_level",
     "word_base_list",
-    "word_dictionary_list",
     "word_list",
     "translation_word_list",
     "translation_word_base_list",
@@ -89,7 +88,7 @@ SENTENCE_FIELDS = [
     "sound_url", # games
 ]
 
-SENTENCE_KEYS_FOR_LISTS = ['word_list', 'word_dictionary_list', 'word_base_list', 'translation_word_list', 'translation_word_base_list']
+SENTENCE_KEYS_FOR_LISTS = ['word_list', 'word_base_list', 'translation_word_list', 'translation_word_base_list']
 
 # Anki
 DEFAULT_ANKI_MODEL = 'sentence'

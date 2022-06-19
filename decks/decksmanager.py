@@ -205,12 +205,14 @@ class DecksManager:
             category = self.get_category_for_row_id(row_id)
             if category in DECK_CATEGORIES:
                 category_count[category] += 1
-            if (category == selected_category or selected_category is None): 
+            if (selected_category is None or category == selected_category):
                 deck_name = self.get_deck_name_for_row_id(category, row_id)
-                if deck_name in deck_count:
-                    deck_count[deck_name] += 1
+                if category not in deck_count:
+                    deck_count[category] = {}
+                if deck_name in deck_count[category]:
+                    deck_count[category][deck_name] += 1
                 else:
-                    deck_count[deck_name] = 1
+                    deck_count[category][deck_name] = 1
         return deck_count, category_count
 
     def zero_category_count(self):
@@ -227,7 +229,9 @@ class DecksManager:
         for deck_name, category, count in result:
             if count > 0:
                 if category == selected_category or selected_category is None:
-                    deck_count[deck_name] = count
+                    if category not in deck_count:
+                        deck_count[category] = {}
+                    deck_count[category][deck_name] = count
                 if category in DECK_CATEGORIES:
                     category_count[category] += count
         return deck_count, category_count
