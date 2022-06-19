@@ -1,6 +1,7 @@
 Flask==2.0.1
 Flask-Cors==3.0.10
 genanki==0.11.0
+ndjson==0.3.1
 psycopg2==2.9.1
 pyenchant==3.2.1
 python-dotenv==0.19.0
