@@ -139,22 +139,24 @@ class DecksManager:
     def get_category_sentences_fts(self, category, text, text_is_japanese=True):
         token_column = "norms" if text_is_japanese else "eng_norms"
         sentence_table = 'sentences_idx' if not category else '{}_sentences_idx'.format(category)
+        partition_column = 'category' if not category else'deck_name' 
         self.cur.execute("""WITH ranked AS
                             (SELECT *, row_number() 
-                                OVER (PARTITION BY deck_name ORDER BY id ASC) AS rn
+                                OVER (PARTITION BY {partition_column} {ordering}) AS rn
                             FROM sentences
-                            WHERE id IN (SELECT rowid
-                                        FROM {sentence_table}
-                                        WHERE {token_column} MATCH ?
-                            ))
+                            WHERE id IN (
+                                            SELECT rowid
+                                            FROM {sentence_table}
+                                            WHERE {token_column} MATCH ?
+                                        )
+                            )
                             SELECT * 
                             FROM ranked
                             WHERE rn <= ?
                             {filtering}
-                            {ordering}
                             LIMIT ?
                             OFFSET ?
-        """.format(sentence_table=sentence_table, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, self.example_limit, RESULTS_LIMIT, self.example_offset))
+        """.format(partition_column=partition_column, sentence_table=sentence_table, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, self.example_limit, RESULTS_LIMIT, self.example_offset))
         result = self.cur.fetchall()
 
         sentences = self.query_result_to_sentences(result)
