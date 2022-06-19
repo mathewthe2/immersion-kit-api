@@ -105,7 +105,8 @@ def filter_fields(examples, excluded_fields):
 
 def parse_examples(examples, text_is_japanese, word_bases):
     for example in examples:
-        example['tags'] = tagger.get_tags_by_deck(example['deck_name'])
+        if 'deck_name' in example:
+            example['tags'] = tagger.get_tags_by_deck(example['deck_name'])
         example['word_index'] = []
         example['translation_word_index'] = []
         if text_is_japanese:
@@ -155,7 +156,7 @@ def look_up(text, sorting, category, tags=[], user_levels={}, min_length=None, m
     word_bases = analyze_japanese(text)['base_tokens'] if text_is_japanese else analyze_english(text)['base_tokens']
     examples_and_count = get_examples_and_category_count(category, text_is_japanese, text, word_bases, tags, is_exact_match)
     examples = examples_and_count["examples"]
-    deck_count = examples_and_count["deck_count"] if not tagged_decks else {key: value for key, value in examples_and_count["deck_count"].items() if key in tagged_decks}
+    deck_count = examples_and_count["deck_count"] if not tagged_decks else get_filtered_deck_count(examples_and_count["deck_count"], tagged_decks)
     dictionary_words = [] if not text_is_japanese else [word for word in word_bases if dictionary.is_entry(word)]
     result = [{
         'dictionary': get_text_definition(text, dictionary_words),
@@ -165,6 +166,16 @@ def look_up(text, sorting, category, tags=[], user_levels={}, min_length=None, m
         "category_count": examples_and_count["category_count"]
     }]
     return dict(data=result)
+
+def get_filtered_deck_count(deck_count, tagged_decks):
+    result_count = {}
+    for category_name in deck_count:
+        for deck_name in deck_count[category_name]:
+            if deck_name in tagged_decks:
+                if category_name not in result_count:
+                    result_count[category_name] = {}
+                result_count[category_name][deck_name] = deck_count[category_name][deck_name]
+    return result_count
 
 def get_filtered_decks(category, selected_decks, tagged_decks):
     if selected_decks and tagged_decks:
