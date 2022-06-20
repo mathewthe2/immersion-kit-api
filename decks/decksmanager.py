@@ -141,7 +141,9 @@ class DecksManager:
         sentence_table = 'sentences_idx' if not category else '{}_sentences_idx'.format(category)
         self.cur.execute("""WITH ranked AS
                             (SELECT *, 
-                            row_number() 
+                            row_number()
+                                OVER (PARTITION BY category {ordering}),
+                            row_number()
                                 OVER (PARTITION BY category, deck_name {ordering}) AS rn
                             FROM sentences
                             WHERE id IN (SELECT rowid
@@ -154,7 +156,7 @@ class DecksManager:
                             {filtering}
                             LIMIT ?
                             OFFSET ?
-        """.format(sentence_table=sentence_table, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, self.example_limit, RESULTS_LIMIT, self.example_offset))
+        """.format(sentence_table=sentence_table, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, RESULTS_LIMIT, RESULTS_LIMIT, self.example_offset))
         result = self.cur.fetchall()
 
         sentences = self.query_result_to_sentences(result)
@@ -164,8 +166,11 @@ class DecksManager:
     def get_category_sentences_exact(self, category, text):
         category_filter = '' if not category else "category = '{}' AND ".format(category)
         self.cur.execute("""WITH ranked AS
-                            (SELECT *, row_number() 
-                                OVER (PARTITION BY category, deck_name {ordering}) AS rn
+                            (SELECT *, 
+                                row_number()
+                                    OVER (PARTITION BY category {ordering}),
+                                row_number()
+                                    OVER (PARTITION BY category, deck_name {ordering}) AS rn
                             FROM sentences
                             WHERE 
                             {category_filter} 
