@@ -165,7 +165,7 @@ class DecksManager:
         category_filter = '' if not category else "category = '{}' AND ".format(category)
         self.cur.execute("""WITH ranked AS
                             (SELECT *, row_number() 
-                                OVER (PARTITION BY category, deck_name) AS rn
+                                OVER (PARTITION BY category, deck_name {ordering}) AS rn
                             FROM sentences
                             WHERE 
                             {category_filter} 
@@ -175,7 +175,6 @@ class DecksManager:
                             FROM ranked
                             WHERE rn <= ?
                             {filtering}
-                            {ordering}
                             LIMIT ?      
                             OFFSET ?                      
                         """.format(category_filter=category_filter, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), ('%' + text + '%', self.example_limit,  RESULTS_LIMIT, self.example_offset))
