@@ -3,7 +3,7 @@ from pathlib import Path
 from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from config import DECK_CATEGORIES, DEFAULT_CATEGORY, DEV_MODE, EXAMPLE_LIMIT, TERM_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
-import json
+import json, ndjson
 from bisect import bisect
 import sqlite3
 
@@ -102,10 +102,10 @@ class DecksManager:
     def get_deck_by_name(self, deck_name, category):
         sentences = []
         path = DECK_CATEGORIES[category]['path']
-        file = Path(path, deck_name, 'data.json')
+        file = Path(path, deck_name, 'data.ndjson')
         if file.is_file():
             with open(file, encoding='utf-8') as f:
-                sentences = json.load(f)
+                sentences = ndjson.load(f) 
         return [self.parse_sentence(sentence, category='literature') for sentence in sentences]
 
     def get_sentences(self, ids):
