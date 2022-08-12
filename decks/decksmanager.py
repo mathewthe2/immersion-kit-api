@@ -245,7 +245,8 @@ class DecksManager:
         result = self.cur.fetchall()
         if result is not None:
             sentences = self.query_result_to_sentences(result)
-            return sentences[0]
+            if sentences:
+                return sentences[0]
         return None
 
     def get_ranged_sentences(self, category, deck_name, episode, offset, limit):
