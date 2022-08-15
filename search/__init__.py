@@ -60,7 +60,7 @@ def get_sentences_with_combinatory_ids(combinatory_sentence_ids):
 def get_sentence_with_context(id):
     sentence = get_sentence_by_id(id)
     if not sentence:
-        return None
+        return {}
     context_sentences = decks.get_ranged_sentences(sentence["category"], sentence["deck_name"], episode=None, offset=max(1, sentence["position"]-CONTEXT_RANGE), limit=CONTEXT_RANGE*2)
     ## Improvement: Refactor filtering with better mathematical formula
     sentence["pretext_sentences"] = [s for s in context_sentences if s["position"] < sentence["position"]]
