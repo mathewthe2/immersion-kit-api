@@ -1,3 +1,4 @@
+import string
 from wanakana import to_hiragana, is_japanese
 from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
@@ -116,10 +117,15 @@ def parse_examples(examples, text_is_japanese, word_bases):
     return examples
 
 def look_up(text, sorting, category, tags=[], user_levels={}, min_length=None, max_length=None, selected_decks=[], offset=0, limit=EXAMPLE_LIMIT):
-    
+
     is_exact_match = '「' in text and '」' in text
     if is_exact_match:
         text = text.split('「')[1].split('」')[0]
+    else:
+        text = text.translate({ord(c): None for c in string.punctuation + "〜！？。、（）：「」『』"})
+
+    if len(text.strip()) == 0:
+        return {}
     
     text_is_japanese = is_japanese(text) 
     if not text_is_japanese:
