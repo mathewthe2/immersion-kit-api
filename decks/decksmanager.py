@@ -138,11 +138,16 @@ class DecksManager:
         return "" if not self.search_filter.has_filters() else "AND id IN ({})".format(self.search_filter.get_query_string())
 
     def get_category_sentences_fts(self, category, text, text_is_japanese=True):
+        
         # Server restraint
+        if text in ['もの', 'こと', 'の']:
+            return self.get_category_sentences_exact(category, text)
         if len(text) == 1 and not category:
             no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
             if no_kanji:
                 category = 'anime'
+        
+        # Construct Query
         token_column = "norms" if text_is_japanese else "eng_norms"
         sentence_table = 'sentences_idx' if not category else '{}_sentences_idx'.format(category)
         self.cur.execute("""WITH ranked AS
