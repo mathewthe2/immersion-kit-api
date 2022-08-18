@@ -4,6 +4,7 @@ from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from config import DECK_CATEGORIES, DEFAULT_CATEGORY, DEV_MODE, EXAMPLE_LIMIT, TERM_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json, ndjson
+from wanakana import is_katakana, is_hiragana, is_japanese
 from bisect import bisect
 import sqlite3
 
@@ -137,6 +138,11 @@ class DecksManager:
         return "" if not self.search_filter.has_filters() else "AND id IN ({})".format(self.search_filter.get_query_string())
 
     def get_category_sentences_fts(self, category, text, text_is_japanese=True):
+        # Server restraint
+        if len(text) == 1 and not category:
+            no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
+            if no_kanji:
+                category = 'anime'
         token_column = "norms" if text_is_japanese else "eng_norms"
         sentence_table = 'sentences_idx' if not category else '{}_sentences_idx'.format(category)
         self.cur.execute("""WITH ranked AS
