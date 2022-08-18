@@ -141,7 +141,7 @@ class DecksManager:
         
         # Server restraint
         if text in ['もの', 'こと', 'の']:
-            return self.get_category_sentences_exact(category, text)
+            return self.get_category_sentences_exact(category if category else 'anime', text)
         if len(text) == 1 and not category:
             no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
             if no_kanji:
