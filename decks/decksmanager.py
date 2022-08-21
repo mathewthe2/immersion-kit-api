@@ -150,10 +150,10 @@ class DecksManager:
         # Server constraint
         if text in ['もの', 'こと']:
             return self.get_category_sentences_exact(category if category else 'anime', text)
-        if len(text) == 1 and not category:
-            no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
-            if no_kanji:
-                category = 'anime'
+        # if len(text) == 1 and not category:
+        #     no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
+        #     if no_kanji:
+        #         category = 'anime'
         
         # Construct Query
         token_column = "norms" if text_is_japanese else "eng_norms"

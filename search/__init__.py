@@ -1,5 +1,5 @@
 import string
-from wanakana import to_hiragana, is_japanese
+from wanakana import to_hiragana, is_japanese, is_katakana, is_hiragana
 from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from tokenizer.englishtokenizer import analyze_english, is_english_word
@@ -74,8 +74,12 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
     deck_count = {}
     
     # Server constraint
-    if text in MINI_QUERY_KEYWORDS:
-        category = 'mini'
+    # if text in MINI_QUERY_KEYWORDS:
+    #     category = 'mini'
+    if len(text) == 1 and not category:
+        no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
+        if no_kanji:
+            category = 'mini'
 
     if is_exact_match:
         examples, deck_count, category_count = decks.get_category_sentences_exact(
