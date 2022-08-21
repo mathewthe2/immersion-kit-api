@@ -1,5 +1,5 @@
 from glob import glob
-from config import ANIME_PATH, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE, DEV_MODE
+from config import ANIME_PATH, SENTENCE_FIELDS, NEW_WORDS_TO_USER_PER_SENTENCE, DEV_MODE, MINI_DB_SIZE
 import json, ndjson
 import string
 import bisect
@@ -20,7 +20,7 @@ class Decks:
         deck_range = []
         deck_names = []
         if DEV_MODE:
-            deck_folders = deck_folders[:1]
+            deck_folders = deck_folders[:2]
         for deck_folder in deck_folders:
             print("adding", deck_folder)
             sentences = self.load_one_deck(deck_folder)
@@ -70,6 +70,8 @@ class Decks:
         cur.executemany("insert into sentences values ({})".format(",".join(['?']*len(SENTENCE_FIELDS))), sentence_tuple_list)
         cur.executemany("insert into sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)", tokenized_sentence_list)
         cur.executemany("insert into {}_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
+        if sentence_counter < MINI_DB_SIZE:
+            cur.executemany("insert into mini_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
         # cur.execute("insert INTO sentences_idx(sentences_idx) VALUES('optimize')")
         # cur.execute("insert INTO {}_sentences_idx({}_sentences_idx) VALUES('optimize')".format(self.category, self.category))
         return sentence_counter

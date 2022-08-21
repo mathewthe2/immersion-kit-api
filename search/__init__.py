@@ -4,7 +4,7 @@ from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
-from config import DEFAULT_CATEGORY, EXAMPLE_LIMIT, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE
+from config import DEFAULT_CATEGORY, EXAMPLE_LIMIT, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE, MINI_QUERY_KEYWORDS
 from tagger import Tagger
 from data.deckData import DECK_LIST
 from decks.decksmanager import DecksManager
@@ -73,6 +73,10 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
     category_count = {}
     deck_count = {}
     
+    # Server constraint
+    if text in MINI_QUERY_KEYWORDS:
+        category = 'mini'
+
     if is_exact_match:
         examples, deck_count, category_count = decks.get_category_sentences_exact(
             category, 

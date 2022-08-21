@@ -21,6 +21,14 @@ class DecksManager:
                             content_rowid=id,
                             tokenize = "unicode61 tokenchars '-_'");
     """)
+    # mini table for queries with huge results
+    cur.execute("""CREATE VIRTUAL TABLE mini_sentences_idx
+                 USING fts5(norms,
+                            eng_norms,
+                            content=sentences,
+                            content_rowid=id,
+                            tokenize = "unicode61 tokenchars '-_'");
+    """)
     for category in list(DECK_CATEGORIES.keys()):
         cur.execute("""CREATE VIRTUAL TABLE {}
                  USING fts5(norms,
@@ -139,8 +147,8 @@ class DecksManager:
 
     def get_category_sentences_fts(self, category, text, text_is_japanese=True):
         
-        # Server restraint
-        if text in ['もの', 'こと', 'の']:
+        # Server constraint
+        if text in ['もの', 'こと']:
             return self.get_category_sentences_exact(category if category else 'anime', text)
         if len(text) == 1 and not category:
             no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
