@@ -103,5 +103,6 @@ SENTENCES_LIMIT = 999 # SQL-bound limit
 TERM_LIMIT = 20
 MINI_DB_SIZE = 100000 # 100k mini db
 MINI_QUERY_KEYWORDS = ['の', 'な']
+EXACT_QUERY_KEYWORDS = ['だろう']
 NEW_WORDS_TO_USER_PER_SENTENCE = 1
 RESULT_EXCLUDED_FIELDS = ["image", "sound", "norms", "eng_norms", "wk_level", "jlpt_level", "translation_word_base_list", "word_base_list", "pretext", "posttext"]

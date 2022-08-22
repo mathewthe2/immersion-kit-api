@@ -4,7 +4,7 @@ from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from tokenizer.englishtokenizer import analyze_english, is_english_word
 from tokenizer.japanesetokenizer import analyze_japanese, KANA_MAPPING
-from config import DEFAULT_CATEGORY, EXAMPLE_LIMIT, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE, MINI_QUERY_KEYWORDS
+from config import DEFAULT_CATEGORY, EXAMPLE_LIMIT, RESULT_EXCLUDED_FIELDS, CONTEXT_RANGE, EXACT_QUERY_KEYWORDS
 from tagger import Tagger
 from data.deckData import DECK_LIST
 from decks.decksmanager import DecksManager
@@ -74,12 +74,14 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
     deck_count = {}
     
     # Server constraint
-    # if text in MINI_QUERY_KEYWORDS:
-    #     category = 'mini'
-    if len(text) == 1 and not category:
-        no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
-        if no_kanji:
-            category = 'mini'
+    if text in EXACT_QUERY_KEYWORDS:
+        is_exact_match = True
+    else:
+        text_query = ' '.join(word_bases)
+        if len(text_query) == 1:
+            no_kanji = is_hiragana(text_query) or is_katakana(text_query) or not is_japanese(text_query)
+            if no_kanji:
+                category = 'mini'
 
     if is_exact_match:
         examples, deck_count, category_count = decks.get_category_sentences_exact(
@@ -89,7 +91,7 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
     else:
         examples, deck_count, category_count = decks.get_category_sentences_fts(
             category=category, 
-            text=' '.join(word_bases), 
+            text=text_query, 
             text_is_japanese=text_is_japanese
         )
     if len(examples) > 0:
