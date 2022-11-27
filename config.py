@@ -95,8 +95,8 @@ DEFAULT_ANKI_MODEL = 'sentence'
 
 # Serving
 DEV_MODE = False # loads only two anime decks
-MEDIA_FILE_HOST = 'https://immersion-kit.sfo3.digitaloceanspaces.com/media'
-DICTIONARY_MEDIA_HOST = 'https://immersion-kit.sfo3.digitaloceanspaces.com/dictionary/media'
+MEDIA_FILE_HOST = 'https://immersionkit.us-southeast-1.linodeobjects.com/media'
+# DICTIONARY_MEDIA_HOST = 'https://immersion-kit.sfo3.digitaloceanspaces.com/dictionary/media'
 EXAMPLE_LIMIT = 50 # example limit per deck
 RESULTS_LIMIT = 5000 # total result limit
 SENTENCES_LIMIT = 999 # SQL-bound limit
