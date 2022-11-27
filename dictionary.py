@@ -1,7 +1,7 @@
 import json
 import zipfile
 from pathlib import Path
-from config import DICTIONARY_PATH, DICTIONARY_MEDIA_HOST
+from config import DICTIONARY_PATH
 
 CUSTOM_MAPPER = {
     '食える': '食えない'

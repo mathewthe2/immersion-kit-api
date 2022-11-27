@@ -2,7 +2,7 @@ import genanki
 import requests
 import os
 from pathlib import Path
-from config import RESOURCES_PATH, DEFAULT_ANKI_MODEL, DICTIONARY_MEDIA_HOST
+from config import RESOURCES_PATH, DEFAULT_ANKI_MODEL
 from search import dictionary
 from anki.anki_models import ANKI_MODELS
 from anki.audio import get_jpod_audio_url
