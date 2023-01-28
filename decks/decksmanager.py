@@ -4,13 +4,21 @@ from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from config import DECK_CATEGORIES, DEFAULT_CATEGORY, DEV_MODE, EXAMPLE_LIMIT, TERM_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json, ndjson
-from wanakana import is_katakana, is_hiragana, is_japanese
+# from wanakana import is_katakana, is_hiragana, is_japanese
 from bisect import bisect
+from itertools import permutations
+import re
 import sqlite3
 
-class DecksManager:
+def regexp(y, x, search=re.search):
+        return 1 if search(y, x) else 0
 
+def get_any_order_regex(tokens):
+    return r'|'.join(['.*?'.join(perm) for perm in list(permutations(tokens))])
+
+class DecksManager:
     con = sqlite3.connect(":memory:", check_same_thread=False)
+    con.create_function('regexp', 2, regexp)
     cur = con.cursor()
     cur.execute("create table sentences ({})".format(','.join(SENTENCE_FIELDS)))
     cur.execute("CREATE INDEX idx_sentences_category ON sentences (category)")
@@ -149,7 +157,7 @@ class DecksManager:
         
         # Server constraint
         if text in ['もの', 'こと']:
-            return self.get_category_sentences_exact(category if category else 'anime', text)
+            return self.get_category_sentences_exact(category if category else 'anime', text, text_is_japanese)
         # if len(text) == 1 and not category:
         #     no_kanji = is_hiragana(text) or is_katakana(text) or not is_japanese(text)
         #     if no_kanji:
@@ -175,15 +183,26 @@ class DecksManager:
                             {filtering}
                             LIMIT ?
                             OFFSET ?
-        """.format(sentence_table=sentence_table, token_column=token_column, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), (text, RESULTS_LIMIT, RESULTS_LIMIT, self.example_offset))
+        """.format(sentence_table=sentence_table, 
+                   token_column=token_column, 
+                   filtering=self.get_filter_string(), 
+                   ordering=self.search_order.get_order()), 
+                   (text, RESULTS_LIMIT, RESULTS_LIMIT, self.example_offset)
+                   )
         result = self.cur.fetchall()
 
         sentences = self.query_result_to_sentences(result)
         deck_count, category_count = self.count_fts(category, text)
         return sentences, deck_count, category_count
 
-    def get_category_sentences_exact(self, category, text):
+    def get_category_sentences_exact(self, category, text, text_is_japanese=True):
         category_filter = '' if not category else "category = '{}' AND ".format(category)
+        sentence_filter = 'sentence LIKE ?' if text_is_japanese else 'translation LIKE ?'
+        sentence_expression = '%' + text + '%'
+        words = text.split(' ')
+        if text_is_japanese and len(words) > 1:
+                sentence_filter = 'sentence REGEXP ?'
+                sentence_expression = get_any_order_regex(words)
         self.cur.execute("""WITH ranked AS
                             (SELECT *, 
                                 row_number()
@@ -193,7 +212,7 @@ class DecksManager:
                             FROM sentences
                             WHERE 
                             {category_filter} 
-                            sentence LIKE ?
+                            {sentence_filter}
                             )
                             SELECT *
                             FROM ranked
@@ -201,14 +220,19 @@ class DecksManager:
                             {filtering}
                             LIMIT ?      
                             OFFSET ?                      
-                        """.format(category_filter=category_filter, filtering=self.get_filter_string(), ordering=self.search_order.get_order()), ('%' + text + '%', self.example_limit,  RESULTS_LIMIT, self.example_offset))
+                        """.format(category_filter=category_filter, 
+                                   sentence_filter=sentence_filter, 
+                                   filtering=self.get_filter_string(), 
+                                   ordering=self.search_order.get_order()), 
+                                   (sentence_expression, self.example_limit,  RESULTS_LIMIT, self.example_offset)
+                                   )
         result = self.cur.fetchall()
         sentences = self.query_result_to_sentences(result)
-        deck_count, category_count = self.count_exact_sentence(category, text)
+        deck_count, category_count = self.count_exact_sentence(category, text, sentence_filter, sentence_expression)
         return sentences, deck_count, category_count
 
     def count_fts(self, selected_category, text):
-        self.cur.row_factory = lambda cursor, row: row[0]
+        self.cur.row_factory = lambda _, row: row[0]
         terms = [term for term in text.split(" ") if len(term) > 0][:TERM_LIMIT]
         if not terms:
             return self.zero_category_count()
@@ -244,8 +268,10 @@ class DecksManager:
             category_count[category] = 0
         return category_count
 
-    def count_exact_sentence(self, selected_category, text):
-        self.cur.execute("select deck_name, category, count(case when sentence like ? then 1 else null end) as `number_of_examples` from sentences group by deck_name", ('%' + text + '%',))
+    def count_exact_sentence(self, selected_category, text, sentence_filter, sentence_expression):
+        self.cur.execute(
+            "select deck_name, category, count(case when {sentence_filter} then 1 else null end) as `number_of_examples` from sentences group by deck_name".format(
+                sentence_filter=sentence_filter), (sentence_expression,))
         result = self.cur.fetchall()
         category_count = self.zero_category_count()
         deck_count = {}

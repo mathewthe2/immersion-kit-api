@@ -85,8 +85,9 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
 
     if is_exact_match:
         examples, deck_count, category_count = decks.get_category_sentences_exact(
-            category, 
-            text
+            category=category, 
+            text=' '.join(analyze_japanese(text, is_exact_match=True)),
+            text_is_japanese=text_is_japanese
         )
     else:
         examples, deck_count, category_count = decks.get_category_sentences_fts(
@@ -132,7 +133,7 @@ def look_up(text, sorting, category, tags=[], user_levels={}, min_length=None, m
     if is_exact_match:
         text = text.split('「')[1].split('」')[0]
     else:
-        text = text.translate({ord(c): None for c in string.punctuation + "〜！？。、（）：「」『』"})
+        text = text.translate({ord(c): None for c in string.punctuation + "〜！？。（）：「」『』"})
 
     if len(text.strip()) == 0:
         return {}

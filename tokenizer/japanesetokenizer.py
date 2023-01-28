@@ -52,7 +52,9 @@ JAPANESE_PUNCTUATION = '　〜！？。、（）：「」『』０１２３４�
 
 SPECIAL_CHARACTERS = '〜'
 
-def analyze_japanese(text):
+def analyze_japanese(text, is_exact_match=False):
+    if is_exact_match:
+        return text if not has_delimiter(text) else tokenize_exact(text)
     if text in KANA_TO_KANJI_MAPPING:
         text = KANA_TO_KANJI_MAPPING[text]
     tokens = [m for m in tokenizer_obj.tokenize(text, mode)]
@@ -123,6 +125,16 @@ def add_furigana(text):
         else:
             parsed += token.surface()
     return parsed
+
+def has_delimiter(s):
+    return ' ' in s or '　' or '、' in s or ',' in s
+
+def tokenize_exact(s):
+    replacements = ['、', ', ', ',', '　', ' ']
+    for replacement in replacements:
+        if replacement in s:
+            return s.split(replacement)
+    return [s]
 
 # print(analyze_japanese('其れ'))
 # print(analyze_japanese('然し'))
