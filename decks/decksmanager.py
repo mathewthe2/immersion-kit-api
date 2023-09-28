@@ -141,7 +141,8 @@ class DecksManager:
     
     def get_results_with_count(self, result):
         sentences = []
-        deck_count, category_count = {}, {}
+        category_count = dict((category_name, 0) for category_name in DECK_CATEGORIES.keys())
+        deck_count = dict((category_name, {}) for category_name in DECK_CATEGORIES.keys())
         for sentence_tuple in result:
             sentence = {}
             for data_index, value in enumerate(sentence_tuple[:len(SENTENCE_FIELDS)]):
@@ -149,10 +150,9 @@ class DecksManager:
                 sentence[key] = '' if value == '' else json.loads(value) if key in SENTENCE_KEYS_FOR_LISTS else value
             count_for_category = sentence_tuple[-1]
             count_for_deck = sentence_tuple[-2]
-            if sentence["deck_name"] not in deck_count:
-                deck_count[sentence["deck_name"]] = count_for_deck
-            if sentence["category"] not in category_count:
-                category_count[sentence["category"]] = count_for_category
+            if sentence["deck_name"] not in deck_count[sentence["category"]]:
+                deck_count[sentence["category"]][sentence["deck_name"]] = count_for_deck
+            category_count[sentence["category"]] = count_for_category # we still want 0 if all decks in category do not have matching sentence
             sentence = self.parse_sentence(sentence)
             sentences.append(sentence)
         return sentences, deck_count, category_count
