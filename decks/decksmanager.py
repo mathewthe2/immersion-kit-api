@@ -4,7 +4,6 @@ from search.searchFilter import SearchFilter
 from search.searchOrder import SearchOrder
 from config import DECK_CATEGORIES, DEFAULT_CATEGORY, DEV_MODE, EXAMPLE_LIMIT, TERM_LIMIT, SENTENCE_FIELDS, MEDIA_FILE_HOST, SENTENCE_KEYS_FOR_LISTS, RESULTS_LIMIT, SENTENCES_LIMIT
 import json, ndjson
-# from wanakana import is_katakana, is_hiragana, is_japanese
 from bisect import bisect
 from itertools import permutations
 import re
@@ -20,7 +19,9 @@ class DecksManager:
     con = sqlite3.connect(":memory:", check_same_thread=False)
     con.create_function('regexp', 2, regexp)
     cur = con.cursor()
-    cur.execute("create table sentences ({})".format(','.join(SENTENCE_FIELDS)))
+    cur.execute('CREATE TABLE decks (id INTEGER, category TEXT, name TEXT)')
+    cur.execute("CREATE TABLE sentences ({})".format(','.join(SENTENCE_FIELDS)))
+    cur.execute("CREATE INDEX sentences_decks_idx ON sentences (deck_id)")
     cur.execute("CREATE INDEX idx_sentences_category ON sentences (category)")
     cur.execute("""CREATE VIRTUAL TABLE sentences_idx
                  USING fts5(norms,
@@ -45,7 +46,6 @@ class DecksManager:
                             content_rowid=id,
                             tokenize = "unicode61 tokenchars '-_'");
         """.format(category + "_sentences_idx"))
-    cur.execute("CREATE VIRTUAL TABLE sentence_idx_row USING fts5vocab('sentences_idx', 'instance');")
 
     def __init__(self, category=DEFAULT_CATEGORY, dictionary=None):
         self.decks = {}
@@ -84,16 +84,16 @@ class DecksManager:
         return False if category not in self.deck_names_by_category else (deck_name in self.deck_names_by_category[category])
 
     def load_decks(self):
-        sentence_counter = 0
+        deck_counter, sentence_counter = 0, 0
         for deck_category in DECK_CATEGORIES:
-            sentence_counter, deck_names, deck_range = Decks(
+            deck_counter, sentence_counter, deck_names, deck_range = Decks(
                 category=deck_category, 
                 path=DECK_CATEGORIES[deck_category]["path"],
                 has_image=DECK_CATEGORIES[deck_category]["has_image"],
                 has_sound=DECK_CATEGORIES[deck_category]["has_sound"],
                 has_resource_url=DECK_CATEGORIES[deck_category]["has_resource_url"],
                 dictionary=self.dictionary
-            ).load_decks(sentence_counter, self.cur)
+            ).load_decks(deck_counter, sentence_counter, self.cur)
             self.deck_names_by_category[deck_category] = deck_names
             self.deck_range_by_category[deck_category] = deck_range
             self.category_range.append(sentence_counter)
@@ -138,6 +138,24 @@ class DecksManager:
             seq=','.join(['?']*len(search_list))), search_list)
         result = self.cur.fetchall()
         return self.query_result_to_sentences(result)
+    
+    def get_results_with_count(self, result):
+        sentences = []
+        deck_count, category_count = {}, {}
+        for sentence_tuple in result:
+            sentence = {}
+            for data_index, value in enumerate(sentence_tuple[:len(SENTENCE_FIELDS)]):
+                key = SENTENCE_FIELDS[data_index]
+                sentence[key] = '' if value == '' else json.loads(value) if key in SENTENCE_KEYS_FOR_LISTS else value
+            count_for_category = sentence_tuple[-1]
+            count_for_deck = sentence_tuple[-2]
+            if sentence["deck_name"] not in deck_count:
+                deck_count[sentence["deck_name"]] = count_for_deck
+            if sentence["category"] not in category_count:
+                category_count[sentence["category"]] = count_for_category
+            sentence = self.parse_sentence(sentence)
+            sentences.append(sentence)
+        return sentences, deck_count, category_count
 
     def query_result_to_sentences(self, result):
         sentences = []
@@ -166,23 +184,42 @@ class DecksManager:
         # Construct Query
         token_column = "norms" if text_is_japanese else "eng_norms"
         sentence_table = 'sentences_idx' if not category else '{}_sentences_idx'.format(category)
-        self.cur.execute("""WITH ranked AS
-                            (SELECT *, 
-                            row_number()
-                                OVER (PARTITION BY category {ordering}),
-                            row_number()
-                                OVER (PARTITION BY category, deck_name {ordering}) AS rn
-                            FROM sentences
-                            WHERE id IN (SELECT rowid
-                                            FROM {sentence_table}
-                                            WHERE {token_column} MATCH ?)
-                            )
-                            SELECT * 
-                            FROM ranked
-                            WHERE rn <= ?
-                            {filtering}
-                            LIMIT ?
-                            OFFSET ?
+        self.cur.execute("""
+                WITH matching_ids AS (
+                  SELECT rowid
+                    FROM {sentence_table}
+                    WHERE {token_column} MATCH ?
+                ),
+                count_for_deck AS (
+                    SELECT COUNT(*) as sentences_for_deck, d.id as deck_id, d.category 
+                    FROM sentences as s
+                    INNER JOIN decks as d
+                    ON d.id = s.deck_id
+                    WHERE s.id in matching_ids
+                    GROUP BY d.name
+                  ),
+                count_for_category AS (
+                    SELECT c.deck_id, c.sentences_for_deck,
+                    SUM (sentences_for_deck) OVER (PARTITION BY c.category) as sentences_for_category
+                    FROM count_for_deck as c
+                  ),
+                ranked AS
+                    (SELECT *, 
+                        row_number()
+                            OVER (PARTITION BY category {ordering}),
+                        row_number()
+                            OVER (PARTITION BY category, deck_name {ordering}) AS rn
+                        FROM sentences
+                        WHERE id IN matching_ids
+                    )
+                SELECT *
+                FROM ranked r
+                LEFT JOIN count_for_category cc
+                ON r.deck_id = cc.deck_id
+                WHERE rn <= ?
+                {filtering}
+                LIMIT ?
+                OFFSET ?
         """.format(sentence_table=sentence_table, 
                    token_column=token_column, 
                    filtering=self.get_filter_string(), 
@@ -190,10 +227,8 @@ class DecksManager:
                    (text, RESULTS_LIMIT, RESULTS_LIMIT, self.example_offset)
                    )
         result = self.cur.fetchall()
-
-        sentences = self.query_result_to_sentences(result)
-        deck_count, category_count = self.count_fts(category, text)
-        return sentences, deck_count, category_count
+        print(result[0])
+        return self.get_results_with_count(result)
 
     def get_category_sentences_exact(self, category, text, text_is_japanese=True):
         category_filter = '' if not category else "category = '{}' AND ".format(category)
@@ -203,88 +238,51 @@ class DecksManager:
         if text_is_japanese and len(words) > 1:
                 sentence_filter = 'sentence REGEXP ?'
                 sentence_expression = get_any_order_regex(words)
-        self.cur.execute("""WITH ranked AS
-                            (SELECT *, 
-                                row_number()
-                                    OVER (PARTITION BY category {ordering}),
-                                row_number()
-                                    OVER (PARTITION BY category, deck_name {ordering}) AS rn
-                            FROM sentences
-                            WHERE 
-                            {category_filter} 
-                            {sentence_filter}
+        self.cur.execute("""
+                WITH matching_ids AS (
+                  SELECT id
+                    FROM sentences
+                    WHERE {category_filter} {sentence_filter}
+                ),
+                count_for_deck AS (
+                    SELECT COUNT(*) as sentences_for_deck, d.id as deck_id, d.category 
+                    FROM sentences as s
+                    INNER JOIN decks as d
+                    ON d.id = s.deck_id
+                    WHERE s.id in matching_ids
+                    GROUP BY d.name
+                  ),
+                count_for_category AS (
+                    SELECT c.deck_id, c.sentences_for_deck,
+                    SUM (sentences_for_deck) OVER (PARTITION BY c.category) as sentences_for_category
+                    FROM count_for_deck as c
+                  ),
+                ranked AS(
+                    SELECT *, 
+                        row_number()
+                            OVER (PARTITION BY category {ordering}),
+                        row_number()
+                            OVER (PARTITION BY category, deck_name {ordering}) AS rn
+                    FROM sentences
+                    WHERE id IN matching_ids
+                )
+                SELECT *
+                FROM ranked r
+                LEFT JOIN count_for_category cc
+                ON r.deck_id = cc.deck_id
+                WHERE rn <= ?
+                {filtering}
+                LIMIT ?
+                OFFSET ?                    
+                """.format(category_filter=category_filter, 
+                            sentence_filter=sentence_filter, 
+                            filtering=self.get_filter_string(), 
+                            ordering=self.search_order.get_order()), 
+                            (sentence_expression, self.example_limit,  RESULTS_LIMIT, self.example_offset)
                             )
-                            SELECT *
-                            FROM ranked
-                            WHERE rn <= ?
-                            {filtering}
-                            LIMIT ?      
-                            OFFSET ?                      
-                        """.format(category_filter=category_filter, 
-                                   sentence_filter=sentence_filter, 
-                                   filtering=self.get_filter_string(), 
-                                   ordering=self.search_order.get_order()), 
-                                   (sentence_expression, self.example_limit,  RESULTS_LIMIT, self.example_offset)
-                                   )
         result = self.cur.fetchall()
-        sentences = self.query_result_to_sentences(result)
-        deck_count, category_count = self.count_exact_sentence(category, text, sentence_filter, sentence_expression)
-        return sentences, deck_count, category_count
-
-    def count_fts(self, selected_category, text):
-        self.cur.row_factory = lambda _, row: row[0]
-        terms = [term for term in text.split(" ") if len(term) > 0][:TERM_LIMIT]
-        if not terms:
-            return self.zero_category_count()
-        row_ids = []
-        self.cur.execute("""SELECT doc
-                            FROM sentence_idx_row
-                            WHERE term = ?
-                            {}
-        """.format(" ".join(["INTERSECT SELECT doc FROM sentence_idx_row WHERE term = ?"]*(len(terms)-1))), (*terms,))
-        row_ids = self.cur.fetchall()
-        self.cur.row_factory = None
-        category_count = {}
-        deck_count = {}
-        for category in DECK_CATEGORIES:
-            category_count[category] = 0
-        for row_id in row_ids:
-            category = self.get_category_for_row_id(row_id)
-            if category in DECK_CATEGORIES:
-                category_count[category] += 1
-            if (selected_category is None or category == selected_category):
-                deck_name = self.get_deck_name_for_row_id(category, row_id)
-                if category not in deck_count:
-                    deck_count[category] = {}
-                if deck_name in deck_count[category]:
-                    deck_count[category][deck_name] += 1
-                else:
-                    deck_count[category][deck_name] = 1
-        return deck_count, category_count
-
-    def zero_category_count(self):
-        category_count = {}
-        for category in DECK_CATEGORIES:
-            category_count[category] = 0
-        return category_count
-
-    def count_exact_sentence(self, selected_category, text, sentence_filter, sentence_expression):
-        self.cur.execute(
-            "select deck_name, category, count(case when {sentence_filter} then 1 else null end) as `number_of_examples` from sentences group by deck_name".format(
-                sentence_filter=sentence_filter), (sentence_expression,))
-        result = self.cur.fetchall()
-        category_count = self.zero_category_count()
-        deck_count = {}
-        for deck_name, category, count in result:
-            if count > 0:
-                if category == selected_category or selected_category is None:
-                    if category not in deck_count:
-                        deck_count[category] = {}
-                    deck_count[category][deck_name] = count
-                if category in DECK_CATEGORIES:
-                    category_count[category] += count
-        return deck_count, category_count
-
+        return self.get_results_with_count(result)
+    
     def get_sentence(self, id):
         self.cur.execute("select * from sentences where id = ?", (id,))
         result = self.cur.fetchall()

@@ -15,7 +15,7 @@ class Decks:
         self.has_resource_url = has_resource_url
         self.dictionary = dictionary
 
-    def load_decks(self, sentence_counter, cur):
+    def load_decks(self, deck_counter, sentence_counter, cur):
         deck_folders = glob(str(self.path) + '/*/')
         deck_range = []
         deck_names = []
@@ -23,12 +23,13 @@ class Decks:
             deck_folders = deck_folders[:2]
         for deck_folder in deck_folders:
             print("adding", deck_folder)
+            deck_counter += 1
             sentences = self.load_one_deck(deck_folder)
-            sentence_counter = self.load_sentences_to_db(sentences, sentence_counter, cur)
+            sentence_counter = self.load_sentences_to_db(sentences, deck_counter, sentence_counter, cur)
             deck_range.append(sentence_counter)
             if sentences:
                 deck_names.append(sentences[0]['deck_name'])
-        return sentence_counter, deck_names, deck_range
+        return deck_counter, sentence_counter, deck_names, deck_range
     
     def load_one_deck(self, path):
         sentences = []
@@ -37,15 +38,17 @@ class Decks:
             sentences = ndjson.load(f)      
         return sentences
 
-    def load_sentences_to_db(self, sentences, sentence_counter, cur):
+    def load_sentences_to_db(self, sentences, deck_counter, sentence_counter, cur):
         sentence_tuple_list = []
         tokenized_sentence_list = []
+        cur.execute("INSERT INTO decks (id, category, name) VALUES (?, ?, ?)", (deck_counter, self.category, sentences[0]["deck_name"]))
         for index, sentence in enumerate(sentences):
             sentence['category'] = self.category
             sentence["position"] = index + 1
 
             sentence["sentence_id"] = sentence["id"]
             sentence["id"] = sentence_counter
+            sentence["deck_id"] = deck_counter
             sentence["norms"] = ' '.join([base for base in sentence["word_base_list"] if base != ' '])
             if "translation_word_base_list" in sentence:
                 sentence["eng_norms"] = ' '.join([base for base in sentence["translation_word_base_list"] if base != ' '])
@@ -67,9 +70,9 @@ class Decks:
             tokenized_card = (sentence["id"], sentence["norms"],  sentence["eng_norms"])
             tokenized_sentence_list.append(tokenized_card)
             sentence_counter += 1
-        cur.executemany("insert into sentences values ({})".format(",".join(['?']*len(SENTENCE_FIELDS))), sentence_tuple_list)
-        cur.executemany("insert into sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)", tokenized_sentence_list)
-        cur.executemany("insert into {}_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
+        cur.executemany("INSERT INTO sentences values ({})".format(",".join(['?']*len(SENTENCE_FIELDS))), sentence_tuple_list)
+        cur.executemany("INSERT INTO sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)", tokenized_sentence_list)
+        cur.executemany("INSERT INTO {}_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
         if sentence_counter < MINI_DB_SIZE:
             cur.executemany("insert into mini_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
         # cur.execute("insert INTO sentences_idx(sentences_idx) VALUES('optimize')")
