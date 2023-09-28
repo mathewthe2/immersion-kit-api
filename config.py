@@ -60,6 +60,7 @@ SENTENCE_CATEGORY_INDEX = 3 # 3rd item in sentence fields
 # Sentence Format
 SENTENCE_FIELDS = [
     "id", 
+    'deck_id',
     "sentence_id",
     "position",
     "category",
