@@ -227,7 +227,6 @@ class DecksManager:
                    (text, RESULTS_LIMIT, RESULTS_LIMIT, self.example_offset)
                    )
         result = self.cur.fetchall()
-        print(result[0])
         return self.get_results_with_count(result)
 
     def get_category_sentences_exact(self, category, text, text_is_japanese=True):
