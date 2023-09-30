@@ -19,8 +19,8 @@ class DecksManager:
     con = sqlite3.connect(":memory:", check_same_thread=False)
     con.create_function('regexp', 2, regexp)
     cur = con.cursor()
-    cur.execute('CREATE TABLE decks (id INTEGER, category TEXT, name TEXT)')
-    cur.execute("CREATE TABLE sentences ({})".format(','.join(SENTENCE_FIELDS)))
+    cur.execute('CREATE TABLE decks (id INTEGER PRIMARY KEY, category TEXT, name TEXT)')
+    cur.execute("CREATE TABLE sentences ({})".format(','.join(SENTENCE_FIELDS)).replace("id", "id INTEGER PRIMARY KEY", 1))
     cur.execute("CREATE INDEX sentences_decks_idx ON sentences (deck_id)")
     cur.execute("CREATE INDEX idx_sentences_category ON sentences (category)")
     cur.execute("""CREATE VIRTUAL TABLE sentences_idx
