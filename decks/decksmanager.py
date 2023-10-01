@@ -142,8 +142,6 @@ class DecksManager:
                 if value == '':
                     sentence[key] = ' '
                 elif key in SENTENCE_KEYS_FOR_LISTS and value is not None:
-                    print(value)
-                    print(key)
                     sentence[key] = json.loads(value)
                 else:
                     sentence[key] = value
