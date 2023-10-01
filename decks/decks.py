@@ -72,7 +72,7 @@ class Decks:
             sentence_counter += 1
         cur.executemany("INSERT INTO sentences values ({})".format(",".join(['?']*len(SENTENCE_FIELDS))), sentence_tuple_list)
         cur.executemany("INSERT INTO sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)", tokenized_sentence_list)
-        cur.executemany("INSERT INTO {}_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
+        # cur.executemany("INSERT INTO {}_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
         if sentence_counter < MINI_DB_SIZE:
             cur.executemany("insert into mini_sentences_idx(rowid, norms, eng_norms) values (?, ?, ?)".format(self.category), tokenized_sentence_list)
         # cur.execute("insert INTO sentences_idx(sentences_idx) VALUES('optimize')")

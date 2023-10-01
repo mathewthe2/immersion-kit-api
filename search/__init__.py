@@ -72,6 +72,7 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
     examples = []
     category_count = {}
     deck_count = {}
+    use_mini_db = False
     
     # Server constraint
     if text in EXACT_QUERY_KEYWORDS:
@@ -81,7 +82,7 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
         if len(text_query) == 1:
             no_kanji = is_hiragana(text_query) or is_katakana(text_query) or not is_japanese(text_query)
             if no_kanji:
-                category = 'mini'
+                use_mini_db = True
 
     if is_exact_match:
         examples, deck_count, category_count = decks.get_category_sentences_exact(
@@ -92,6 +93,7 @@ def get_examples_and_category_count(category, text_is_japanese, text, word_bases
     else:
         examples, deck_count, category_count = decks.get_category_sentences_fts(
             category=category, 
+            use_mini_db=use_mini_db,
             text=text_query, 
             text_is_japanese=text_is_japanese
         )
