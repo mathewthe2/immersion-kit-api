@@ -139,9 +139,7 @@ class DecksManager:
             sentence = {}
             for data_index, value in enumerate(sentence_tuple[:len(SENTENCE_FIELDS)]):
                 key = SENTENCE_FIELDS[data_index]
-                if value == '':
-                    sentence[key] = ' '
-                elif key in SENTENCE_KEYS_FOR_LISTS and value is not None:
+                if key in SENTENCE_KEYS_FOR_LISTS and value is not None and value is not '':
                     sentence[key] = json.loads(value)
                 else:
                     sentence[key] = value
