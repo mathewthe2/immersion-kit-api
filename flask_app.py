@@ -146,22 +146,23 @@ def download_sentence_image():
 
 @app.route('/download_sentence_audio')
 def download_sentence_audio():
-    sentence_id = request.args.get('id')
-    if not sentence_id:
-        return 'No sentence id specified.'
-    elif not sentence_id.isdigit():
-        return 'Invalid sentence id format.'
-    else:
-        sentence_id = int(sentence_id)
-        sentence = get_sentence_by_id(sentence_id)
-        if sentence is None:
-            return 'File not found.'
-        else:
-            return download_static_file(
-                request_url=sentence["sound_url"],
-                filename=os.path.basename(sentence["sound_url"]),
-                mimetype='audio/mpeg'
-            )
+    return "featture under maintenance"
+    # sentence_id = request.args.get('id')
+    # if not sentence_id:
+    #     return 'No sentence id specified.'
+    # elif not sentence_id.isdigit():
+    #     return 'Invalid sentence id format.'
+    # else:
+    #     sentence_id = int(sentence_id)
+    #     sentence = get_sentence_by_id(sentence_id)
+    #     if sentence is None:
+    #         return 'File not found.'
+    #     else:
+    #         return download_static_file(
+    #             request_url=sentence["sound_url"],
+    #             filename=os.path.basename(sentence["sound_url"]),
+    #             mimetype='audio/mpeg'
+    #         )
 
 @app.route('/download_media')
 def download_media():
